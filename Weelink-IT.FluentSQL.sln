@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weelink-IT.FluentSQL", "src\Weelink-IT.FluentSQL\Weelink-IT.FluentSQL.csproj", "{608F8140-560F-45DB-8CEB-594AB98CF1CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weelink-IT.FluentSQL.Tests", "src\Weelink-IT.FluentSQL.Tests\Weelink-IT.FluentSQL.Tests.csproj", "{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{608F8140-560F-45DB-8CEB-594AB98CF1CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{608F8140-560F-45DB-8CEB-594AB98CF1CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{608F8140-560F-45DB-8CEB-594AB98CF1CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{608F8140-560F-45DB-8CEB-594AB98CF1CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D4D5910-FD0C-4E31-8BB4-D618A300A761}
+	EndGlobalSection
+EndGlobal
