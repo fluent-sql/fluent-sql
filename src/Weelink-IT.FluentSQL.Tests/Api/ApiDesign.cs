@@ -2,8 +2,8 @@
 
 using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
-using WeelinkIT.FluentSQL.Querying;
 using WeelinkIT.FluentSQL.Querying.Extensions;
+using WeelinkIT.FluentSQL.Querying.Functions.Extensions;
 
 using Xunit;
 

@@ -1,6 +1,6 @@
 ﻿using WeelinkIT.FluentSQL.Modelling;
 
-namespace WeelinkIT.FluentSQL.Querying.Extensions
+namespace WeelinkIT.FluentSQL.Querying.Functions.Extensions
 {
     /// <summary>
     ///     Allows <see cref="SqlExpression{TType}" />s to be summed.
