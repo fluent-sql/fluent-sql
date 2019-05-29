@@ -5,39 +5,29 @@ using WeelinkIT.FluentSQL.Modelling;
 
 namespace WeelinkIT.FluentSQL.Querying
 {
-    public sealed class OuterJoin<TModel, TResult, TChild, TParent> : QueryComponent<TModel, TResult>
+    /// <summary>
+    ///     Applies an <c>OUTER JOIN</c> between two <see cref="Table" />s.
+    /// </summary>
+    /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
+    /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
+    /// <typeparam name="TChild">The new <see cref="Table" /> to add to this <see cref="Query{TResult}" />.</typeparam>
+    /// <typeparam name="TParent">
+    ///     The parent <see cref="Table" /> where <typeparamref name="TChild" /> should be joined with.
+    /// </typeparam>
+    public sealed class OuterJoin<TModel, TResult, TChild, TParent>
+        : Join<TModel, TResult, TChild, TParent, OuterJoin<TModel, TResult, TChild, TParent>>
         where TModel : PersistenceModel
         where TParent : Table
         where TChild : Table
     {
+        /// <summary>
+        ///     Create a new <c>OUTER JOIN</c> statement.
+        /// </summary>
+        /// <param name="queryContext">The <see cref="QueryContext{TModel, TResult}" />.</param>
+        /// <param name="expression">The expression for selecting <typeparamref name="TChild" /> <see cref="Table" />.</param>
         public OuterJoin(QueryContext<TModel, TResult> queryContext, Expression<Func<TModel, TChild>> expression)
+            : base(queryContext, expression)
         {
-            Expression = expression;
-            QueryContext = queryContext;
-        }
-        
-        public OuterJoin<TModel, TResult, TChild, TParent> As(string alias)
-        {
-            Alias = new Alias(alias);
-            return this;
-        }
-
-        private QueryContext<TModel, TResult> QueryContext { get; }
-        private Expression<Func<TChild, TParent, bool>> Condition { get; set; }
-        private Expression<Func<TModel, TChild>> Expression { get; }
-        private Alias Alias { get; set; }
-
-        public From<TModel, TResult, TChild> On(Expression<Func<TChild, TParent, bool>> expression)
-        {
-            Condition = expression;
-            var from = new From<TModel, TResult, TChild>(QueryContext, Expression);
-
-            return from;
-        }
-
-        QueryContext<TModel, TResult> QueryComponent<TModel, TResult>.QueryContext
-        {
-            get { return QueryContext; }
         }
     }
 }

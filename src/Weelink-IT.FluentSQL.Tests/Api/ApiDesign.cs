@@ -50,6 +50,7 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                 new ExampleModel(new SqlServerDatabase())
                     .Query<int>()
                     .From(m => m.Customers)
+                    .Where(c => string.IsNullOrEmpty(c.Name))
                     .Select(c => c.Name)
                     .Select(c => c.Id)
                     .GroupBy(c => c.Id)

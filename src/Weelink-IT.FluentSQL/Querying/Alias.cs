@@ -1,7 +1,14 @@
 ﻿namespace WeelinkIT.FluentSQL.Querying
 {
+    /// <summary>
+    ///     An alias.
+    /// </summary>
     public sealed class Alias
     {
+        /// <summary>
+        ///     Create a new alias.
+        /// </summary>
+        /// <param name="name">The alias.</param>
         public Alias(string name)
         {
             Name = name;

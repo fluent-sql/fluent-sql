@@ -6,7 +6,7 @@ using WeelinkIT.FluentSQL.Modelling;
 namespace WeelinkIT.FluentSQL.Querying
 {
     /// <summary>
-    ///     Applies a <c>LEFT JOIN</c> between two <see cref="Table" />s.
+    ///     Contains the generic logic for all types of <c>JOIN</c>s.
     /// </summary>
     /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
     /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
@@ -14,17 +14,19 @@ namespace WeelinkIT.FluentSQL.Querying
     /// <typeparam name="TParent">
     ///     The parent <see cref="Table" /> where <typeparamref name="TChild" /> should be joined with.
     /// </typeparam>
-    public sealed class LeftJoin<TModel, TResult, TChild, TParent> : QueryComponent<TModel, TResult>
+    /// <typeparam name="TJoin">The concrete <see cref="Join{TModel, TResult, TChild, TParent, TJoin}" /> type.</typeparam>
+    public abstract class Join<TModel, TResult, TChild, TParent, TJoin> : QueryComponent<TModel, TResult>
         where TModel : PersistenceModel
         where TParent : Table
         where TChild : Table
+        where TJoin : Join<TModel, TResult, TChild, TParent, TJoin>
     {
         /// <summary>
-        ///     Create a new <c>LEFT JOIN</c> statement.
+        ///     Create a new <c>INNER JOIN</c> statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TModel, TResult}" />.</param>
-        /// <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="Table" />.</param>
-        public LeftJoin(QueryContext<TModel, TResult> queryContext, Expression<Func<TModel, TChild>> expression)
+        /// <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="Table" /></param>
+        protected Join(QueryContext<TModel, TResult> queryContext, Expression<Func<TModel, TChild>> expression)
         {
             Expression = expression;
             QueryContext = queryContext;
@@ -35,10 +37,10 @@ namespace WeelinkIT.FluentSQL.Querying
         /// </summary>
         /// <param name="alias">The alias to use.</param>
         /// <returns><c>this</c> for method chaining.</returns>
-        public LeftJoin<TModel, TResult, TChild, TParent> As(string alias)
+        public TJoin As(string alias)
         {
             Alias = new Alias(alias);
-            return this;
+            return (TJoin)this;
         }
 
         /// <summary>

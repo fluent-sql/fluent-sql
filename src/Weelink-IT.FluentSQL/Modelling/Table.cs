@@ -1,6 +1,9 @@
 ﻿namespace WeelinkIT.FluentSQL.Modelling
 {
-    public class Table
+    /// <summary>
+    ///     Represents a table.
+    /// </summary>
+    public abstract class Table
     {
     }
 }
