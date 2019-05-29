@@ -11,8 +11,8 @@ namespace WeelinkIT.FluentSQL.Querying
     /// </summary>
     /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
     /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
-    /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="Column{TType}" />s from.</typeparam>
-    /// <typeparam name="TType">The <see cref="Column{TType}" /> type.</typeparam>
+    /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="SqlExpression{TType}" />s from.</typeparam>
+    /// <typeparam name="TType">The <see cref="SqlExpression{TType}" /> type.</typeparam>
     public sealed class OrderBy<TModel, TResult, TTable, TType> : QueryComponent<TModel, TResult>
         where TTable : Table
         where TModel : PersistenceModel
@@ -21,9 +21,9 @@ namespace WeelinkIT.FluentSQL.Querying
         ///     Create a new <c>ORDER BY</c>-statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TModel, TResult}" />.</param>
-        /// <param name="expression">The expression for selecting the <see cref="Column{TType}" />.</param>
+        /// <param name="expression">The expression for selecting the <see cref="SqlExpression{TType}" />.</param>
         /// <param name="previous">The previous <see cref="ExtensionPoint{TModel, TResult}" />, for method chaining.</param>
-        public OrderBy(QueryContext<TModel, TResult> queryContext, Expression<Func<TTable, Column<TType>>> expression,
+        public OrderBy(QueryContext<TModel, TResult> queryContext, Expression<Func<TTable, SqlExpression<TType>>> expression,
             ExtensionPoint<TModel, TResult, TTable> previous)
         {
             QueryContext = queryContext;
@@ -32,7 +32,7 @@ namespace WeelinkIT.FluentSQL.Querying
         }
 
         /// <summary>
-        ///     Order by the <see cref="Column{TType}" /> ascending.
+        ///     Order by the <see cref="SqlExpression{TType}" /> ascending.
         /// </summary>
         public ExtensionPoint<TModel, TResult, TTable> Ascending
         {
@@ -40,7 +40,7 @@ namespace WeelinkIT.FluentSQL.Querying
         }
 
         /// <summary>
-        ///     Order by the <see cref="Column{TType}" /> descending.
+        ///     Order by the <see cref="SqlExpression{TType}" /> descending.
         /// </summary>
         public ExtensionPoint<TModel, TResult, TTable> Descending
         {
@@ -48,7 +48,7 @@ namespace WeelinkIT.FluentSQL.Querying
         }
 
         private QueryContext<TModel, TResult> QueryContext { get; }
-        private Expression<Func<TTable, Column<TType>>> Expression { get; }
+        private Expression<Func<TTable, SqlExpression<TType>>> Expression { get; }
         private ExtensionPoint<TModel, TResult, TTable> Previous { get; }
         
         /// <inheritdoc />

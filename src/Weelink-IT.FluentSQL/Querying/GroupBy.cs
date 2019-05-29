@@ -11,8 +11,8 @@ namespace WeelinkIT.FluentSQL.Querying
     /// </summary>
     /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
     /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
-    /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="Column{TType}" />s from.</typeparam>
-    /// <typeparam name="TType">The <see cref="Column{TType}" /> type.</typeparam>
+    /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="SqlExpression{TType}" />s from.</typeparam>
+    /// <typeparam name="TType">The <see cref="SqlExpression{TType}" /> type.</typeparam>
     public sealed class GroupBy<TModel, TResult, TTable, TType> : QueryComponent<TModel, TResult>,
         ExtensionPoint<TModel, TResult, TTable>
         where TTable : Table
@@ -22,15 +22,15 @@ namespace WeelinkIT.FluentSQL.Querying
         ///     Create a new <c>ORDER BY</c>-statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TModel, TResult}" />.</param>
-        /// <param name="expression">The expression for selecting the <see cref="Column{TType}" />.</param>
-        public GroupBy(QueryContext<TModel, TResult> queryContext, Expression<Func<TTable, Column<TType>>> expression)
+        /// <param name="expression">The expression for selecting the <see cref="SqlExpression{TType}" />.</param>
+        public GroupBy(QueryContext<TModel, TResult> queryContext, Expression<Func<TTable, SqlExpression<TType>>> expression)
         {
             QueryContext = queryContext;
             Expression = expression;
         }
 
         private QueryContext<TModel, TResult> QueryContext { get; }
-        private Expression<Func<TTable, Column<TType>>> Expression { get; }
+        private Expression<Func<TTable, SqlExpression<TType>>> Expression { get; }
 
         /// <inheritdoc />
         QueryContext<TModel, TResult> QueryComponent<TModel, TResult>.QueryContext

@@ -17,7 +17,7 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
         /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
         /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
         /// <typeparam name="TTable">The <see cref="Table" /> where to apply the condition to.</typeparam>
-        /// <typeparam name="TType">The <see cref="Column{TType}" /> type.</typeparam>
+        /// <typeparam name="TType">The <see cref="SqlExpression{TType}" /> type.</typeparam>
         /// <param name="subject">The <see cref="GroupBy{TModel, TResult, TTable, TType}" />.</param>
         /// <param name="expression">The expression that represents the condition.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.Having{TModel, TResult, TTable}" />.</returns>

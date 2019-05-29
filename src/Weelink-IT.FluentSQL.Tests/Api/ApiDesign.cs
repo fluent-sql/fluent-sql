@@ -2,6 +2,7 @@
 
 using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
+using WeelinkIT.FluentSQL.Querying;
 using WeelinkIT.FluentSQL.Querying.Extensions;
 
 using Xunit;
@@ -52,10 +53,10 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                     .From(m => m.Customers)
                     .Where(c => string.IsNullOrEmpty(c.Name))
                     .Select(c => c.Name)
-                    .Select(c => c.Id)
+                    .Select(c => c.Id.Sum())
                     .GroupBy(c => c.Id)
                     .Having(c => string.IsNullOrEmpty(c.Name))
-                    .Having(c => c.Id > 0)
+                    .Having(c => c.Id.Sum() > 0)
                     .InnerJoin(m => m.Invoices).On((i, c) => i.CustomerId == c.Id)
                     .Select(i => i.InvoiceDate)
                     .Select(i => i.InvoiceNumber)

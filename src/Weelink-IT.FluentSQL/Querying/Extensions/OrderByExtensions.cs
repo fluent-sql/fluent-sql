@@ -16,14 +16,14 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
         /// </summary>
         /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
         /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
-        /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="Column{TType}" />s from.</typeparam>
-        /// <typeparam name="TType">The <see cref="Column{TType}" /> type.</typeparam>
+        /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="SqlExpression{TType}" />s from.</typeparam>
+        /// <typeparam name="TType">The <see cref="SqlExpression{TType}" /> type.</typeparam>
         /// <param name="subject">The <see cref="ExtensionPoint{TModel, TResult, TTable}" />.</param>
         /// <param name="expression">The expression that represents the condition.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.OrderBy{TModel, TResult, TTable, TType}" />.</returns>
         public static OrderBy<TModel, TResult, TTable, TType> OrderBy<TModel, TResult, TTable, TType>(
             this ExtensionPoint<TModel, TResult, TTable> subject,
-            Expression<Func<TTable, Column<TType>>> expression)
+            Expression<Func<TTable, SqlExpression<TType>>> expression)
             where TModel : PersistenceModel
             where TTable : Table
         {

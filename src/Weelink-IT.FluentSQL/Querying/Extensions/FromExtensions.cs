@@ -15,7 +15,7 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
         /// </summary>
         /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
         /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
-        /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="Column{TType}" />s from.</typeparam>
+        /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="SqlExpression{TType}" />s from.</typeparam>
         /// <param name="subject">The <see cref="QueryContext{TModel, TResult}" />.</param>
         /// <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.From{TModel, TResult, TTable}" />.</returns>

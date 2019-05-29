@@ -1,0 +1,773 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Weelink-IT.FluentSQL</name>
+    </assembly>
+    <members>
+        <member name="T:WeelinkIT.FluentSQL.Databases.Database">
+            <summary>
+                Represents the database.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Databases.Database.Compile``2(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1})">
+            <summary>
+                Compile <paramref name="context" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <param name="context">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to compile.</param>
+            <returns>A compiled <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Databases.SqlServerDatabase">
+            <summary>
+                Represents a SQL Server database.
+            </summary>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Modelling.Column`1">
+            <summary>
+                Represnts a column.
+            </summary>
+            <typeparam name="TType">The column type.</typeparam>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel">
+            <summary>
+                Represents the model in the <see cref="T:WeelinkIT.FluentSQL.Databases.Database" />.
+            </summary>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1">
+            <summary>
+                Represents the model in the <see cref="T:WeelinkIT.FluentSQL.Databases.Database" />.
+            </summary>
+            <typeparam name="TModel">This <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1" />.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1.#ctor(WeelinkIT.FluentSQL.Databases.Database)">
+            <summary>
+                Create a new <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1" />.
+            </summary>
+            <param name="database">
+                The <see cref="T:WeelinkIT.FluentSQL.Databases.Database" /> where
+                this <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1" /> is located.
+            </param>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1.Query``1">
+            <summary>
+                <see cref="M:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1.Query``1" /> this <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel`1" />.
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">
+            <summary>
+                Reduces the result of a database expression to <typeparamref name="TType" />.
+            </summary>
+            <typeparam name="TType">The result type of evaluating this <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_Implicit(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})~`0">
+            <summary>
+                Implicitly convert <paramref name="expression" /> to <typeparamref name="TType" />, so that it can be used
+                in regular .NET constructs
+            </summary>
+            <example>
+                <code>
+                    Query&lt;int&gt; query = 
+                        new ExampleModel(new SqlServerDatabase())
+                            .Query&lt;int&gt;()
+                            .From(m =&gt; m.Customers)
+                            .Where(c =&gt; string.IsNullOrEmpty(c.Name))
+                </code>
+            </example>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_Equality(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>equals</c> comparison between a <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_Inequality(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for a <c>not equals</c> comparison between a <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_GreaterThan(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>greater than</c> comparison between a <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_LessThan(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>less than</c> comparison between a <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_GreaterThanOrEqual(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>greater than or equal</c> comparison between a <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_LessThanOrEqual(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>less than or equal</c> comparison between a <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_Equality(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>equals</c> comparison between two <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_Inequality(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for a <c>not equals</c> comparison between two <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s.
+                a value of type <typeparamref name="TType" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_GreaterThan(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>greater than</c> comparison between two <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_LessThan(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>less than</c> comparison between two <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_GreaterThanOrEqual(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>greater than or equal</c> comparison between two <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Modelling.SqlExpression`1.op_LessThanOrEqual(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0},WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>less than or equal</c> comparison between two <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Modelling.Table">
+            <summary>
+                Represents a table.
+            </summary>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Query`1">
+            <summary>
+                The compiled query to execute.
+            </summary>
+            <typeparam name="TResult">The result type.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Query`1.#ctor(WeelinkIT.FluentSQL.Databases.Database)">
+            <summary>
+                Create a new query that will be executed in <paramref name="database" />.
+            </summary>
+            <param name="database">The <see cref="T:WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Query`1.ExecuteAsync">
+            <summary>
+                Execute this query and return the result.
+            </summary>
+            <returns>The result of the query.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Alias">
+            <summary>
+                An alias.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Alias.#ctor(System.String)">
+            <summary>
+                Create a new alias.
+            </summary>
+            <param name="name">The alias.</param>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`2">
+            <summary>
+                Allows for adding extensions to this <see cref="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3">
+            <summary>
+                Allows for adding extensions to this <see cref="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="T">Any other type required for this <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</typeparam>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPointExtensions">
+            <summary>
+                Extends <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`2" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPointExtensions.GetQueryContext``3(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``2})">
+            <summary>
+                Get the underlying <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> of
+                this <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`2" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="T">Any other type required for this <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</typeparam>
+            <param name="extensionPoint">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <returns>The underlying <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.FromExtensions">
+            <summary>
+                Allows the construction of <see cref="M:WeelinkIT.FluentSQL.Querying.Extensions.FromExtensions.From``3(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``2}})" />s on a <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.FromExtensions.From``3(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+                The <c>FROM</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.From`3" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.GroupByExtensions">
+            <summary>
+                Allows the construction of <see cref="T:WeelinkIT.FluentSQL.Querying.GroupBy`4" />s on
+                <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.GroupByExtensions.GroupBy``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,WeelinkIT.FluentSQL.Modelling.SqlExpression{``3}}})">
+            <summary>
+                The <c>GROUP BY</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression for selecting the <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.OrderBy`4" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.HavingExtensions">
+            <summary>
+                Allows the construction of <see cref="T:WeelinkIT.FluentSQL.Querying.Having`3" />s on
+                <see cref="T:WeelinkIT.FluentSQL.Querying.GroupBy`4" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.HavingExtensions.Having``4(WeelinkIT.FluentSQL.Querying.GroupBy{``0,``1,``2,``3},System.Linq.Expressions.Expression{System.Func{``2,System.Boolean}})">
+            <summary>
+                The <c>HAVING</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to apply the condition to.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.GroupBy`4" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.Having`3" />.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.HavingExtensions.Having``3(WeelinkIT.FluentSQL.Querying.Having{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,System.Boolean}})">
+            <summary>
+                The <c>HAVING</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to apply the condition to.</typeparam>
+            <param name="subject">The <see cref="M:WeelinkIT.FluentSQL.Querying.Extensions.HavingExtensions.Having``3(WeelinkIT.FluentSQL.Querying.Having{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,System.Boolean}})" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.Having`3" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.JoinExtensions">
+            <summary>
+                Allows the construction of <see cref="T:WeelinkIT.FluentSQL.Querying.Join`5" />s on
+                <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.JoinExtensions.InnerJoin``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``3},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+                Applies an <c>INNER JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.InnerJoin`4" />.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.JoinExtensions.OuterJoin``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``3},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+                Applies an <c>OUTER JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.OuterJoin`4" />.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.JoinExtensions.LeftJoin``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``3},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+                Applies a <c>LEFT JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /></param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.LeftJoin`4" />.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.JoinExtensions.RightJoin``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``3},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+                Applies a <c>RIGHT JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /></param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.RightJoin`4" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.OrderByExtensions">
+            <summary>
+                Allows the construction of <see cref="T:WeelinkIT.FluentSQL.Querying.OrderBy`4" />s on
+                <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.OrderByExtensions.OrderBy``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,WeelinkIT.FluentSQL.Modelling.SqlExpression{``3}}})">
+            <summary>
+                The <c>ORDER BY</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.OrderBy`4" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.QueryComponentExtensions">
+            <summary>
+                Extends <see cref="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.QueryComponentExtensions.Compile``2(WeelinkIT.FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                Compile the <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> associated with
+                this <see cref="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <param name="component">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2" /> to compile.</param>
+            <returns>A compiled <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.SelectExtensions">
+            <summary>
+                Allows the construction of <see cref="M:WeelinkIT.FluentSQL.Querying.Extensions.SelectExtensions.Select``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,``3}})" />s on
+                <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SelectExtensions.Select``4(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,``3}})">
+            <summary>
+                The <c>SELECT</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.Select`4" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions">
+            <summary>
+                Allows <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s to be summed.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Int32})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;int&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Nullable{System.Int32}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;int?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Int64})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;long&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Nullable{System.Int64}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;long?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Decimal})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;decimal&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Nullable{System.Decimal}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;decimal?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Single})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;float&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.SumExtensions.Sum(WeelinkIT.FluentSQL.Modelling.SqlExpression{System.Nullable{System.Single}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;float?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Extensions.WhereExtensions">
+            <summary>
+                Allows the construction of <see cref="T:WeelinkIT.FluentSQL.Querying.Where`3" />s on
+                <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />s.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.WhereExtensions.Where``3(WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{``0,``1,``2},System.Linq.Expressions.Expression{System.Func{``2,System.Boolean}})">
+            <summary>
+                The <c>WHERE</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to apply the condition to.</typeparam>
+            <param name="subject">The <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`3" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+            <returns>The <see cref="T:WeelinkIT.FluentSQL.Querying.Where`3" />.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.From`3">
+            <summary>
+                The <c>FROM</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.From`3.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,`2}})">
+            <summary>
+                Create a new <c>FROM</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.From`3.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.GroupBy`4">
+            <summary>
+                The <c>GROUP BY</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.GroupBy`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2,WeelinkIT.FluentSQL.Modelling.SqlExpression{`3}}})">
+            <summary>
+                Create a new <c>ORDER BY</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting the <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />.</param>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.GroupBy`4.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Having`3">
+            <summary>
+                The <c>HAVING</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to apply the condition to.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Having`3.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <summary>
+                Create a new <c>HAVING</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.Having`3.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.InnerJoin`4">
+            <summary>
+                Applies an <c>INNER JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.InnerJoin`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,`2}})">
+            <summary>
+                Create a new <c>INNER JOIN</c> statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />.</param>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Join`5">
+            <summary>
+                Contains the generic logic for all types of <c>JOIN</c>s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+            <typeparam name="TJoin">The concrete <see cref="T:WeelinkIT.FluentSQL.Querying.Join`5" /> type.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Join`5.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,`2}})">
+            <summary>
+                Create a new <c>INNER JOIN</c> statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /></param>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Join`5.As(System.String)">
+            <summary>
+                Add an alias to <typeparamref name="TChild"/> />.
+            </summary>
+            <param name="alias">The alias to use.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Join`5.On(System.Linq.Expressions.Expression{System.Func{`2,`3,System.Boolean}})">
+            <summary>
+                Use <paramref name="expression" /> for joining <typeparamref name="TChild" /> with <typeparamref name="TParent" />.
+            </summary>
+            <param name="expression">
+                The search condition to use for joining <typeparamref name="TChild" /> with <typeparamref name="TParent" />.
+            </param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Querying.From`3" /> representing <typeparamref name="TChild" />.</returns>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.Join`5.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.LeftJoin`4">
+            <summary>
+                Applies a <c>LEFT JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.LeftJoin`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,`2}})">
+            <summary>
+                Create a new <c>LEFT JOIN</c> statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />.</param>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.LeftJoin`4.As(System.String)">
+            <summary>
+                Add an alias to <typeparamref name="TChild"/> />.
+            </summary>
+            <param name="alias">The alias to use.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.LeftJoin`4.On(System.Linq.Expressions.Expression{System.Func{`2,`3,System.Boolean}})">
+            <summary>
+                Use <paramref name="expression" /> for joining <typeparamref name="TChild" /> with <typeparamref name="TParent" />.
+            </summary>
+            <param name="expression">
+                The search condition to use for joining <typeparamref name="TChild" /> with <typeparamref name="TParent" />.
+            </param>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Querying.From`3" /> representing <typeparamref name="TChild" />.</returns>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.LeftJoin`4.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.OrderBy`4">
+            <summary>
+                The <c>ORDER BY</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.OrderBy`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2,WeelinkIT.FluentSQL.Modelling.SqlExpression{`3}}},WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint{`0,`1,`2})">
+            <summary>
+                Create a new <c>ORDER BY</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting the <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />.</param>
+            <param name="previous">The previous <see cref="T:WeelinkIT.FluentSQL.Querying.Extensions.ExtensionPoint`2" />, for method chaining.</param>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.OrderBy`4.Ascending">
+            <summary>
+                Order by the <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> ascending.
+            </summary>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.OrderBy`4.Descending">
+            <summary>
+                Order by the <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> descending.
+            </summary>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.OrderBy`4.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.OuterJoin`4">
+            <summary>
+                Applies an <c>OUTER JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.OuterJoin`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,`2}})">
+            <summary>
+                Create a new <c>OUTER JOIN</c> statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild" /> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />.</param>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2">
+            <summary>
+                A component in a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.QueryComponent`2.QueryContext">
+            <summary>
+                Return the underlying <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.
+            </summary>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.QueryContext`2">
+            <summary>
+                The complete context of the final <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.QueryContext`2.#ctor(WeelinkIT.FluentSQL.Databases.Database)">
+            <summary>
+                Create a new <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> that will be executed in <paramref name="database" />.
+            </summary>
+            <param name="database">The <see cref="T:WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.QueryContext`2.Compile">
+            <summary>
+                Compile this <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <returns>A <see cref="T:WeelinkIT.FluentSQL.Query`1" /> that can be executed.</returns>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.RightJoin`4">
+            <summary>
+                Applies a <c>RIGHT JOIN</c> between two <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />s.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TChild">The new <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> to add to this <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TParent">
+                The parent <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where <typeparamref name="TChild" /> should be joined with.
+            </typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.RightJoin`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,`2}})">
+            <summary>
+                Create a new <c>RIGHT JOIN</c> statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" />.</param>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Select`4">
+            <summary>
+                The <c>SELECT</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to select <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />s from.</typeparam>
+            <typeparam name="TType">The <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> type.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Select`4.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2,`3}})">
+            <summary>
+                Create a new <c>SELECT</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting the <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />.</param>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Select`4.As(System.String)">
+            <summary>
+                Add an alias to <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" />.
+            </summary>
+            <param name="alias">The alias to use.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.Select`4.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Sum`1">
+            <summary>
+                Represents a summed expression.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Sum`1.#ctor(WeelinkIT.FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new summed expression.
+            </summary>
+            <param name="expression">The actual <see cref="T:WeelinkIT.FluentSQL.Modelling.SqlExpression`1" /> that should be summed.</param>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Querying.Where`3">
+            <summary>
+                The <c>WHERE</c>-statement of a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
+            </summary>
+            <typeparam name="TModel">The <see cref="T:WeelinkIT.FluentSQL.Modelling.PersistenceModel" />.</typeparam>
+            <typeparam name="TResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <typeparam name="TTable">The <see cref="T:WeelinkIT.FluentSQL.Modelling.Table" /> where to apply the condition to.</typeparam>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Querying.Where`3.#ctor(WeelinkIT.FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <summary>
+                Create a new <c>WHERE</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Querying.Where`3.WeelinkIT#FluentSQL#Querying#QueryComponent{TModel,TResult}#QueryContext">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
