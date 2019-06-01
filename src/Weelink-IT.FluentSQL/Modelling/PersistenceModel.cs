@@ -29,7 +29,20 @@ namespace WeelinkIT.FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     <see cref="Query{TResult}" /> this <see cref="PersistenceModel{TModel}" />.
+        ///     <see cref="Query{TParameters, TResult}" /> this <see cref="PersistenceModel{TModel}" />.
+        /// </summary>
+        /// <typeparam name="TParameters">
+        ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+        /// </typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <returns></returns>
+        public QueryContext<TModel, TParameters, TResult> Query<TParameters, TResult>() where TParameters : new()
+        {
+            return new QueryContext<TModel, TParameters, TResult>(Database);
+        }
+
+        /// <summary>
+        ///     <see cref="Query{TParameters, TResult}" /> this <see cref="PersistenceModel{TModel}" />.
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         /// <returns></returns>

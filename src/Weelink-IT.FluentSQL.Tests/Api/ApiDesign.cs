@@ -1,5 +1,5 @@
 ﻿using System;
-
+using FluentAssertions;
 using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
 using WeelinkIT.FluentSQL.Querying.Extensions;
@@ -41,32 +41,43 @@ namespace WeelinkIT.FluentSQL.Tests.Api
         public readonly InvoiceLines InvoiceLines = new InvoiceLines();
         public readonly Customers Customers = new Customers();
     }
-    
+
     public sealed class ApiDesign
     {
+        public class ExampleParameters
+        {
+            public int Limit { get; set; }
+        }
+
         [Fact]
         public void TestApi()
         {
-            Query<int> query = 
+            var query2 =
                 new ExampleModel(new SqlServerDatabase())
                     .Query<int>()
                     .From(m => m.Customers)
-                    .Where(c => string.IsNullOrEmpty(c.Name))
-                    .Select(c => c.Name)
-                    .Select(c => c.Id.Sum())
-                    .GroupBy(c => c.Id)
-                    .Having(c => string.IsNullOrEmpty(c.Name))
-                    .Having(c => c.Id.Sum() > 0)
-                    .InnerJoin(m => m.Invoices).On((i, c) => i.CustomerId == c.Id)
-                    .Select(i => i.InvoiceDate)
-                    .Select(i => i.InvoiceNumber)
-                    .Where(i => i.InvoiceDate > DateTimeOffset.MaxValue)
-                    .OrderBy(i => i.InvoiceNumber).Ascending
-                    .InnerJoin(m => m.InvoiceLines).On((l, i) => l.InvoiceId == i.Id)
-                    .Select(l => l.Price)
-                    .OrderBy(l => l.Price).Descending
-                    .Where(l => l.Price > 100)
-                    .Compile();
+                    .Where(x => x.Id > 0);
+
+            var query =
+               new ExampleModel(new SqlServerDatabase())
+                   .Query<int>().WithParameters<ExampleParameters>()
+                   .From(m => m.Customers)
+                   .Where((c, p) => string.IsNullOrEmpty(c.Name))
+                   .Select(c => c.Name)
+                   .Select(c => c.Id.Sum())
+                   .GroupBy(c => c.Id)
+                   .Having((c, p) => string.IsNullOrEmpty(c.Name))
+                   .Having((c, p) => c.Id.Sum() > p.Limit)
+                   .InnerJoin(m => m.Invoices).On((i, c) => i.CustomerId == c.Id)
+                   .Select(i => i.InvoiceDate)
+                   .Select(i => i.InvoiceNumber)
+                   .Where((i, p) => i.InvoiceDate > DateTimeOffset.MaxValue)
+                   .OrderBy(i => i.InvoiceNumber).Ascending
+                   .InnerJoin(m => m.InvoiceLines).On((l, i) => l.InvoiceId == i.Id)
+                   .Select(l => l.Price)
+                   .OrderBy(l => l.Price).Descending
+                   .Where((l, p) => l.Price > p.Limit)
+                   .Compile();
 
             /*
              *      select c.name, i.invoice_date, i.invoice_number, l.price

@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>WeelinkIT.FluentSQL</RootNamespace>
+    <SolutionDir>$([System.IO.Path]::GetDirectoryName($(MSBuildProjectDirectory)))\</SolutionDir>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>C:\Projects\FluentSQL\src\Weelink-IT.FluentSQL\Weelink-IT.FluentSQL.xml</DocumentationFile>
+    <DocumentationFile>..\..\docs\Weelink-IT.FluentSQL.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>

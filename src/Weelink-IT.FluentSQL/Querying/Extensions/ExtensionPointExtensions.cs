@@ -3,23 +3,26 @@
 namespace WeelinkIT.FluentSQL.Querying.Extensions
 {
     /// <summary>
-    ///     Extends <see cref="ExtensionPoint{TModel, TResult}" />.
+    ///     Extends <see cref="ExtensionPoint{TModel, TParameters, TResult}" />.
     /// </summary>
     internal static class ExtensionPointExtensions
     {
         /// <summary>
-        ///     Get the underlying <see cref="QueryContext{TModel, TResult}" /> of
-        ///     this <see cref="ExtensionPoint{TModel, TResult}" />.
+        ///     Get the underlying <see cref="QueryContext{TModel, TParameters, TResult}" /> of
+        ///     this <see cref="ExtensionPoint{TModel, TParameters, TResult}" />.
         /// </summary>
         /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
-        /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
-        /// <typeparam name="T">Any other type required for this <see cref="QueryContext{TModel, TResult}" />.</typeparam>
-        /// <param name="extensionPoint">The <see cref="ExtensionPoint{TModel, TResult, T}" />.</param>
-        /// <returns>The underlying <see cref="QueryContext{TModel, TResult}" />.</returns>
-        internal static QueryContext<TModel, TResult> GetQueryContext<TModel, TResult, T>(
-            this ExtensionPoint<TModel, TResult, T> extensionPoint) where TModel : PersistenceModel
+        /// <typeparam name="TParameters">
+        ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
+        /// <typeparam name="T">Any other type required for this <see cref="QueryContext{TModel, TParameters, TResult}" />.</typeparam>
+        /// <param name="extensionPoint">The <see cref="ExtensionPoint{TModel, TParameters, TResult, T}" />.</param>
+        /// <returns>The underlying <see cref="QueryContext{TModel, TParameters, TResult}" />.</returns>
+        internal static QueryContext<TModel, TParameters, TResult> GetQueryContext<TModel, TParameters, TResult, T>(
+            this ExtensionPoint<TModel, TParameters, TResult, T> extensionPoint) where TModel : PersistenceModel where TParameters : new()
         {
-            var component = (QueryComponent<TModel, TResult>)extensionPoint;
+            var component = (QueryComponent<TModel, TParameters, TResult>)extensionPoint;
             return component.QueryContext;
         }
     }

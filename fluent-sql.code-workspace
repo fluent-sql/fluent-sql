@@ -9,9 +9,9 @@
 		"files.insertFinalNewline": true,
 		"files.eol": "\n",
 		"editor.wordWrap": "wordWrapColumn",
-		"editor.wordWrapColumn": 130,
+		"editor.wordWrapColumn": 160,
 		"editor.rulers": [
-			130
+			160
 		],
 		"editor.scrollBeyondLastLine": false,
 		"editor.formatOnPaste": true,
@@ -20,6 +20,7 @@
 		"files.exclude": {
 			"**/bin": true,
 			"**/obj": true
-		}
+		},
+		"editor.minimap.enabled": false
 	}
 }

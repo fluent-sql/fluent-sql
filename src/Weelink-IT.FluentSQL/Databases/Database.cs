@@ -9,15 +9,21 @@ namespace WeelinkIT.FluentSQL.Databases
     public abstract class Database
     {
         /// <summary>
-        ///     Compile <paramref name="context" /> into a <see cref="Query{TResult}" />.
+        ///     Compile <paramref name="context" /> into a <see cref="Query{TParameters, TResult}" />.
         /// </summary>
         /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
-        /// <typeparam name="TResult">The result type of the <see cref="Query{TResult}" />.</typeparam>
-        /// <param name="context">The <see cref="QueryContext{TModel, TResult}" /> to compile.</param>
-        /// <returns>A compiled <see cref="Query{TResult}" />.</returns>
-        public Query<TResult> Compile<TModel, TResult>(QueryContext<TModel, TResult> context) where TModel : PersistenceModel
+        /// <typeparam name="TParameters">
+        ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+        /// </typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
+        /// <param name="context">The <see cref="QueryContext{TModel, TParameters, TResult}" /> to compile.</param>
+        /// <returns>A compiled <see cref="Query{TParameters, TResult}" />.</returns>
+        public Query<TParameters, TResult> Compile<TModel, TParameters, TResult>(
+            QueryContext<TModel, TParameters, TResult> context)
+            where TModel : PersistenceModel
+            where TParameters : new()
         {
-            return new Query<TResult>(this);
+            return new Query<TParameters, TResult>(this);
         }
     }
 }
