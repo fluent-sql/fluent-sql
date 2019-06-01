@@ -16,6 +16,10 @@
 		"editor.scrollBeyondLastLine": false,
 		"editor.formatOnPaste": true,
 		"editor.formatOnSave": true,
-		"files.trimFinalNewlines": true
+		"files.trimFinalNewlines": true,
+		"files.exclude": {
+			"**/bin": true,
+			"**/obj": true
+		}
 	}
 }
