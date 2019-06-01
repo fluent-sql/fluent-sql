@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
@@ -50,16 +51,18 @@ namespace WeelinkIT.FluentSQL.Tests.Api
         }
 
         [Fact]
-        public void TestApi()
+        public async Task TestApi()
         {
-            var query2 =
+            Query<int> parameterless =
                 new ExampleModel(new SqlServerDatabase())
                     .Query<int>()
                     .From(m => m.Customers)
                     .Where(x => x.Id > 0)
                     .Compile();
 
-            var query =
+            int parameterlessResult = await parameterless.ExecuteAsync();
+
+            Query<ExampleParameters, int> parameterized =
                new ExampleModel(new SqlServerDatabase())
                    .Query<int>().WithParameters<ExampleParameters>()
                    .From(m => m.Customers)
@@ -79,6 +82,8 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                    .OrderBy(l => l.Price).Descending
                    .Where((l, p) => l.Price > p.Limit)
                    .Compile();
+
+            int parameterizedResult = await parameterized.ExecuteAsync(p => p.Limit = 100);
 
             /*
              *      select c.name, i.invoice_date, i.invoice_number, l.price
