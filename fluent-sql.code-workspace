@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.editor.highlightModifiedTabs": true,
+		"files.insertFinalNewline": true,
+		"files.eol": "\n",
+		"editor.wordWrap": "wordWrapColumn",
+		"editor.wordWrapColumn": 130,
+		"editor.rulers": [
+			130
+		],
+		"editor.scrollBeyondLastLine": false,
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"files.trimFinalNewlines": true
+	}
+}
