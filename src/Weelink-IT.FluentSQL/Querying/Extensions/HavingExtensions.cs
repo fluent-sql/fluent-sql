@@ -52,7 +52,7 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
         /// <param name="expression">The expression that represents the condition.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.Having{TModel, TParameters, TResult, TTable}" />.</returns>
         public static Having<TModel, TParameters, TResult, TTable> Having<TModel, TParameters, TResult, TTable>(
-            this Having<TModel, TParameters, TResult, TTable> subject,
+            this ExtensionPoint<TModel, TParameters, TResult, TTable> subject,
             Expression<Func<TTable, TParameters, bool>> expression)
             where TModel : PersistenceModel
             where TTable : Table
@@ -77,7 +77,7 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
         /// <param name="expression">The expression that represents the condition.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.Having{TModel, TParameters, TResult, TTable}" />.</returns>
         public static Having<TModel, NoParameters, TResult, TTable> Having<TModel, TResult, TTable>(
-            this Having<TModel, NoParameters, TResult, TTable> subject,
+            this ExtensionPoint<TModel, NoParameters, TResult, TTable> subject,
             Expression<Func<TTable, bool>> expression)
             where TModel : PersistenceModel
             where TTable : Table

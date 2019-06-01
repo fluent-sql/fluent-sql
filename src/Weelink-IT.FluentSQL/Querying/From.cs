@@ -32,8 +32,20 @@ namespace WeelinkIT.FluentSQL.Querying
             Expression = expression;
         }
 
+        /// <summary>
+        ///     Add an alias to <typeparamref name="TTable"/> />.
+        /// </summary>
+        /// <param name="alias">The alias to use.</param>
+        /// <returns><c>this</c> for method chaining.</returns>
+        public From<TModel, TParameters, TResult, TTable> As(string alias)
+        {
+            Alias = new Alias(alias);
+            return this;
+        }
+
         private QueryContext<TModel, TParameters, TResult> QueryContext { get; }
         private Expression<Func<TModel, TTable>> Expression { get; }
+        private Alias Alias { get; set; }
 
         /// <inheritdoc />
         QueryContext<TModel, TParameters, TResult> QueryComponent<TModel, TParameters, TResult>.QueryContext

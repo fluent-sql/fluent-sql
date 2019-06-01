@@ -65,34 +65,36 @@ namespace WeelinkIT.FluentSQL.Tests.Api
             Query<ExampleParameters, int> parameterized =
                new ExampleModel(new SqlServerDatabase())
                    .Query<int>().WithParameters<ExampleParameters>()
-                   .From(m => m.Customers)
+                   .From(m => m.Customers).As("c")
                    .Where((c, p) => string.IsNullOrEmpty(c.Name))
                    .Select(c => c.Name)
-                   .Select(c => c.Id.Sum())
-                   .GroupBy(c => c.Id)
-                   .Having((c, p) => string.IsNullOrEmpty(c.Name))
-                   .Having((c, p) => c.Id.Sum() > p.Limit)
-                   .InnerJoin(m => m.Invoices).On((i, c) => i.CustomerId == c.Id)
+                   .GroupBy(c => c.Name)
+                   .InnerJoin(m => m.Invoices).As("i").On((i, c) => i.CustomerId == c.Id)
                    .Select(i => i.InvoiceDate)
                    .Select(i => i.InvoiceNumber)
                    .Where((i, p) => i.InvoiceDate > DateTimeOffset.MaxValue)
+                   .GroupBy(i => i.InvoiceDate)
+                   .GroupBy(i => i.InvoiceNumber)
                    .OrderBy(i => i.InvoiceNumber).Ascending
                    .InnerJoin(m => m.InvoiceLines).On((l, i) => l.InvoiceId == i.Id)
-                   .Select(l => l.Price)
+                   .Select(c => c.Price.Sum()).As("total")
                    .OrderBy(l => l.Price).Descending
-                   .Where((l, p) => l.Price > p.Limit)
+                   .Having((l, p) => l.Price.Sum() > p.Limit)
                    .Compile();
 
             int parameterizedResult = await parameterized.ExecuteAsync(p => p.Limit = 100);
 
             /*
-             *      select c.name, i.invoice_date, i.invoice_number, l.price
-             *        from dbo.customers
+             *      select c.name, i.invoice_date, i.invoice_number, sum(l.price) as total
+             *        from dbo.customers c
              *  inner join dbo.invoices i on i.customer_id = c.id
              *  inner join dbo.invoice_lines l on l.invoice_id = i.id
-             *       where i.invoice_date > @p0
-             *         and l.price > 100
+             *       where (c.name IS NOT NULL or c.name <> '')
+             *             i.invoice_date > @p0
+             *         and l.price > @p2
              *    order by i.invoice_number asc, l.price desc
+             *    group by c.Name, i.invoice_date, i.invoice_number
+             *      having sum(l.Id) > @p0
              */
         }
     }

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 
 using WeelinkIT.FluentSQL.Modelling;
+using WeelinkIT.FluentSQL.Querying.Extensions;
 
 namespace WeelinkIT.FluentSQL.Querying
 {
@@ -19,7 +20,8 @@ namespace WeelinkIT.FluentSQL.Querying
     /// </typeparam>
     /// <typeparam name="TJoin">The concrete <see cref="Join{TModel, TParameters, TResult, TChild, TParent, TJoin}" /> type.</typeparam>
     public abstract class Join<TModel, TParameters, TResult, TChild, TParent, TJoin>
-        : QueryComponent<TModel, TParameters, TResult>
+        : QueryComponent<TModel, TParameters, TResult>,
+        ExtensionPoint<TModel, TParameters, TResult, TChild>
         where TModel : PersistenceModel
         where TParent : Table
         where TChild : Table
@@ -27,7 +29,7 @@ namespace WeelinkIT.FluentSQL.Querying
         where TParameters : new()
     {
         /// <summary>
-        ///     Create a new <c>INNER JOIN</c> statement.
+        ///     Create a new <c>JOIN</c> statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TModel, TParameters, TResult}" />.</param>
         /// <param name="expression">The expression for selecting <typeparamref name="TChild"/> <see cref="Table" /></param>
@@ -54,13 +56,12 @@ namespace WeelinkIT.FluentSQL.Querying
         /// <param name="expression">
         ///     The search condition to use for joining <typeparamref name="TChild" /> with <typeparamref name="TParent" />.
         /// </param>
-        /// <returns>A <see cref="From{TModel, TParameters, TResult, TTable}" /> representing <typeparamref name="TChild" />.</returns>
-        public From<TModel, TParameters, TResult, TChild> On(Expression<Func<TChild, TParent, bool>> expression)
+        /// <returns><c>this</c> for method chaining.</returns>
+        public TJoin On(Expression<Func<TChild, TParent, bool>> expression)
         {
             Condition = expression;
-            var from = new From<TModel, TParameters, TResult, TChild>(QueryContext, Expression);
 
-            return from;
+            return (TJoin)this;
         }
 
         private QueryContext<TModel, TParameters, TResult> QueryContext { get; }
