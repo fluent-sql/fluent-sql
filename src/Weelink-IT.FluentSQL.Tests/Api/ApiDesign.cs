@@ -56,7 +56,8 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                 new ExampleModel(new SqlServerDatabase())
                     .Query<int>()
                     .From(m => m.Customers)
-                    .Where(x => x.Id > 0);
+                    .Where(x => x.Id > 0)
+                    .Compile();
 
             var query =
                new ExampleModel(new SqlServerDatabase())

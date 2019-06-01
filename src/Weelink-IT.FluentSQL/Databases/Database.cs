@@ -25,5 +25,19 @@ namespace WeelinkIT.FluentSQL.Databases
         {
             return new Query<TParameters, TResult>(this);
         }
+
+        /// <summary>
+        ///     Compile <paramref name="context" /> into a <see cref="Query{TParameters, TResult}" />.
+        /// </summary>
+        /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
+        /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
+        /// <param name="context">The <see cref="QueryContext{TModel, TParameters, TResult}" /> to compile.</param>
+        /// <returns>A compiled <see cref="Query{TResult}" />.</returns>
+        public Query<TResult> Compile<TModel, TResult>(
+            QueryContext<TModel, NoParameters, TResult> context)
+            where TModel : PersistenceModel
+        {
+            return new Query<TResult>(this);
+        }
     }
 }

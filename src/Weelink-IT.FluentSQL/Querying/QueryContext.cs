@@ -7,12 +7,6 @@ using WeelinkIT.FluentSQL.Modelling;
 
 namespace WeelinkIT.FluentSQL.Querying
 {
-    /// <summary>
-    ///     Used when the <see cref="Query{TParameters, TResult}" /> does not have parameters.
-    /// </summary>
-    public sealed class NoParameters
-    {
-    }
 
     /// <summary>
     ///     The complete context of the final <see cref="Query{TParameters, TResult}" />.
@@ -28,7 +22,6 @@ namespace WeelinkIT.FluentSQL.Querying
         public QueryContext(Database database)
             : base(database)
         {
-            Database = database;
         }
 
         /// <summary>
@@ -42,8 +35,6 @@ namespace WeelinkIT.FluentSQL.Querying
         {
             return new QueryContext<TModel, TParameters, TResult>(Database);
         }
-
-        private Database Database { get; }
     }
 
     /// <summary>
@@ -74,7 +65,7 @@ namespace WeelinkIT.FluentSQL.Querying
         }
 
         private Expression<Func<TResult>> ResultExpression { get; }
-        private Database Database { get; }
+        internal Database Database { get; }
 
         internal IList<QueryComponent<TModel, TParameters, TResult>> FromComponents { get; }
         internal IList<QueryComponent<TModel, TParameters, TResult>> SelectComponents { get; }
@@ -82,14 +73,5 @@ namespace WeelinkIT.FluentSQL.Querying
         internal IList<QueryComponent<TModel, TParameters, TResult>> WhereComponents { get; }
         internal IList<QueryComponent<TModel, TParameters, TResult>> OrderByComponents { get; }
         internal IList<QueryComponent<TModel, TParameters, TResult>> GroupByComponents { get; }
-
-        /// <summary>
-        ///     Compile this <see cref="QueryContext{TModel, TParameters, TResult}" /> to a <see cref="Query{TParameters, TResult}" />.
-        /// </summary>
-        /// <returns>A <see cref="Query{TParameters, TResult}" /> that can be executed.</returns>
-        public Query<TParameters, TResult> Compile()
-        {
-            return Database.Compile(this);
-        }
     }
 }
