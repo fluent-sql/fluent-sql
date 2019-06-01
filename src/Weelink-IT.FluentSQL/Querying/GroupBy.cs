@@ -23,7 +23,7 @@ namespace WeelinkIT.FluentSQL.Querying
         where TParameters : new()
     {
         /// <summary>
-        ///     Create a new <c>ORDER BY</c>-statement.
+        ///     Create a new <c>GROUP BY</c>-statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TModel, TParameters, TResult}" />.</param>
         /// <param name="expression">The expression for selecting the <see cref="SqlExpression{TType}" />.</param>
@@ -33,8 +33,22 @@ namespace WeelinkIT.FluentSQL.Querying
             Expression = expression;
         }
 
+        /// <summary>
+        ///     Create a new <c>GROUP BY</c>-statement for a <see cref="Select{TModel, TParameters, TResult, TTable, TType}" />.
+        /// </summary>
+        /// <param name="queryContext">The <see cref="QueryContext{TModel, TParameters, TResult}" />.</param>
+        /// <param name="select">
+        ///     The <see cref="Select{TModel, TParameters, TResult, TTable, TType}" /> containing the <see cref="Column{TType}" /> to group by.
+        /// </param>
+        public GroupBy(QueryContext<TModel, TParameters, TResult> queryContext, Select<TModel, TParameters, TResult, TTable, TType> select)
+        {
+            QueryContext = queryContext;
+            Select = select;
+        }
+
         private QueryContext<TModel, TParameters, TResult> QueryContext { get; }
         private Expression<Func<TTable, SqlExpression<TType>>> Expression { get; }
+        private Select<TModel, TParameters, TResult, TTable, TType> Select { get; }
 
         /// <inheritdoc />
         QueryContext<TModel, TParameters, TResult> QueryComponent<TModel, TParameters, TResult>.QueryContext
