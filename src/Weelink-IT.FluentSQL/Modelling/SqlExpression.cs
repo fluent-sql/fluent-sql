@@ -14,6 +14,14 @@ namespace WeelinkIT.FluentSQL.Modelling
             return false;
         }
 
+        /// <summary>
+        ///     Converts this <see cref="SqlExpression{TType}" /> to <typeparamref name="TType" />.
+        /// </summary>
+        public TType ToType()
+        {
+            return default(TType);
+        }
+
         /// <inheritdoc />
         public override int GetHashCode()
         {
@@ -35,7 +43,7 @@ namespace WeelinkIT.FluentSQL.Modelling
         /// </example>
         public static implicit operator TType(SqlExpression<TType> expression)
         {
-            return default(TType);
+            return expression.ToType();
         }
 
         /// <summary>
@@ -100,7 +108,7 @@ namespace WeelinkIT.FluentSQL.Modelling
             return false;
         }
 
-        
+
         /// <summary>
         ///     Allows for a <c>not equals</c> comparison between two <see cref="SqlExpression{TType}" />s.
         ///     a value of type <typeparamref name="TType" />.
@@ -118,7 +126,7 @@ namespace WeelinkIT.FluentSQL.Modelling
             return false;
         }
 
-        
+
         /// <summary>
         ///     Allows for an <c>less than</c> comparison between two <see cref="SqlExpression{TType}" />s.
         /// </summary>

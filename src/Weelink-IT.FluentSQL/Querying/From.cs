@@ -15,8 +15,9 @@ namespace WeelinkIT.FluentSQL.Querying
     /// </typeparam>
     /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
     /// <typeparam name="TTable">The <see cref="Table" /> where to select <see cref="SqlExpression{TType}" />s from.</typeparam>
-    public sealed class From<TModel, TParameters, TResult, TTable> : QueryComponent<TModel, TParameters, TResult>,
-        ExtensionPoint<TModel, TParameters, TResult>, ExtensionPoint<TModel, TParameters, TResult, TTable>
+    public sealed class From<TModel, TParameters, TResult, TTable> :
+        QueryComponent<TModel, TParameters, TResult>,
+        ExtensionPoint<TModel, TParameters, TResult, TTable>
         where TModel : PersistenceModel
         where TTable : Table
         where TParameters : new()

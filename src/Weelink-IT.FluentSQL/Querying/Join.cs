@@ -19,9 +19,9 @@ namespace WeelinkIT.FluentSQL.Querying
     ///     The parent <see cref="Table" /> where <typeparamref name="TChild" /> should be joined with.
     /// </typeparam>
     /// <typeparam name="TJoin">The concrete <see cref="Join{TModel, TParameters, TResult, TChild, TParent, TJoin}" /> type.</typeparam>
-    public abstract class Join<TModel, TParameters, TResult, TChild, TParent, TJoin>
-        : QueryComponent<TModel, TParameters, TResult>,
-        ExtensionPoint<TModel, TParameters, TResult, TChild>
+    public abstract class Join<TModel, TParameters, TResult, TChild, TParent, TJoin> :
+        QueryComponent<TModel, TParameters, TResult>,
+        ExtensionPoint<TModel, TParameters, TResult, TChild, TParent, TJoin>
         where TModel : PersistenceModel
         where TParent : Table
         where TChild : Table

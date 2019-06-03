@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
+using WeelinkIT.FluentSQL.Querying;
 using WeelinkIT.FluentSQL.Querying.Extensions;
 using WeelinkIT.FluentSQL.Querying.Functions.Extensions;
 
@@ -43,18 +44,26 @@ namespace WeelinkIT.FluentSQL.Tests.Api
         public readonly Customers Customers = new Customers();
     }
 
-    public sealed class ApiDesign
+    public sealed partial class ApiDesign
     {
         public class ExampleParameters
         {
             public int Limit { get; set; }
+            public string InvoiceNumber { get; set; }
+        }
+
+        public class SubqueryResult
+        {
+            public int InvoiceId { get; set; }
         }
 
         [Fact]
         public async Task TestApi()
         {
+            var model = new ExampleModel(new SqlServerDatabase());
+
             Query<int> parameterless =
-                new ExampleModel(new SqlServerDatabase())
+                model
                     .Query<int>()
                     .From(m => m.Customers)
                     .Where(x => x.Id > 0)
@@ -62,8 +71,15 @@ namespace WeelinkIT.FluentSQL.Tests.Api
 
             int parameterlessResult = await parameterless.ExecuteAsync();
 
+            Query<ExampleParameters, SubqueryResult> subquery =
+                model.Query<SubqueryResult>().WithParameters<ExampleParameters>()
+                    .From(m => m.Invoices)
+                    .Select(i => i.Id)
+                    .Where((i, p) => i.InvoiceNumber.ToType().StartsWith(p.InvoiceNumber))
+                    .Compile();
+
             Query<ExampleParameters, int> parameterized =
-               new ExampleModel(new SqlServerDatabase())
+               model
                    .Query<int>().WithParameters<ExampleParameters>()
                    .From(m => m.Customers).As("c")
                    .Where((c, p) => string.IsNullOrEmpty(c.Name))
@@ -79,7 +95,11 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                    .Having((l, p) => l.Price.Sum() > p.Limit)
                    .Compile();
 
-            int parameterizedResult = await parameterized.ExecuteAsync(p => p.Limit = 100);
+            int parameterizedResult = await parameterized.ExecuteAsync(p =>
+            {
+                p.Limit = 100;
+                p.InvoiceNumber = "2019";
+            });
 
             /*
              *      select c.name, i.invoice_date, i.invoice_number, sum(l.price) as total
@@ -88,10 +108,9 @@ namespace WeelinkIT.FluentSQL.Tests.Api
              *  inner join dbo.invoice_lines l on l.invoice_id = i.id
              *       where (c.name IS NOT NULL or c.name <> '')
              *             i.invoice_date > @p0
-             *         and l.price > @p2
              *    order by i.invoice_number asc, l.price desc
              *    group by c.Name, i.invoice_date, i.invoice_number
-             *      having sum(l.Id) > @p0
+             *      having sum(l.Id) > @p1
              */
         }
     }
