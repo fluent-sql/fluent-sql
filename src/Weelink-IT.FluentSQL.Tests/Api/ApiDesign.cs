@@ -5,6 +5,7 @@ using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
 using WeelinkIT.FluentSQL.Querying.Extensions;
 using WeelinkIT.FluentSQL.Querying.Functions.Extensions;
+using WeelinkIT.FluentSQL.Querying.SqlExpressions.Extensions;
 using WeelinkIT.FluentSQL.Querying.Statements.Extensions;
 
 using Xunit;
@@ -50,6 +51,12 @@ namespace WeelinkIT.FluentSQL.Tests.Api
         {
             public int Limit { get; set; }
             public string InvoiceNumber { get; set; }
+        }
+        
+        public class UnionResult
+        {
+            public string CustomerName { get; set; }
+            public int TotalAmount { get; set; }
         }
 
         public class SubqueryResult
@@ -139,6 +146,59 @@ namespace WeelinkIT.FluentSQL.Tests.Api
             {
                 p.Limit = 100;
                 p.InvoiceNumber = "2019";
+            });
+
+            /**
+             *      SELECT c.name AS CustomerName, SUM(l.price) AS TotalAmount
+             *        FROM dbo.customers c
+             *  INNER JOIN dbo.invoices i ON i.customer_id = c.id
+             *  INNER JOIN dbo.invoice_lines l ON l.invoice_id = i.id
+             *       WHERE c.id > @limit
+             *
+             * UNION ALL
+             *
+             *      SELECT c.Name as CustomerName, 1 AS TotalAmount
+             *        FROM dbo.customers c
+             *
+             * UNION
+             *
+             *      SELECT "dummy", 1
+             *        FROM dbo.customers
+             *
+             * UNION
+             *
+             *      SELECT "other_dummy", id
+             *        FROM dbo.customers
+             */
+            Query<ExampleParameters, UnionResult> unionQuery =
+                model.Query<UnionResult>().WithParameters<ExampleParameters>()
+                    .From(() => c)
+                    .InnerJoin(() => i).On(() => i.CustomerId == c.Id)
+                    .InnerJoin(() => l).On(() => l.InvoiceId == i.Id)
+                    .Select(() => c.Name).As(result => result.CustomerName)
+                    .Select(() => l.Price.Sum()).As(result => result.TotalAmount)
+                    .Where(p => c.Id > p.Limit)
+                    .UnionAll(
+                        model.Query<UnionResult>()
+                            .From(() => c)
+                            .Select(() => c.Name).As(result => result.CustomerName)
+                            .Select(() => 1.Constant()).As(result => result.TotalAmount)
+                            .Union(
+                                model.Query<UnionResult>()
+                                    .WithParameters<ExampleParameters>()
+                                    .From(() => model.Customers)
+                                    .Select(() => "dummy".Constant())
+                                    .Select(() => 1.Constant())
+                                    .Union(
+                                        model.Query<UnionResult>()
+                                            .From(() => model.Customers)
+                                            .Select(() => "other_dummy".Constant())
+                                            .Select(() => model.Customers.Id))))
+                    .Compile();
+
+            UnionResult unionResult = await unionQuery.ExecuteAsync(p =>
+            {
+                p.Limit = 122;
             });
         }
     }
