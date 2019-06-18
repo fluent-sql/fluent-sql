@@ -1,22 +1,17 @@
-﻿using WeelinkIT.FluentSQL.Modelling;
-
-namespace WeelinkIT.FluentSQL.Querying
+﻿namespace WeelinkIT.FluentSQL.Querying
 {
     /// <summary>
-    ///     A component in a <see cref="Query{TParameters, TResult}" />.
+    ///     A component in a <see cref="Query{TParameters, TQueryResult}" />.
     /// </summary>
-    /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
     /// </typeparam>
-    /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
-    public interface QueryComponent<TModel, TParameters, TResult>
-        where TModel : PersistenceModel
-        where TParameters : new()
+    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    public interface QueryComponent<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
-        ///     Return the underlying <see cref="QueryContext{TModel, TParameters, TResult} " />.
+        ///     Return the underlying <see cref="QueryContext{TParameters, TQueryResult} " />.
         /// </summary>
-        QueryContext<TModel, TParameters, TResult> QueryContext { get; }
+        QueryContext<TParameters, TQueryResult> QueryContext { get; }
     }
 }

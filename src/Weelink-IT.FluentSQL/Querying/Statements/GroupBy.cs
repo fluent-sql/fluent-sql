@@ -3,14 +3,14 @@ using System.Linq.Expressions;
 
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
-    public class From<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
+    public class GroupBy<TParameters, TQueryResult, TSqlExpression> :
+        QueryComponent<TParameters, TQueryResult>
+        where TParameters : new()
     {
-        public From(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> table)
+        public GroupBy(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
         {
             QueryContext = queryContext;
-            Table = table;
-
-            QueryContext.FromComponents.Add(this);
+            Expression = expression;
         }
 
         QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
@@ -19,6 +19,6 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         }
 
         private QueryContext<TParameters, TQueryResult> QueryContext { get; }
-        private Expression<Func<TTable>> Table { get; }
+        private Expression<Func<TSqlExpression>> Expression { get; }
     }
 }

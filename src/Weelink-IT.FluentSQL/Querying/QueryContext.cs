@@ -3,20 +3,54 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 
 using WeelinkIT.FluentSQL.Databases;
-using WeelinkIT.FluentSQL.Modelling;
 
 namespace WeelinkIT.FluentSQL.Querying
 {
-
     /// <summary>
-    ///     The complete context of the final <see cref="Query{TParameters, TResult}" />.
+    ///     The complete context of the final <see cref="Query{TParameters, TQueryResult}" />.
     /// </summary>
-    /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
-    /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
-    public class QueryContext<TModel, TResult> : QueryContext<TModel, NoParameters, TResult> where TModel : PersistenceModel
+    /// <typeparam name="TParameters">
+    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+    /// </typeparam>
+    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    public class QueryContext<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
-        ///     Create a new <see cref="QueryContext{TModel, TParameters, TResult}" /> that will be executed in <paramref name="database" />.
+        ///     Create a new <see cref="QueryContext{TParameters,TQueryResult}" /> that will be executed in <paramref name="database" />.
+        /// </summary>
+        /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+        public QueryContext(Database database)
+        {
+            FromComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+            SelectComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+            JoinComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+            WhereComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+            OrderByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+            GroupByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+
+            ResultExpression = () => default(TQueryResult);
+            Database = database;
+        }
+
+        private Expression<Func<TQueryResult>> ResultExpression { get; }
+        internal Database Database { get; }
+
+        internal IList<QueryComponent<TParameters, TQueryResult>> FromComponents { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> SelectComponents { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> JoinComponents { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> WhereComponents { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> OrderByComponents { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> GroupByComponents { get; }
+    }
+
+    /// <summary>
+    ///     The complete context of the final <see cref="Query{TParameters, TQueryResult}" />.
+    /// </summary>
+    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    public class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
+    {
+        /// <summary>
+        ///     Create a new <see cref="QueryContext{TParameters,TQueryResult}" /> that will be executed in <paramref name="database" />.
         /// </summary>
         /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
         public QueryContext(Database database)
@@ -25,53 +59,15 @@ namespace WeelinkIT.FluentSQL.Querying
         }
 
         /// <summary>
-        ///     Create a parameterized version of this <see cref="QueryContext{TModel, TParameters, TResult}" />.
+        ///     Create a parameterized version of this <see cref="QueryContext{TParameters,TQueryResult}" />.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
         /// </typeparam>
         /// <returns>The parameterized version.</returns>
-        public QueryContext<TModel, TParameters, TResult> WithParameters<TParameters>() where TParameters : new()
+        public QueryContext<TParameters, TQueryResult> WithParameters<TParameters>() where TParameters : new()
         {
-            return new QueryContext<TModel, TParameters, TResult>(Database);
+            return new QueryContext<TParameters, TQueryResult>(Database);
         }
-    }
-
-    /// <summary>
-    ///     The complete context of the final <see cref="Query{TParameters, TResult}" />.
-    /// </summary>
-    /// <typeparam name="TModel">The <see cref="PersistenceModel" />.</typeparam>
-    /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
-    /// </typeparam>
-    /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
-    public class QueryContext<TModel, TParameters, TResult> where TModel : PersistenceModel where TParameters : new()
-    {
-        /// <summary>
-        ///     Create a new <see cref="QueryContext{TModel, TParameters, TResult}" /> that will be executed in <paramref name="database" />.
-        /// </summary>
-        /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
-        public QueryContext(Database database)
-        {
-            FromComponents = new List<QueryComponent<TModel, TParameters, TResult>>();
-            SelectComponents = new List<QueryComponent<TModel, TParameters, TResult>>();
-            JoinComponents = new List<QueryComponent<TModel, TParameters, TResult>>();
-            WhereComponents = new List<QueryComponent<TModel, TParameters, TResult>>();
-            OrderByComponents = new List<QueryComponent<TModel, TParameters, TResult>>();
-            GroupByComponents = new List<QueryComponent<TModel, TParameters, TResult>>();
-
-            ResultExpression = () => default(TResult);
-            Database = database;
-        }
-
-        private Expression<Func<TResult>> ResultExpression { get; }
-        internal Database Database { get; }
-
-        internal IList<QueryComponent<TModel, TParameters, TResult>> FromComponents { get; }
-        internal IList<QueryComponent<TModel, TParameters, TResult>> SelectComponents { get; }
-        internal IList<QueryComponent<TModel, TParameters, TResult>> JoinComponents { get; }
-        internal IList<QueryComponent<TModel, TParameters, TResult>> WhereComponents { get; }
-        internal IList<QueryComponent<TModel, TParameters, TResult>> OrderByComponents { get; }
-        internal IList<QueryComponent<TModel, TParameters, TResult>> GroupByComponents { get; }
     }
 }

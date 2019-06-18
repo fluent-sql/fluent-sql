@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using WeelinkIT.FluentSQL.Querying.Extensions;
-
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
-    public abstract class Join<TParameters, TQueryResult, TTable> :
-        QueryComponent<TParameters, TQueryResult>,
-        ExtensionPoint<TParameters, TQueryResult, TTable>
-        where TParameters : new()
+    public abstract class Join<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
     {
         protected Join(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
         {

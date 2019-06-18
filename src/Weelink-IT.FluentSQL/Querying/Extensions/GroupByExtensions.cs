@@ -5,14 +5,14 @@ using WeelinkIT.FluentSQL.Querying.Statements;
 
 namespace WeelinkIT.FluentSQL.Querying.Extensions
 {
-    public static class SelectExtensions
+    public static class GroupByExtensions
     {
-        public static Select<TParameters, TQueryResult, TSqlExpression> Select<TParameters, TQueryResult, TSqlExpression>(
+        public static GroupBy<TParameters, TQueryResult, TSqlExpression> GroupBy<TParameters, TQueryResult, TSqlExpression>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<TSqlExpression>> expression)
             where TParameters : new()
         {
-            return new Select<TParameters, TQueryResult, TSqlExpression>(queryComponent.QueryContext, expression);
+            return new GroupBy<TParameters, TQueryResult, TSqlExpression>(queryComponent.QueryContext, expression);
         }
     }
 }

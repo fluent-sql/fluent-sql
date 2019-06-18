@@ -53,7 +53,7 @@ namespace WeelinkIT.FluentSQL.Tests.Api
 
         public class SubqueryResult
         {
-            public int InvoiceId { get; set; }
+            public int InvoiceIdFromSubquery { get; set; }
         }
 
         [Fact]
@@ -61,56 +61,89 @@ namespace WeelinkIT.FluentSQL.Tests.Api
         {
             var model = new ExampleModel(new SqlServerDatabase());
 
-            Query<int> parameterless =
-                model
-                    .Query<int>()
-                    .From(m => m.Customers)
-                    .Where(x => x.Id > 0)
-                    .Compile();
-
-            int parameterlessResult = await parameterless.ExecuteAsync();
-
-            Query<ExampleParameters, SubqueryResult> subquery =
-                model.Query<SubqueryResult>().WithParameters<ExampleParameters>()
-                    .From(m => m.Invoices)
-                    .Select(i => i.Id)
-                    .Where((i, p) => i.InvoiceNumber.ToType().StartsWith(p.InvoiceNumber))
-                    .Compile();
-
-            Query<ExampleParameters, int> parameterized =
-               model
-                   .Query<int>().WithParameters<ExampleParameters>()
-                   .From(m => m.Customers).As("c")
-                   .Where((c, p) => string.IsNullOrEmpty(c.Name))
-                   .Select(c => c.Name).GroupBy()
-                   .InnerJoin(m => m.Invoices).As("i").On((i, c) => i.CustomerId == c.Id)
-                   .Select(i => i.InvoiceDate).GroupBy()
-                   .Select(i => i.InvoiceNumber).GroupBy()
-                   .Where((i, p) => i.InvoiceDate > DateTimeOffset.MaxValue)
-                   .OrderBy(i => i.InvoiceNumber).Ascending
-                   .InnerJoin(m => m.InvoiceLines).On((l, i) => l.InvoiceId == i.Id)
-                   .Select(c => c.Price.Sum()).As("total")
-                   .OrderBy(l => l.Price).Descending
-                   .Having((l, p) => l.Price.Sum() > p.Limit)
-                   .Compile();
-
-            int parameterizedResult = await parameterized.ExecuteAsync(p =>
             {
-                p.Limit = 100;
-                p.InvoiceNumber = "2019";
-            });
+                Query<int> parameterless =
+                    model
+                        .Query<int>()
+                        .From(() => model.Customers)
+                        .Where(() => model.Customers.Id > 0)
+                        .Compile();
 
-            /*
-             *      select c.name, i.invoice_date, i.invoice_number, sum(l.price) as total
-             *        from dbo.customers c
-             *  inner join dbo.invoices i on i.customer_id = c.id
-             *  inner join dbo.invoice_lines l on l.invoice_id = i.id
-             *       where (c.name IS NOT NULL or c.name <> '')
-             *             i.invoice_date > @p0
-             *    order by i.invoice_number asc, l.price desc
-             *    group by c.Name, i.invoice_date, i.invoice_number
-             *      having sum(l.Id) > @p1
-             */
+                int parameterlessResult = await parameterless.ExecuteAsync();
+            }
+
+            {
+                Customers c = model.Customers;
+                Invoices i = model.Invoices;
+                InvoiceLines l = model.InvoiceLines;
+
+                Invoices i2 = model.Invoices;
+
+                Query<int> parameterless =
+                    model
+                        .Query<int>()
+                        .From(() => model.Customers)
+                        .Where(() => model.Customers.Id > 0)
+                        .Select(() => model.Customers.Id)
+                        .Compile();
+
+                /*
+                 *      select customers.name
+                 *        from dbo.customers
+                 *       where dbo.customers.id > 0
+                 */
+
+                Query<ExampleParameters, SubqueryResult> subquery =
+                    model.Query<SubqueryResult>().WithParameters<ExampleParameters>()
+                        .From(() => i2)
+                        .Where(p => i2.InvoiceNumber == i.InvoiceNumber)
+                        .Select(() => i2.InvoiceNumber).As(r => r.InvoiceIdFromSubquery)
+                        .Compile();
+
+                /*
+                 *      select i2.invoice_number as InvoiceIdFromSubquery
+                 *        from dbo.invoices i2
+                 *       where i2.invoice_number = i.invoice_number
+                 */
+
+                Query<ExampleParameters, int> parameterized =
+                    model.Query<int>().WithParameters<ExampleParameters>()
+                        .From(() => c)
+                        .InnerJoin(() => i).On(() => i.CustomerId == c.Id)
+                        .LeftJoin(() => subquery).On(x => x.InvoiceIdFromSubquery == i.Id)
+                        .LeftJoin(() => parameterless).On(x => x == i.CustomerId)
+                        .LeftJoin(() => l).On(() => l.InvoiceId == i.Id)
+                        .Where(p => i.InvoiceNumber == p.InvoiceNumber)
+                        .Select(() => c.Name)
+                        .Select(() => i.InvoiceDate)
+                        .Select(() => l.Price.Sum()).As("total")
+                        .OrderBy(() => c.Name).Descending
+                        .GroupBy(() => c.Name)
+                        .GroupBy(() => i.InvoiceDate)
+                        .Compile();
+
+                int parameterizedResult = await parameterized.ExecuteAsync(p =>
+                {
+                    p.Limit = 100;
+                    p.InvoiceNumber = "2019";
+                });
+
+                /*
+                 *      select c.name, i.invoice_date, sum(l.price) as total
+                 *        from dbo.customers c
+                 *  inner join dbo.invoices i on i.customer_id = c.id
+                 *   left join (select i2.invoice_number as InvoiceIdFromSubquery
+                 *                from dbo.invoices i2
+                 *               where i2.invoice_number = i.invoice_number) subquery on subquery.invoice_number = i.invoice_number
+                 *   left join (select customers.id
+                 *                from dbo.customers
+                 *               where dbo.customers.id > 0) parameterless on parameterless.id = i.customer_id
+                 *   left join dbo.invoice_lines l on l.invoice_id = i.id
+                 *       where i.invoice_number = @invoiceNumber
+                 *    order by c.name desc
+                 *    group by c.name, i.invoice_date
+                 */
+            }
         }
     }
 }

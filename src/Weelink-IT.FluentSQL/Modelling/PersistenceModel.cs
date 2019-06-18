@@ -29,26 +29,26 @@ namespace WeelinkIT.FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     <see cref="Query{TParameters, TResult}" /> this <see cref="PersistenceModel{TModel}" />.
+        ///     <see cref="Query{TParameters, TQueryResult}" /> this <see cref="PersistenceModel{TModel}" />.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
         /// </typeparam>
-        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TQueryResult"></typeparam>
         /// <returns></returns>
-        public QueryContext<TModel, TParameters, TResult> Query<TParameters, TResult>() where TParameters : new()
+        public QueryContext<TParameters, TQueryResult> Query<TParameters, TQueryResult>() where TParameters : new()
         {
-            return new QueryContext<TModel, TParameters, TResult>(Database);
+            return new QueryContext<TParameters, TQueryResult>(Database);
         }
 
         /// <summary>
-        ///     <see cref="Query{TParameters, TResult}" /> this <see cref="PersistenceModel{TModel}" />.
+        ///     <see cref="Query{TParameters, TQueryResult}" /> this <see cref="PersistenceModel{TModel}" />.
         /// </summary>
-        /// <typeparam name="TResult"></typeparam>
+        /// <typeparam name="TQueryResult"></typeparam>
         /// <returns></returns>
-        public QueryContext<TModel, TResult> Query<TResult>()
+        public QueryContext<TQueryResult> Query<TQueryResult>()
         {
-            return new QueryContext<TModel, TResult>(Database);
+            return new QueryContext<TQueryResult>(Database);
         }
 
         private Database Database { get; }

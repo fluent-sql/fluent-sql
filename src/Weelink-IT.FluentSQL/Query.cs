@@ -8,11 +8,11 @@ namespace WeelinkIT.FluentSQL
     /// <summary>
     ///     The compiled query to execute.
     /// </summary>
-    /// <typeparam name="TResult">The result type.</typeparam>
+    /// <typeparam name="TQueryResult">The result type.</typeparam>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
     /// </typeparam>
-    public sealed class Query<TParameters, TResult> where TParameters : new()
+    public class Query<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
         ///     Create a new query that will be executed in <paramref name="database" />.
@@ -27,12 +27,12 @@ namespace WeelinkIT.FluentSQL
         ///     Execute this query and return the result.
         /// </summary>
         /// <returns>The result of the query.</returns>
-        public Task<TResult> ExecuteAsync(Action<TParameters> parameters)
+        public Task<TQueryResult> ExecuteAsync(Action<TParameters> parameters)
         {
             var p = new TParameters();
             parameters(p);
 
-            return Task.FromResult(default(TResult));
+            return Task.FromResult(default(TQueryResult));
         }
 
         private Database Database { get; }
@@ -41,8 +41,8 @@ namespace WeelinkIT.FluentSQL
     /// <summary>
     ///     The compiled query to execute.
     /// </summary>
-    /// <typeparam name="TResult">The result type.</typeparam>
-    public sealed class Query<TResult>
+    /// <typeparam name="TQueryResult">The result type.</typeparam>
+    public sealed class Query<TQueryResult>
     {
         /// <summary>
         ///     Create a new query that will be executed in <paramref name="database" />.
@@ -57,9 +57,9 @@ namespace WeelinkIT.FluentSQL
         ///     Execute this query and return the result.
         /// </summary>
         /// <returns>The result of the query.</returns>
-        public Task<TResult> ExecuteAsync()
+        public Task<TQueryResult> ExecuteAsync()
         {
-            return Task.FromResult(default(TResult));
+            return Task.FromResult(default(TQueryResult));
         }
 
         private Database Database { get; }
