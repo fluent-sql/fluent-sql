@@ -17,7 +17,7 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="expression">The expression that represents the condition.</param>
-        public Where(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TParameters, bool>> expression)
+        internal Where(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TParameters, bool>> expression)
         {
             QueryContext = queryContext;
             Expression = expression;

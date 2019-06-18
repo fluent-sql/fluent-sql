@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="first">The first <see cref="Query{TParameters, TQueryResult}" />.</param>
         /// <param name="second">The second <see cref="Query{TParameters, TQueryResult}" />.</param>
-        public UnionAll(QueryComponent<TParameters1, TQueryResult> first, QueryComponent<TParameters2, TQueryResult> second)
+        internal UnionAll(QueryComponent<TParameters1, TQueryResult> first, QueryComponent<TParameters2, TQueryResult> second)
         {
             First = first;
             Second = second;

@@ -9,7 +9,7 @@
         ///     Create a new alias.
         /// </summary>
         /// <param name="name">The alias.</param>
-        public Alias(string name)
+        internal Alias(string name)
         {
             Name = name;
         }

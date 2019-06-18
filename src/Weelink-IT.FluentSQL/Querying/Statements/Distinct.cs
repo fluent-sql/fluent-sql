@@ -13,7 +13,7 @@
         ///     Create a new <c>DISTINCT</c>-statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
-        public Distinct(QueryContext<TParameters, TQueryResult> queryContext)
+        internal Distinct(QueryContext<TParameters, TQueryResult> queryContext)
         {
             QueryContext = queryContext;
 

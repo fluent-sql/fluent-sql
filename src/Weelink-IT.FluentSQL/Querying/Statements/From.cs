@@ -20,7 +20,7 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
-        public From(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> expression)
+        internal From(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> expression)
         {
             QueryContext = queryContext;
             Expression = expression;

@@ -1,4 +1,5 @@
-﻿namespace WeelinkIT.FluentSQL.Querying.Statements
+﻿
+namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
     ///     Limits the number of results.
@@ -14,7 +15,7 @@
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="count">The number of rows.</param>
-        public Limit(QueryContext<TParameters, TQueryResult> queryContext, int count)
+        internal Limit(QueryContext<TParameters, TQueryResult> queryContext, int count)
         {
             QueryContext = queryContext;
             Count = count;

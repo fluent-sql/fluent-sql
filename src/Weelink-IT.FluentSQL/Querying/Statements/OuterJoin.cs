@@ -20,7 +20,7 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         /// <param name="child">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
         /// </param>
-        public OuterJoin(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
+        internal OuterJoin(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
             : base(queryContext, child)
         {
         }

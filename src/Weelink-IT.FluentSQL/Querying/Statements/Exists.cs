@@ -10,7 +10,7 @@
         ///     Create a new <c>EXISTS</c>-statement.
         /// </summary>
         /// <param name="subquery">The <see cref="Query{TQueryResult}" /> that will check the existence of records.</param>
-        public Exists(Query<TQueryResult> subquery)
+        internal Exists(Query<TQueryResult> subquery)
         {
             Subquery = subquery;
         }
@@ -41,7 +41,7 @@
         ///     Create a new <c>EXISTS</c>-statement.
         /// </summary>
         /// <param name="subquery">The <see cref="Query{TParameters, TQueryResult}" /> that will check the existence of records.</param>
-        public Exists(Query<TParameters, TQueryResult> subquery)
+        internal Exists(Query<TParameters, TQueryResult> subquery)
         {
             Subquery = subquery;
         }

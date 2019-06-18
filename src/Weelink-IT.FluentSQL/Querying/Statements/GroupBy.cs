@@ -20,7 +20,7 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="expression">The <see cref="Expression{TDelegate}" /> to select.</param>
-        public GroupBy(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
+        internal GroupBy(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
         {
             QueryContext = queryContext;
             Expression = expression;
