@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using WeelinkIT.FluentSQL.Querying.Statements;
-
-namespace WeelinkIT.FluentSQL.Querying.Extensions
+namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     public static class FromExtensions
     {

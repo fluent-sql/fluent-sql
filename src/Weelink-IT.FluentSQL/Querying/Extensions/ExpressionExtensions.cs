@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -14,7 +14,8 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
                 noParameterExpression
             };
 
-            Expression<Func<NoParameters, T>> newExpression = Expression.Lambda<Func<NoParameters, T>>(expression.Body, newParameters);
+            Expression<Func<NoParameters, T>> newExpression =
+                Expression.Lambda<Func<NoParameters, T>>(expression.Body, newParameters);
             return newExpression;
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using WeelinkIT.FluentSQL.Querying.Statements;
+using WeelinkIT.FluentSQL.Querying.Extensions;
 
-namespace WeelinkIT.FluentSQL.Querying.Extensions
+namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     public static class WhereExtensions
     {

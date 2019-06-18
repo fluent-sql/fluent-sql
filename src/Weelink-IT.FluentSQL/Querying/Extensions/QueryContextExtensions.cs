@@ -15,7 +15,7 @@
 
         public static Query<TQueryResult> Compile<TQueryResult>(this QueryComponent<NoParameters, TQueryResult> queryComponent)
         {
-            return queryComponent.QueryContext.Compile();
+            return queryComponent.QueryContext.Compile<TQueryResult>();
         }
 
         public static Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(this QueryComponent<TParameters, TQueryResult> queryComponent)
