@@ -1,4 +1,4 @@
-﻿namespace WeelinkIT.FluentSQL.Querying
+﻿namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
     ///     An alias.

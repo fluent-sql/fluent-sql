@@ -5,6 +5,9 @@
     /// </summary>
     public sealed class SqlServerDatabase : Database
     {
+        /// <summary>
+        ///     Construct a new database targeting SQL Server.
+        /// </summary>
         public SqlServerDatabase()
             : base(new SqlServerQueryCompiler())
         {
