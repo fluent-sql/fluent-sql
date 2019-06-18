@@ -11,6 +11,8 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         {
             QueryContext = queryContext;
             Expression = expression;
+
+            queryContext.OrderByComponents.Add(this);
         }
 
         public OrderBy<TParameters, TQueryResult, TSqlExpression> Ascending

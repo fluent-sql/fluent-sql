@@ -11,6 +11,8 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         {
             QueryContext = queryContext;
             Expression = expression;
+
+            queryContext.GroupByComponents.Add(this);
         }
 
         QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext

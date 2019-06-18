@@ -11,6 +11,8 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         {
             QueryContext = queryContext;
             Expression = expression;
+
+            queryContext.SelectComponents.Add(this);
         }
 
         public Select<TParameters, TQueryResult, TSqlExpression> As(string alias)
