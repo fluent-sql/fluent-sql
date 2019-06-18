@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using FluentAssertions;
+
 using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
-using WeelinkIT.FluentSQL.Querying;
 using WeelinkIT.FluentSQL.Querying.Extensions;
 using WeelinkIT.FluentSQL.Querying.Functions.Extensions;
 
@@ -44,7 +43,7 @@ namespace WeelinkIT.FluentSQL.Tests.Api
         public readonly Customers Customers = new Customers();
     }
 
-    public sealed partial class ApiDesign
+    public sealed class ApiDesign
     {
         public class ExampleParameters
         {

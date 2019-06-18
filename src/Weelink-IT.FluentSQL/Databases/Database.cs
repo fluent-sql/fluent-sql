@@ -18,8 +18,7 @@ namespace WeelinkIT.FluentSQL.Databases
         /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
         /// <param name="context">The <see cref="QueryContext{TModel, TParameters, TResult}" /> to compile.</param>
         /// <returns>A compiled <see cref="Query{TParameters, TResult}" />.</returns>
-        public Query<TParameters, TResult> Compile<TModel, TParameters, TResult>(
-            QueryContext<TModel, TParameters, TResult> context)
+        public Query<TParameters, TResult> Compile<TModel, TParameters, TResult>(QueryContext<TModel, TParameters, TResult> context)
             where TModel : PersistenceModel
             where TParameters : new()
         {
@@ -33,8 +32,7 @@ namespace WeelinkIT.FluentSQL.Databases
         /// <typeparam name="TResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
         /// <param name="context">The <see cref="QueryContext{TModel, TParameters, TResult}" /> to compile.</param>
         /// <returns>A compiled <see cref="Query{TResult}" />.</returns>
-        public Query<TResult> Compile<TModel, TResult>(
-            QueryContext<TModel, NoParameters, TResult> context)
+        public Query<TResult> Compile<TModel, TResult>(QueryContext<TModel, NoParameters, TResult> context)
             where TModel : PersistenceModel
         {
             return new Query<TResult>(this);

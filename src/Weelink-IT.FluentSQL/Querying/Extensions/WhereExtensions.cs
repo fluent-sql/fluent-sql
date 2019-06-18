@@ -53,7 +53,6 @@ namespace WeelinkIT.FluentSQL.Querying.Extensions
             where TModel : PersistenceModel
             where TTable : Table
         {
-            var newExpression = expression.AddNoParameters();
             return subject.Where(expression.AddNoParameters());
         }
     }
