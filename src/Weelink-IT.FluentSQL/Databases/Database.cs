@@ -7,6 +7,11 @@ namespace WeelinkIT.FluentSQL.Databases
     /// </summary>
     public abstract class Database
     {
+        protected Database(QueryCompiler compiler)
+        {
+            Compiler = compiler;
+        }
+
         /// <summary>
         ///     Compile <paramref name="context" /> into a <see cref="Query{TParameters, TQueryResult}" />.
         /// </summary>
@@ -19,7 +24,7 @@ namespace WeelinkIT.FluentSQL.Databases
         public Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
             where TParameters : new()
         {
-            return new Query<TParameters, TQueryResult>(this);
+            return Compiler.Compile(context);
         }
 
         /// <summary>
@@ -30,7 +35,9 @@ namespace WeelinkIT.FluentSQL.Databases
         /// <returns>A compiled <see cref="Query{TQueryResult}" />.</returns>
         public Query<TQueryResult> Compile<TQueryResult>(QueryContext<NoParameters, TQueryResult> context)
         {
-            return new Query<TQueryResult>(this);
+            return Compiler.Compile(context);
         }
+
+        private QueryCompiler Compiler { get; }
     }
 }
