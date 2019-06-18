@@ -91,5 +91,33 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 
             return new InnerJoin<TParameters, TQueryResult, TSubqueryResult>(queryComponent.QueryContext, () => subquery.QueryResult);
         }
+
+        public static OuterJoin<TParameters, TQueryResult, TTable> OuterJoin<TParameters, TQueryResult, TTable>(
+            this QueryComponent<TParameters, TQueryResult> queryComponent,
+            Expression<Func<TTable>> child)
+            where TParameters : new()
+        {
+            return new OuterJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
+        }
+
+        public static OuterJoin<TParameters, TQueryResult, TSubqueryResult> OuterJoin<TParameters, TQueryResult, TSubqueryResult>(
+            this QueryComponent<TParameters, TQueryResult> queryComponent,
+            Expression<Func<Query<TParameters, TSubqueryResult>>> child)
+            where TParameters : new()
+        {
+            var subquery = new Subquery<TParameters, TSubqueryResult>(child);
+
+            return new OuterJoin<TParameters, TQueryResult, TSubqueryResult>(queryComponent.QueryContext, () => subquery.QueryResult);
+        }
+
+        public static OuterJoin<TParameters, TQueryResult, TSubqueryResult> OuterJoin<TParameters, TQueryResult, TSubqueryResult>(
+            this QueryComponent<TParameters, TQueryResult> queryComponent,
+            Expression<Func<Query<TSubqueryResult>>> child)
+            where TParameters : new()
+        {
+            var subquery = new Subquery<TSubqueryResult>(child);
+
+            return new OuterJoin<TParameters, TQueryResult, TSubqueryResult>(queryComponent.QueryContext, () => subquery.QueryResult);
+        }
     }
 }

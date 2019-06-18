@@ -27,6 +27,7 @@ namespace WeelinkIT.FluentSQL.Querying
             WhereComponents = new List<QueryComponent<TParameters, TQueryResult>>();
             OrderByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
             GroupByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
+            Modifiers = new List<QueryComponent<TParameters, TQueryResult>>();
 
             ResultExpression = () => default(TQueryResult);
             Database = database;
@@ -41,6 +42,7 @@ namespace WeelinkIT.FluentSQL.Querying
         internal IList<QueryComponent<TParameters, TQueryResult>> WhereComponents { get; }
         internal IList<QueryComponent<TParameters, TQueryResult>> OrderByComponents { get; }
         internal IList<QueryComponent<TParameters, TQueryResult>> GroupByComponents { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> Modifiers { get; }
     }
 
     /// <summary>

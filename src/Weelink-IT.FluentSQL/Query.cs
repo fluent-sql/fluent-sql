@@ -42,7 +42,7 @@ namespace WeelinkIT.FluentSQL
     ///     The compiled query to execute.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type.</typeparam>
-    public sealed class Query<TQueryResult>
+    public class Query<TQueryResult>
     {
         /// <summary>
         ///     Create a new query that will be executed in <paramref name="database" />.
