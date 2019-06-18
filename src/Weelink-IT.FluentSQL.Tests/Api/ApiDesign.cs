@@ -5,7 +5,6 @@ using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Modelling;
 using WeelinkIT.FluentSQL.Querying.Extensions;
 using WeelinkIT.FluentSQL.Querying.Functions.Extensions;
-using WeelinkIT.FluentSQL.Querying.SqlExpressions.Extensions;
 using WeelinkIT.FluentSQL.Querying.Statements.Extensions;
 
 using Xunit;
@@ -84,7 +83,7 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                     .Query<int>()
                     .From(() => model.Customers)
                     .Where(() => model.Customers.Id > 0)
-                    .Select(() => model.Customers.Id)
+                    .Select(() => model.Customers.Name)
                     .Compile();
 
             /*
@@ -182,17 +181,17 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                         model.Query<UnionResult>()
                             .From(() => c)
                             .Select(() => c.Name).As(result => result.CustomerName)
-                            .Select(() => 1.Constant()).As(result => result.TotalAmount)
+                            .Select(() => 1).As(result => result.TotalAmount)
                             .Union(
                                 model.Query<UnionResult>()
                                     .WithParameters<ExampleParameters>()
                                     .From(() => model.Customers)
-                                    .Select(() => "dummy".Constant())
-                                    .Select(() => 1.Constant())
+                                    .Select(() => "dummy")
+                                    .Select(() => 1)
                                     .Union(
                                         model.Query<UnionResult>()
                                             .From(() => model.Customers)
-                                            .Select(() => "other_dummy".Constant())
+                                            .Select(() => "other_dummy")
                                             .Select(() => model.Customers.Id))))
                     .Compile();
 
