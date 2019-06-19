@@ -4,18 +4,17 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     /// <summary>
-    ///     Allows the construction of
-    ///     <see cref="WeelinkIT.FluentSQL.Querying.Statements.GroupBy{TParameters, TQueryResult, TSqlExpression}" />s.
+    ///     Adds <c>GROUP BY</c> to a query.
     /// </summary>
     public static class GroupByExtensions
     {
         /// <summary>
-        ///     Add a new <c>GROUP BY</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>GROUP BY</c> to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSqlExpression">The expression to group by.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="expression">

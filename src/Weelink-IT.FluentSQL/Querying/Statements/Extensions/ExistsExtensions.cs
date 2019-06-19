@@ -1,7 +1,7 @@
 ﻿namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     /// <summary>
-    ///     Allows the construction of <see cref="WeelinkIT.FluentSQL.Querying.Statements.Exists{TQueryResult}"/>.
+    ///     Adds <c>EXISTS</c> to a query.
     /// </summary>
     public static class ExistsExtensions
     {
@@ -9,9 +9,9 @@
         ///     The <c>EXISTS</c>-statement.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="query">The <see cref="Query{TParameters,TQueryResult}" /> that tests for the existence of a record.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.Statements.Exists{TQueryResult}"/>.</returns>
         public static Exists<TParameters, TQueryResult> Exists<TParameters, TQueryResult>(
@@ -24,7 +24,7 @@
         /// <summary>
         ///     The <c>EXISTS</c>-statement.
         /// </summary>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="query">The <see cref="Query{TParameters,TQueryResult}" /> that tests for the existence of a record.</param>
         /// <returns>The <see cref="WeelinkIT.FluentSQL.Querying.Statements.Exists{TQueryResult}"/>.</returns>
         public static Exists<TQueryResult> Exists<TQueryResult>(this Query<TQueryResult> query)

@@ -4,14 +4,14 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
-    ///     The <c>FROM</c>-statement of a <see cref="Query{TParameters, TResult}" />.
+    ///     The <c>FROM</c>-statement of a query.
     /// </summary>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TTable">
-    ///     The <see cref="Expression" /> where to select <see cref="WeelinkIT.FluentSQL.Modelling.SqlExpression{TExpressionType}" />s from.
+    ///     The table where to select <see cref="WeelinkIT.FluentSQL.Modelling.SqlExpression{TExpressionType}" />s from.
     /// </typeparam>
     public class From<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
     {

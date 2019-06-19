@@ -4,12 +4,12 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
-    ///     The <c>WHERE</c>-statement of a <see cref="Query{TParameters, TResult}" />.
+    ///     The <c>WHERE</c>-statement of a query.
     /// </summary>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class Where<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>

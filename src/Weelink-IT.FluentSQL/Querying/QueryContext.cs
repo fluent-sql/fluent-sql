@@ -5,16 +5,16 @@ using WeelinkIT.FluentSQL.Databases;
 namespace WeelinkIT.FluentSQL.Querying
 {
     /// <summary>
-    ///     The complete context of the final <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The context containing all components of the query.
     /// </summary>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class QueryContext<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
-        ///     Create a new <see cref="QueryContext{TParameters,TQueryResult}" /> that will be executed in <paramref name="database" />.
+        ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
         /// </summary>
         /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
         public QueryContext(Database database)
@@ -42,13 +42,13 @@ namespace WeelinkIT.FluentSQL.Querying
     }
 
     /// <summary>
-    ///     The complete context of the final <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The context containing all components of the query.
     /// </summary>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
     {
         /// <summary>
-        ///     Create a new <see cref="QueryContext{TParameters,TQueryResult}" /> that will be executed in <paramref name="database" />.
+        ///     Create a new <see cref="QueryContext{TParameters,TQueryResult}" />.
         /// </summary>
         /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
         public QueryContext(Database database)
@@ -57,10 +57,10 @@ namespace WeelinkIT.FluentSQL.Querying
         }
 
         /// <summary>
-        ///     Create a parameterized version of this <see cref="QueryContext{TParameters,TQueryResult}" />.
+        ///     Create a parameterized version of this <see cref="QueryContext{TQueryResult}" />.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing the query.
         /// </typeparam>
         /// <returns>The parameterized version.</returns>
         public QueryContext<TParameters, TQueryResult> WithParameters<TParameters>() where TParameters : new()

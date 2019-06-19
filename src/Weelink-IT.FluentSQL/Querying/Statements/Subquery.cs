@@ -4,15 +4,15 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
-    ///     Represents a subquery to use in a different <see cref="Query{TQueryResult}" />.
+    ///     Represents a subquery to use in a different query.
     /// </summary>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TQueryResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class Subquery<TQueryResult>
     {
         /// <summary>
         ///     Create a new subquery.
         /// </summary>
-        /// <param name="query">The underlying <see cref="Query{TQueryResult}" />.</param>
+        /// <param name="query">The underlying query.</param>
         internal Subquery(Expression<Func<Query<TQueryResult>>> query)
         {
             Query = query;
@@ -21,7 +21,7 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         private Expression<Func<Query<TQueryResult>>> Query { get; }
 
         /// <summary>
-        ///     The <typeparamref name="TQueryResult" /> of the underlying <see cref="Query{TQueryResult}" />.
+        ///     The <typeparamref name="TQueryResult" /> of the underlying query.
         /// </summary>
         internal TQueryResult QueryResult
         {
@@ -30,18 +30,18 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
     }
 
     /// <summary>
-    ///     Represents a subquery to use in a different <see cref="Query{TParameters, TQueryResult}" />.
+    ///     Represents a subquery to use in a different query.
     /// </summary>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class Subquery<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
         ///     Create a new subquery.
         /// </summary>
-        /// <param name="query">The underlying <see cref="Query{TParameters, TQueryResult}" />.</param>
+        /// <param name="query">The underlying query.</param>
         internal Subquery(Expression<Func<Query<TParameters, TQueryResult>>> query)
         {
             Query = query;
@@ -50,7 +50,7 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         private Expression<Func<Query<TParameters, TQueryResult>>> Query { get; }
 
         /// <summary>
-        ///     The <typeparamref name="TQueryResult" /> of the underlying <see cref="Query{TQueryResult}" />.
+        ///     The <typeparamref name="TQueryResult" /> of the underlying query.
         /// </summary>
         internal TQueryResult QueryResult
         {

@@ -6,17 +6,17 @@ using WeelinkIT.FluentSQL.Querying.Extensions;
 namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     /// <summary>
-    ///     Allows the construction of <see cref="WeelinkIT.FluentSQL.Querying.Statements.Where{TParameters, TResult}" />s.
+    ///     Adds <c>WHERE</c> to a query.
     /// </summary>
     public static class WhereExtensions
     {
         /// <summary>
-        ///     Add a new <c>WHERE</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>WHERE</c> to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="expression">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
@@ -32,9 +32,9 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>WHERE</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>WHERE</c> to the query.
         /// </summary>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="expression">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on

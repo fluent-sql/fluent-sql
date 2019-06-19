@@ -6,17 +6,17 @@ using WeelinkIT.FluentSQL.Modelling;
 namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     /// <summary>
-    ///     Allows the construction of <see cref="WeelinkIT.FluentSQL.Querying.Statements.Join{TParameters, TResult, TTable}" />s.
+    ///     Adds <c>JOIN</c> to a query.
     /// </summary>
     public static class JoinExtensions
     {
         /// <summary>
-        ///     Add a new <c>LEFT JOIN</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>LEFT JOIN</c> to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -33,12 +33,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>LEFT JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>LEFT JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -57,12 +57,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>LEFT JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>LEFT JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -81,12 +81,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>RIGHT JOIN</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>RIGHT JOIN</c> to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -102,12 +102,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>RIGHT JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>RIGHT JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -126,12 +126,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>RIGHT JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>RIGHT JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -150,12 +150,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>INNER JOIN</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>INNER JOIN</c> to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -169,15 +169,14 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         {
             return new InnerJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
         }
-
         
         /// <summary>
-        ///     Add a new <c>INNER JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>INNER JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -196,12 +195,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>INNER JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>INNER JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -220,12 +219,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>OUTER JOIN</c> to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>OUTER JOIN</c> to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -241,12 +240,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>OUTER JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>OUTER JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
@@ -265,12 +264,12 @@ namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
         }
 
         /// <summary>
-        ///     Add a new <c>OUTER JOIN</c> with a subquery to the <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a new <c>OUTER JOIN</c> with a subquery to the query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">

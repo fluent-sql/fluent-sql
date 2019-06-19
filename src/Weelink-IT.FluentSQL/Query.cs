@@ -10,14 +10,14 @@ namespace WeelinkIT.FluentSQL
     /// </summary>
     /// <typeparam name="TQueryResult">The result type.</typeparam>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
     public class Query<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
         ///     Create a new query that will be executed in <paramref name="database" />.
         /// </summary>
-        /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+        /// <param name="database">The database for this query.</param>
         /// <param name="commandText">The SQL to execute.</param>
         public Query(Database database, string commandText)
         {
@@ -50,7 +50,7 @@ namespace WeelinkIT.FluentSQL
         /// <summary>
         ///     Create a new query that will be executed in <paramref name="database" />.
         /// </summary>
-        /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+        /// <param name="database">The database for this query.</param>
         /// <param name="commandText">The SQL to execute.</param>
         public Query(Database database, string commandText)
         {

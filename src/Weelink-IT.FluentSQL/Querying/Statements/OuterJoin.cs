@@ -4,12 +4,12 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
-    ///     The <c>OUTER JOIN</c>-statement of a <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The <c>OUTER JOIN</c>-statement of a query.
     /// </summary>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TTable">The child table.</typeparam>
     public class OuterJoin<TParameters, TQueryResult, TTable> : Join<TParameters, TQueryResult, TTable> where TParameters : new()
     {

@@ -4,12 +4,12 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements
 {
     /// <summary>
-    ///     The <c>ORDER BY</c>-statement of a <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The <c>ORDER BY</c>-statement of a query.
     /// </summary>
     /// <typeparam name="TParameters">
-    ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+    ///     The parameters required for executing this query.
     /// </typeparam>
-    /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to order by.</typeparam>
     public class OrderBy<TParameters, TQueryResult, TSqlExpression> :
         QueryComponent<TParameters, TQueryResult>
@@ -19,7 +19,9 @@ namespace WeelinkIT.FluentSQL.Querying.Statements
         ///     Create a new <c>ORDER BY</c>-statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
-        /// <param name="expression">The <see cref="Expression{TDelegate}" /> to select.</param>
+        /// <param name="expression">
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> to select.
+        /// </param>
         internal OrderBy(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
         {
             QueryContext = queryContext;

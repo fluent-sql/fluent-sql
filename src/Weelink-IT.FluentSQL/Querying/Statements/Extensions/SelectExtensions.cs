@@ -4,18 +4,17 @@ using System.Linq.Expressions;
 namespace WeelinkIT.FluentSQL.Querying.Statements.Extensions
 {
     /// <summary>
-    ///     Allows the construction of
-    ///     <see cref="WeelinkIT.FluentSQL.Querying.Statements.Select{TParameters, TQueryResult, TSqlExpression}" />s.
+    ///     Adds <c>SELECT</c> to a query.
     /// </summary>
     public static class SelectExtensions
     {
         /// <summary>
-        ///     Add a <c>SELECT</c> to this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Add a <c>SELECT</c> to this query.
         /// </summary>
         /// <typeparam name="TParameters">
-        ///     The parameters required for executing this <see cref="Query{TParameters, TQueryResult}" />.
+        ///     The parameters required for executing this query.
         /// </typeparam>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <typeparam name="TSqlExpression">The </typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="expression">
