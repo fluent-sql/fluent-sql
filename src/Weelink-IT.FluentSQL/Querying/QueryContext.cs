@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 
 using WeelinkIT.FluentSQL.Databases;
 
@@ -29,11 +27,9 @@ namespace WeelinkIT.FluentSQL.Querying
             GroupByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
             Modifiers = new List<QueryComponent<TParameters, TQueryResult>>();
 
-            ResultExpression = () => default(TQueryResult);
             Database = database;
         }
 
-        private Expression<Func<TQueryResult>> ResultExpression { get; }
         internal Database Database { get; }
 
         internal IList<QueryComponent<TParameters, TQueryResult>> FromComponents { get; }

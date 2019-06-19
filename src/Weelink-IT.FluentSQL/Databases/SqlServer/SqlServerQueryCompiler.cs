@@ -1,4 +1,5 @@
-﻿using WeelinkIT.FluentSQL.Querying;
+﻿using WeelinkIT.FluentSQL.Compilation;
+using WeelinkIT.FluentSQL.Querying;
 
 namespace WeelinkIT.FluentSQL.Databases.SqlServer
 {
@@ -8,11 +9,5 @@ namespace WeelinkIT.FluentSQL.Databases.SqlServer
     /// </summary>
     public class SqlServerQueryCompiler : QueryCompiler
     {
-        /// <inheritdoc />
-        public CompilationResult Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
-            where TParameters : new()
-        {
-            return default(CompilationResult);
-        }
     }
 }

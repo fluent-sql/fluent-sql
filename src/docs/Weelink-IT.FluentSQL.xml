@@ -4,16 +4,42 @@
         <name>Weelink-IT.FluentSQL</name>
     </assembly>
     <members>
+        <member name="T:WeelinkIT.FluentSQL.Compilation.CompilationResult">
+            <summary>
+                The result of the compilation of a <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
+            </summary>
+        </member>
+        <member name="P:WeelinkIT.FluentSQL.Compilation.CompilationResult.CommandText">
+            <summary>
+                Gets the SQL to execute.
+            </summary>
+        </member>
+        <member name="T:WeelinkIT.FluentSQL.Compilation.QueryCompiler">
+            <summary>
+                Compiles a <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to a <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
+            </summary>
+        </member>
+        <member name="M:WeelinkIT.FluentSQL.Compilation.QueryCompiler.Compile``2(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1})">
+            <summary>
+                Compile <paramref name="context" /> to an executable <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
+            </summary>
+            <typeparam name="TQueryResult">The result type.</typeparam>
+            <typeparam name="TParameters">
+                The parameters required for executing this <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
+            </typeparam>
+            <param name="context">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> that contains all query parts.</param>
+            <returns>The compilation result.</returns>
+        </member>
         <member name="T:WeelinkIT.FluentSQL.Databases.Database">
             <summary>
                 Represents the database.
             </summary>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Databases.Database.#ctor(WeelinkIT.FluentSQL.Databases.QueryCompiler)">
+        <member name="M:WeelinkIT.FluentSQL.Databases.Database.#ctor(WeelinkIT.FluentSQL.Compilation.QueryCompiler)">
             <summary>
                 Construct a new database.
             </summary>
-            <param name="compiler">The <see cref="T:WeelinkIT.FluentSQL.Databases.QueryCompiler" /> to use for compiling
+            <param name="compiler">The <see cref="T:WeelinkIT.FluentSQL.Compilation.QueryCompiler" /> to use for compiling
                 <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2"/> to <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
             </param>
         </member>
@@ -28,40 +54,13 @@
             <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to compile.</param>
             <returns>A compiled <see cref="T:WeelinkIT.FluentSQL.Query`2" />.</returns>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Databases.Database.Compile``1(WeelinkIT.FluentSQL.Querying.QueryContext{WeelinkIT.FluentSQL.Querying.NoParameters,``0})">
+        <member name="M:WeelinkIT.FluentSQL.Databases.Database.Compile``1(WeelinkIT.FluentSQL.Querying.QueryContext{``0})">
             <summary>
                 Compile <paramref name="queryContext" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
             </summary>
             <typeparam name="TQueryResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`2" />.</typeparam>
             <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to compile.</param>
             <returns>A compiled <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</returns>
-        </member>
-        <member name="T:WeelinkIT.FluentSQL.Databases.QueryCompiler">
-            <summary>
-                Compiles a <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to a <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
-            </summary>
-        </member>
-        <member name="M:WeelinkIT.FluentSQL.Databases.QueryCompiler.Compile``1(WeelinkIT.FluentSQL.Querying.QueryContext{WeelinkIT.FluentSQL.Querying.NoParameters,``0})">
-            <summary>
-                Compile <paramref name="context" /> to an executable <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
-            </summary>
-            <typeparam name="TQueryResult">The result type.</typeparam>
-            <param name="context">
-                The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2">QueryContext&lt;TQueryResult&gt;</see>
-                that contains all query parts.
-            </param>
-            <returns>An executable <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</returns>
-        </member>
-        <member name="M:WeelinkIT.FluentSQL.Databases.QueryCompiler.Compile``2(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1})">
-            <summary>
-                Compile <paramref name="context" /> to an executable <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
-            </summary>
-            <typeparam name="TQueryResult">The result type.</typeparam>
-            <typeparam name="TParameters">
-                The parameters required for executing this <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
-            </typeparam>
-            <param name="context">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> that contains all query parts.</param>
-            <returns>An executable <see cref="T:WeelinkIT.FluentSQL.Query`2" />.</returns>
         </member>
         <member name="T:WeelinkIT.FluentSQL.Databases.SqlServer.SqlServerDatabase">
             <summary>
@@ -79,11 +78,17 @@
                 <see cref="T:WeelinkIT.FluentSQL.Query`2" /> for SQL Server.
             </summary>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Databases.SqlServer.SqlServerQueryCompiler.Compile``1(WeelinkIT.FluentSQL.Querying.QueryContext{WeelinkIT.FluentSQL.Querying.NoParameters,``0})">
-            <inheritdoc />
+        <member name="T:WeelinkIT.FluentSQL.Extensions.EnumerableExtensions">
+            <summary>
+                Extends <see cref="T:System.Collections.Generic.IEnumerable`1" />.
+            </summary>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Databases.SqlServer.SqlServerQueryCompiler.Compile``2(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1})">
-            <inheritdoc />
+        <member name="M:WeelinkIT.FluentSQL.Extensions.EnumerableExtensions.CopyTo``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0})">
+            <summary>
+                Copies all elements from <paramref name="source" /> to <paramref name="destination" />.
+            </summary>
+            <param name="source">The <see cref="T:System.Collections.Generic.IEnumerable`1" /> containing elements to copy.</param>
+            <param name="destination">The destination where the elements should be copied to.</param>
         </member>
         <member name="T:WeelinkIT.FluentSQL.Modelling.Column`1">
             <summary>
@@ -236,11 +241,12 @@
                 The parameters required for executing this <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
             </typeparam>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Query`2.#ctor(WeelinkIT.FluentSQL.Databases.Database)">
+        <member name="M:WeelinkIT.FluentSQL.Query`2.#ctor(WeelinkIT.FluentSQL.Databases.Database,System.String)">
             <summary>
                 Create a new query that will be executed in <paramref name="database" />.
             </summary>
             <param name="database">The <see cref="T:WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+            <param name="commandText">The SQL to execute.</param>
         </member>
         <member name="M:WeelinkIT.FluentSQL.Query`2.ExecuteAsync(System.Action{`0})">
             <summary>
@@ -254,11 +260,12 @@
             </summary>
             <typeparam name="TQueryResult">The result type.</typeparam>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Query`1.#ctor(WeelinkIT.FluentSQL.Databases.Database)">
+        <member name="M:WeelinkIT.FluentSQL.Query`1.#ctor(WeelinkIT.FluentSQL.Databases.Database,System.String)">
             <summary>
                 Create a new query that will be executed in <paramref name="database" />.
             </summary>
             <param name="database">The <see cref="T:WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+            <param name="commandText">The SQL to execute.</param>
         </member>
         <member name="M:WeelinkIT.FluentSQL.Query`1.ExecuteAsync">
             <summary>
@@ -286,12 +293,12 @@
                 Extends <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" />s.
             </summary>
         </member>
-        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``1(WeelinkIT.FluentSQL.Querying.QueryContext{WeelinkIT.FluentSQL.Querying.NoParameters,``0})">
+        <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``1(WeelinkIT.FluentSQL.Querying.QueryContext{``0})">
             <summary>
-                Compile <paramref name="queryContext" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
+                Compile <paramref name="queryContext" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
             </summary>
-            <typeparam name="TQueryResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`2" />.</typeparam>
-            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`2" /> to compile.</param>
+            <typeparam name="TQueryResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
+            <param name="queryContext">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryContext`1" /> to compile.</param>
             <returns>A compiled <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</returns>
         </member>
         <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``2(WeelinkIT.FluentSQL.Querying.QueryContext{``0,``1})">
@@ -307,9 +314,9 @@
         </member>
         <member name="M:WeelinkIT.FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``1(WeelinkIT.FluentSQL.Querying.QueryComponent{WeelinkIT.FluentSQL.Querying.NoParameters,``0})">
             <summary>
-                Compile <paramref name="queryComponent" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`2" />.
+                Compile <paramref name="queryComponent" /> into a <see cref="T:WeelinkIT.FluentSQL.Query`1" />.
             </summary>
-            <typeparam name="TQueryResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`2" />.</typeparam>
+            <typeparam name="TQueryResult">The result type of the <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</typeparam>
             <param name="queryComponent">The <see cref="T:WeelinkIT.FluentSQL.Querying.QueryComponent`2" /> to compile.</param>
             <returns>A compiled <see cref="T:WeelinkIT.FluentSQL.Query`1" />.</returns>
         </member>

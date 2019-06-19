@@ -1,4 +1,4 @@
-﻿namespace WeelinkIT.FluentSQL.Databases
+﻿namespace WeelinkIT.FluentSQL.Compilation
 {
     /// <summary>
     ///     The result of the compilation of a <see cref="Query{TParameters, TQueryResult}" />.

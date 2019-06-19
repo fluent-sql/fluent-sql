@@ -1,6 +1,6 @@
 ﻿namespace WeelinkIT.FluentSQL.Tests
 {
-    internal abstract class TestDataBuilder<T>
+    public abstract class TestDataBuilder<T>
     {
         internal T Build()
         {

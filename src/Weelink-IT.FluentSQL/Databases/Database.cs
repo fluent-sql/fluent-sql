@@ -1,4 +1,5 @@
-﻿using WeelinkIT.FluentSQL.Extensions;
+﻿using WeelinkIT.FluentSQL.Compilation;
+using WeelinkIT.FluentSQL.Extensions;
 using WeelinkIT.FluentSQL.Querying;
 
 namespace WeelinkIT.FluentSQL.Databases

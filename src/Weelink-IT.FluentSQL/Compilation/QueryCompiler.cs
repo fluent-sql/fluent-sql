@@ -1,11 +1,11 @@
 ﻿using WeelinkIT.FluentSQL.Querying;
 
-namespace WeelinkIT.FluentSQL.Databases
+namespace WeelinkIT.FluentSQL.Compilation
 {
     /// <summary>
     ///     Compiles a <see cref="QueryContext{TParameters, TQueryResult}" /> to a <see cref="Query{TParameters, TQueryResult}" />.
     /// </summary>
-    public interface QueryCompiler
+    public abstract class QueryCompiler
     {
         /// <summary>
         ///     Compile <paramref name="context" /> to an executable <see cref="Query{TParameters, TQueryResult}" />.
@@ -16,7 +16,10 @@ namespace WeelinkIT.FluentSQL.Databases
         /// </typeparam>
         /// <param name="context">The <see cref="QueryContext{TParameters, TQueryResult}" /> that contains all query parts.</param>
         /// <returns>The compilation result.</returns>
-        CompilationResult Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
-            where TParameters : new();
+        public CompilationResult Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
+            where TParameters : new()
+        {
+            return new CompilationResult();
+        }
     }
 }
