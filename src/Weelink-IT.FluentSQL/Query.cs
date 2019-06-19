@@ -18,9 +18,11 @@ namespace WeelinkIT.FluentSQL
         ///     Create a new query that will be executed in <paramref name="database" />.
         /// </summary>
         /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
-        public Query(Database database)
+        /// <param name="commandText">The SQL to execute.</param>
+        public Query(Database database, string commandText)
         {
             Database = database;
+            CommandText = commandText;
         }
 
         /// <summary>
@@ -36,6 +38,7 @@ namespace WeelinkIT.FluentSQL
         }
 
         private Database Database { get; }
+        private string CommandText { get; }
     }
 
     /// <summary>
@@ -48,9 +51,11 @@ namespace WeelinkIT.FluentSQL
         ///     Create a new query that will be executed in <paramref name="database" />.
         /// </summary>
         /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
-        public Query(Database database)
+        /// <param name="commandText">The SQL to execute.</param>
+        public Query(Database database, string commandText)
         {
             Database = database;
+            CommandText = commandText;
         }
 
         /// <summary>
@@ -63,5 +68,6 @@ namespace WeelinkIT.FluentSQL
         }
 
         private Database Database { get; }
+        private string CommandText { get; }
     }
 }

@@ -6,12 +6,12 @@
     public static class QueryContextExtensions
     {
         /// <summary>
-        ///     Compile <paramref name="queryContext" /> into a <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Compile <paramref name="queryContext" /> into a <see cref="Query{TQueryResult}" />.
         /// </summary>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
-        /// <param name="queryContext">The <see cref="QueryContext{TParameters, TQueryResult}" /> to compile.</param>
+        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TQueryResult}" />.</typeparam>
+        /// <param name="queryContext">The <see cref="QueryContext{TQueryResult}" /> to compile.</param>
         /// <returns>A compiled <see cref="Query{TQueryResult}" />.</returns>
-        public static Query<TQueryResult> Compile<TQueryResult>(this QueryContext<NoParameters, TQueryResult> queryContext)
+        public static Query<TQueryResult> Compile<TQueryResult>(this QueryContext<TQueryResult> queryContext)
         {
             return queryContext.Database.Compile(queryContext);
         }
@@ -33,14 +33,15 @@
         }
 
         /// <summary>
-        ///     Compile <paramref name="queryComponent" /> into a <see cref="Query{TParameters, TQueryResult}" />.
+        ///     Compile <paramref name="queryComponent" /> into a <see cref="Query{TQueryResult}" />.
         /// </summary>
-        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TParameters, TQueryResult}" />.</typeparam>
+        /// <typeparam name="TQueryResult">The result type of the <see cref="Query{TQueryResult}" />.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" /> to compile.</param>
         /// <returns>A compiled <see cref="Query{TQueryResult}" />.</returns>
         public static Query<TQueryResult> Compile<TQueryResult>(this QueryComponent<NoParameters, TQueryResult> queryComponent)
         {
-            return queryComponent.QueryContext.Compile();
+            var context = (QueryContext<TQueryResult>)queryComponent.QueryContext;
+            return context.Compile();
         }
 
         /// <summary>
