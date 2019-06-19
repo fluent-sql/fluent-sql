@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weelink-IT.FluentSQL", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weelink-IT.FluentSQL.Tests", "src\Weelink-IT.FluentSQL.Tests\Weelink-IT.FluentSQL.Tests.csproj", "{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Weelink-IT.FluentSQL.Documentation", "src\Weelink-IT.FluentSQL.Documentation\Weelink-IT.FluentSQL.Documentation.shfbproj", "{09A730E7-16E2-4401-8CE2-B66696C9DF06}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B4D261C-0FFB-47F8-BBB2-E1B6E0076ADF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{09A730E7-16E2-4401-8CE2-B66696C9DF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{09A730E7-16E2-4401-8CE2-B66696C9DF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{09A730E7-16E2-4401-8CE2-B66696C9DF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{09A730E7-16E2-4401-8CE2-B66696C9DF06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
