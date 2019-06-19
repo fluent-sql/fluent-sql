@@ -1,50 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-using WeelinkIT.FluentSQL.Databases;
 using WeelinkIT.FluentSQL.Databases.SqlServer;
-using WeelinkIT.FluentSQL.Modelling;
 using WeelinkIT.FluentSQL.Querying.Extensions;
 using WeelinkIT.FluentSQL.Querying.Functions.Extensions;
 using WeelinkIT.FluentSQL.Querying.Statements.Extensions;
+using WeelinkIT.FluentSQL.Tests.Examples;
 
 using Xunit;
 
 namespace WeelinkIT.FluentSQL.Tests.Api
 {
-    public class Invoices : Table
-    {
-        public readonly Column<int> Id = new Column<int>();
-        public readonly Column<string> InvoiceNumber = new Column<string>();
-        public readonly Column<DateTimeOffset> InvoiceDate = new Column<DateTimeOffset>();
-        public readonly Column<int> CustomerId = new Column<int>();
-    }
-
-    public class InvoiceLines : Table
-    {
-        public readonly Column<Guid> Id = new Column<Guid>();
-        public readonly Column<decimal> Price = new Column<decimal>();
-        public readonly Column<int> InvoiceId = new Column<int>();
-    }
-
-    public class Customers : Table
-    {
-        public readonly Column<int> Id = new Column<int>();
-        public readonly Column<string> Name = new Column<string>();
-    }
-
-    public class ExampleModel : PersistenceModel<ExampleModel>
-    {
-        public ExampleModel(Database database)
-            : base(database)
-        {
-        }
-
-        public readonly Invoices Invoices = new Invoices();
-        public readonly InvoiceLines InvoiceLines = new InvoiceLines();
-        public readonly Customers Customers = new Customers();
-    }
-
     public sealed class ApiDesign
     {
         public class ExampleParameters
