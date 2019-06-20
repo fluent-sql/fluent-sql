@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 
 using WeelinkIT.FluentSQL.Databases;
@@ -28,13 +29,15 @@ namespace WeelinkIT.FluentSQL
         /// <summary>
         ///     Execute this query and return the result.
         /// </summary>
+        /// <param name="parameters">Configures the parameters.</param>
+        /// <param name="transaction">The optional transaction.</param>
         /// <returns>The result of the query.</returns>
-        public Task<TQueryResult> ExecuteAsync(Action<TParameters> parameters)
+        public Task<TQueryResult> ExecuteAsync(Action<TParameters> parameters, IDbTransaction transaction = null)
         {
             var p = new TParameters();
             parameters(p);
 
-            return Database.QueryAsync<TQueryResult>(CommandText, p);
+            return Database.QueryAsync<TQueryResult>(transaction, CommandText, p);
         }
 
         private Database Database { get; }
@@ -61,10 +64,11 @@ namespace WeelinkIT.FluentSQL
         /// <summary>
         ///     Execute this query and return the result.
         /// </summary>
+        /// <param name="transaction">The optional transaction.</param>
         /// <returns>The result of the query.</returns>
-        public Task<TQueryResult> ExecuteAsync()
+        public Task<TQueryResult> ExecuteAsync(IDbTransaction transaction = null)
         {
-            return Database.QueryAsync<TQueryResult>(CommandText);
+            return Database.QueryAsync<TQueryResult>(transaction, CommandText);
         }
 
         private Database Database { get; }

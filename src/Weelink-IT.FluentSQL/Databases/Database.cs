@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data;
+using System.Threading.Tasks;
 
 using WeelinkIT.FluentSQL.Compilation;
 using WeelinkIT.FluentSQL.Querying;
@@ -52,11 +53,12 @@ namespace WeelinkIT.FluentSQL.Databases
         /// <summary>
         ///     Execute the query.
         /// </summary>
+        /// <param name="transaction">The optional transaction.</param>
         /// <param name="commandText">The SQL to execute.</param>
         /// <param name="parameters">The optional parameters.</param>
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <returns>The result of the query.</returns>
-        internal Task<TQueryResult> QueryAsync<TQueryResult>(string commandText, object parameters = null)
+        internal Task<TQueryResult> QueryAsync<TQueryResult>(IDbTransaction transaction, string commandText, object parameters = null)
         {
             return Task.FromResult(default(TQueryResult));
         }
