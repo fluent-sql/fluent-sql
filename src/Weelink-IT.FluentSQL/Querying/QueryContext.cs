@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using WeelinkIT.FluentSQL.Databases;
 
@@ -30,6 +31,23 @@ namespace WeelinkIT.FluentSQL.Querying
             Database = database;
         }
 
+        /// <summary>
+        ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
+        /// </summary>
+        /// <param name="other">The <see cref="QueryContext{TParameters, TQueryResult}" /> to copy the components from.</param>
+        public QueryContext(QueryContext<TParameters, TQueryResult> other)
+        {
+            FromComponents = other.FromComponents.ToList();
+            SelectComponents = other.SelectComponents.ToList();
+            JoinComponents = other.JoinComponents.ToList();
+            WhereComponents = other.WhereComponents.ToList();
+            OrderByComponents = other.OrderByComponents.ToList();
+            GroupByComponents = other.GroupByComponents.ToList();
+            Modifiers = other.Modifiers.ToList();
+
+            Database = other.Database;
+        }
+
         internal Database Database { get; }
 
         internal IList<QueryComponent<TParameters, TQueryResult>> FromComponents { get; }
@@ -42,17 +60,20 @@ namespace WeelinkIT.FluentSQL.Querying
     }
 
     /// <summary>
-    ///     The context containing all components of the query.
+    ///     The context containing all components of a parameterless query.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
     {
-        /// <summary>
-        ///     Create a new <see cref="QueryContext{TParameters,TQueryResult}" />.
-        /// </summary>
-        /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
+        /// <inheritdoc />
         public QueryContext(Database database)
             : base(database)
+        {
+        }
+
+        /// <inheritdoc />
+        public QueryContext(QueryContext<NoParameters, TQueryResult> other)
+            : base(other)
         {
         }
 

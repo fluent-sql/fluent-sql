@@ -1,5 +1,4 @@
 ﻿using WeelinkIT.FluentSQL.Compilation;
-using WeelinkIT.FluentSQL.Extensions;
 using WeelinkIT.FluentSQL.Querying;
 
 namespace WeelinkIT.FluentSQL.Databases
@@ -42,18 +41,9 @@ namespace WeelinkIT.FluentSQL.Databases
         /// <returns>A compiled query.</returns>
         public Query<TQueryResult> Compile<TQueryResult>(QueryContext<TQueryResult> queryContext)
         {
-            QueryContext<NoParameters, TQueryResult> contextWithoutParameters = queryContext.WithParameters<NoParameters>();
-
-            queryContext.FromComponents.CopyTo(contextWithoutParameters.FromComponents);
-            queryContext.SelectComponents.CopyTo(contextWithoutParameters.SelectComponents);
-            queryContext.JoinComponents.CopyTo(contextWithoutParameters.JoinComponents);
-            queryContext.WhereComponents.CopyTo(contextWithoutParameters.WhereComponents);
-            queryContext.OrderByComponents.CopyTo(contextWithoutParameters.OrderByComponents);
-            queryContext.GroupByComponents.CopyTo(contextWithoutParameters.GroupByComponents);
-            queryContext.Modifiers.CopyTo(contextWithoutParameters.Modifiers);
+            var contextWithoutParameters = new QueryContext<NoParameters, TQueryResult>(queryContext);
 
             CompilationResult result = Compiler.Compile(contextWithoutParameters);
-
             return new Query<TQueryResult>(this, result.CommandText);
         }
 

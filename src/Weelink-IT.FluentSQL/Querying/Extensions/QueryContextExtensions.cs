@@ -11,9 +11,11 @@
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="queryContext">The <see cref="QueryContext{TQueryResult}" /> to compile.</param>
         /// <returns>A compiled query.</returns>
-        public static Query<TQueryResult> Compile<TQueryResult>(this QueryContext<TQueryResult> queryContext)
+        public static Query<TQueryResult> Compile<TQueryResult>(this QueryContext<NoParameters, TQueryResult> queryContext)
         {
-            return queryContext.Database.Compile(queryContext);
+            var context = new QueryContext<TQueryResult>(queryContext);
+
+            return context.Database.Compile(context);
         }
 
         /// <summary>
@@ -40,8 +42,7 @@
         /// <returns>A compiled query.</returns>
         public static Query<TQueryResult> Compile<TQueryResult>(this QueryComponent<NoParameters, TQueryResult> queryComponent)
         {
-            var context = (QueryContext<TQueryResult>)queryComponent.QueryContext;
-            return context.Compile();
+            return queryComponent.QueryContext.Compile();
         }
 
         /// <summary>
