@@ -18,7 +18,7 @@ namespace WeelinkIT.FluentSQL.Querying
         ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
         /// </summary>
         /// <param name="database">The <see cref="WeelinkIT.FluentSQL.Databases.Database" /> for this query.</param>
-        public QueryContext(Database database)
+        internal QueryContext(Database database)
         {
             FromComponents = new List<QueryComponent<TParameters, TQueryResult>>();
             SelectComponents = new List<QueryComponent<TParameters, TQueryResult>>();

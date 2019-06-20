@@ -13,9 +13,7 @@
         /// <returns>A compiled query.</returns>
         public static Query<TQueryResult> Compile<TQueryResult>(this QueryContext<NoParameters, TQueryResult> queryContext)
         {
-            var context = new QueryContext<TQueryResult>(queryContext);
-
-            return context.Database.Compile(context);
+            return queryContext.Database.Compile(queryContext);
         }
 
         /// <summary>
