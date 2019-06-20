@@ -5,7 +5,7 @@
         {
           "src": "../../",
           "files": [
-            "src/Weelink-IT.FluentSQL/Weelink-IT.FluentSQL.csproj"
+            "src/FluentSQL/FluentSQL.csproj"
           ]
         }
       ],

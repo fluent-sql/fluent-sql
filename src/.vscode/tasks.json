@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Weelink-IT.FluentSQL.Tests/Weelink-IT.FluentSQL.Tests.csproj"
+                "${workspaceFolder}/FluentSQL.Tests/FluentSQL.Tests.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Weelink-IT.FluentSQL.Tests/Weelink-IT.FluentSQL.Tests.csproj"
+                "${workspaceFolder}/FluentSQL.Tests/FluentSQL.Tests.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Weelink-IT.FluentSQL.Tests/Weelink-IT.FluentSQL.Tests.csproj"
+                "${workspaceFolder}/FluentSQL.Tests/FluentSQL.Tests.csproj"
             ],
             "problemMatcher": "$tsc"
         }

@@ -1,0 +1,1565 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentSQL</name>
+    </assembly>
+    <members>
+        <member name="T:FluentSQL.Compilation.CompilationResult">
+            <summary>
+                The result of the compilation of a query.
+            </summary>
+        </member>
+        <member name="P:FluentSQL.Compilation.CompilationResult.CommandText">
+            <summary>
+                Gets the SQL to execute.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Compilation.QueryCompiler">
+            <summary>
+                Compiles a <see cref="T:FluentSQL.Querying.QueryContext`2" /> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Compilation.QueryCompiler.Compile``2(FluentSQL.Querying.QueryContext{``0,``1})">
+            <summary>
+                Compile <paramref name="context" /> to an executable query.
+            </summary>
+            <typeparam name="TQueryResult">The result type.</typeparam>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <param name="context">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> that contains all query parts.</param>
+            <returns>The compilation result.</returns>
+        </member>
+        <member name="T:FluentSQL.Databases.Database">
+            <summary>
+                Represents the database.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Databases.Database.#ctor(FluentSQL.Compilation.QueryCompiler)">
+            <summary>
+                Construct a new database.
+            </summary>
+            <param name="compiler">The <see cref="T:FluentSQL.Compilation.QueryCompiler" /> to use for compiling queries.</param>
+        </member>
+        <member name="M:FluentSQL.Databases.Database.Compile``2(FluentSQL.Querying.QueryContext{``0,``1})">
+            <summary>
+                Compile <paramref name="queryContext" /> into a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> to compile.</param>
+            <returns>A compiled query.</returns>
+        </member>
+        <member name="M:FluentSQL.Databases.Database.Compile``1(FluentSQL.Querying.QueryContext{FluentSQL.Querying.NoParameters,``0})">
+            <summary>
+                Compile <paramref name="queryContext" /> into a query.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> to compile.</param>
+            <returns>A compiled query.</returns>
+        </member>
+        <member name="T:FluentSQL.Databases.SqlServer.SqlServerDatabase">
+            <summary>
+                Represents a SQL Server database.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Databases.SqlServer.SqlServerDatabase.#ctor">
+            <summary>
+                Construct a new database targeting SQL Server.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Databases.SqlServer.SqlServerQueryCompiler">
+            <summary>
+                Compiles a <see cref="T:FluentSQL.Querying.QueryContext`2" /> to a query for SQL Server.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Extensions.QueryExtensions">
+            <summary>
+                Extends <see cref="T:System.Data.IDbConnection" /> for executing queries.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Extensions.QueryExtensions.ExecuteAsync``2(System.Data.IDbConnection,FluentSQL.Query{``0,``1},System.Action{``0},System.Data.IDbTransaction)">
+            <summary>
+                Execute this query and return the result.
+            </summary>
+            <param name="connection">The <see cref="T:System.Data.IDbConnection" />.</param>
+            <param name="query">The query to execute.</param>
+            <param name="parameterConfig">Configures the parameters.</param>
+            <param name="transaction">The optional transaction.</param>
+            <returns>The result of the query.</returns>
+        </member>
+        <member name="M:FluentSQL.Extensions.QueryExtensions.ExecuteAsync``1(System.Data.IDbConnection,FluentSQL.Query{``0},System.Data.IDbTransaction)">
+            <summary>
+                Execute this query and return the result.
+            </summary>
+            <param name="connection">The <see cref="T:System.Data.IDbConnection" />.</param>
+            <param name="query">The query to execute.</param>
+            <param name="transaction">The optional transaction.</param>
+            <returns>The result of the query.</returns>
+        </member>
+        <member name="T:FluentSQL.Modelling.Column`1">
+            <summary>
+                Represents a column.
+            </summary>
+            <typeparam name="TType">The column type.</typeparam>
+        </member>
+        <member name="T:FluentSQL.Modelling.PersistenceModel">
+            <summary>
+                Represents the model in the database.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.PersistenceModel.#ctor(FluentSQL.Databases.Database)">
+            <summary>
+                Create a new <see cref="T:FluentSQL.Modelling.PersistenceModel" />.
+            </summary>
+            <param name="database">
+                The database where this persistence model is located.
+            </param>
+        </member>
+        <member name="M:FluentSQL.Modelling.PersistenceModel.Query``1">
+            <summary>
+                Query this persistence model.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <returns>A new <see cref="T:FluentSQL.Querying.QueryContext`1" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Modelling.SqlExpression`1">
+            <summary>
+                Any expression of type <typeparamref name="TExpressionType" /> that can be used in SQL.
+            </summary>
+            <typeparam name="TExpressionType">The result type of evaluating this <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_Implicit(FluentSQL.Modelling.SqlExpression{`0})~`0">
+            <summary>
+                Implicitly convert <paramref name="expression" /> to <typeparamref name="TExpressionType" />,
+                so that it can be used in regular .NET constructs
+            </summary>
+            <example>
+                <code>
+                    Query&lt;int&gt; query = 
+                        new ExampleModel(new SqlServerDatabase())
+                            .Query&lt;int&gt;()
+                            .From(m =&gt; m.Customers)
+                            .Where(c =&gt; string.IsNullOrEmpty(c.Name))
+                </code>
+            </example>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_Equality(FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>equals</c> comparison between a <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_Inequality(FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for a <c>not equals</c> comparison between a <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_GreaterThan(FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>greater than</c> comparison between a <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_LessThan(FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>less than</c> comparison between a <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_GreaterThanOrEqual(FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>greater than or equal</c> comparison between a <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_LessThanOrEqual(FluentSQL.Modelling.SqlExpression{`0},`0)">
+            <summary>
+                Allows for an <c>less than or equal</c> comparison between a <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> and
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_Equality(FluentSQL.Modelling.SqlExpression{`0},FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>equals</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_Inequality(FluentSQL.Modelling.SqlExpression{`0},FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for a <c>not equals</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
+                a value of type <typeparamref name="TExpressionType" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_GreaterThan(FluentSQL.Modelling.SqlExpression{`0},FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>greater than</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_LessThan(FluentSQL.Modelling.SqlExpression{`0},FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>less than</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_GreaterThanOrEqual(FluentSQL.Modelling.SqlExpression{`0},FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>greater than or equal</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.SqlExpression`1.op_LessThanOrEqual(FluentSQL.Modelling.SqlExpression{`0},FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Allows for an <c>less than or equal</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Modelling.Table">
+            <summary>
+                Represents a table.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Query`2">
+            <summary>
+                The compiled query to execute.
+            </summary>
+            <typeparam name="TQueryResult">The result type.</typeparam>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+        </member>
+        <member name="M:FluentSQL.Query`2.#ctor(FluentSQL.Compilation.CompilationResult)">
+            <summary>
+                Create a new query.
+            </summary>
+            <param name="compilationResult">The result of the compilation.</param>
+        </member>
+        <member name="T:FluentSQL.Query`1">
+            <summary>
+                The compiled query to execute.
+            </summary>
+            <typeparam name="TQueryResult">The result type.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Query`1.#ctor(FluentSQL.Compilation.CompilationResult)">
+            <summary>
+                Create a new query.
+            </summary>
+            <param name="compilationResult">The result of the compilation.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Extensions.ExpressionExtensions">
+            <summary>
+                Extends <see cref="T:System.Linq.Expressions.Expression`1" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Extensions.ExpressionExtensions.AddNoParameters``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+                Modify <paramref name="expression" /> so that the first parameter is <see cref="T:FluentSQL.Querying.NoParameters" />.
+            </summary>
+            <typeparam name="T">The other type.</typeparam>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;T&gt;&gt;</see> to modify.
+            </param>
+            <returns>A new <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;NoParameters, T&gt;&gt;</see>.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Extensions.QueryContextExtensions">
+            <summary>
+                Extends <see cref="T:FluentSQL.Querying.QueryContext`2" />s.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``1(FluentSQL.Querying.QueryContext{FluentSQL.Querying.NoParameters,``0})">
+            <summary>
+                Compile <paramref name="queryContext" /> into a query.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`1" /> to compile.</param>
+            <returns>A compiled query.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``2(FluentSQL.Querying.QueryContext{``0,``1})">
+            <summary>
+                Compile <paramref name="queryContext" /> into a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> to compile.</param>
+            <returns>A compiled query.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``1(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``0})">
+            <summary>
+                Compile <paramref name="queryComponent" /> into a query.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" /> to compile.</param>
+            <returns>A compiled query.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Extensions.QueryContextExtensions.Compile``2(FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                Compile <paramref name="queryComponent" /> into a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" /> to compile.</param>
+            <returns>A compiled query.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Average`1">
+            <summary>
+                Averages a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Average`1.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new AVERAGE-expression.
+            </summary>
+            <param name="expression">The actual <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> that should be averaged.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Cast`2">
+            <summary>
+                Casts a <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;TFrom&gt;</see> to
+                <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;To&gt;</see>.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Cast`2.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new CAST-expression.
+            </summary>
+            <param name="expression">
+                The <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> that should be casted to <typeparamref name="TTo" />.
+            </param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Convert`2">
+            <summary>
+                Convert a <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;TFrom&gt;</see> to
+                <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;To&gt;</see>.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Convert`2.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new CONVERT-expression.
+            </summary>
+            <param name="expression">
+                The <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> that should be converted to <typeparamref name="TTo" />.
+            </param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Count`1">
+            <summary>
+                Counts a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Count`1.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new COUNT-expression.
+            </summary>
+            <param name="expression">The actual <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> that should be counted.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.DateAdd">
+            <summary>
+                Adds a date part to a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.DateAdd.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime},System.TimeSpan)">
+            <summary>
+                Create a new DATEADD-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to add <paramref name="interval" /> to.</param>
+            <param name="interval">The interval to add.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.DateAdd.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset},System.TimeSpan)">
+            <summary>
+                Create a new DATEADD-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to add <paramref name="interval" /> to.</param>
+            <param name="interval">The interval to add.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.DateDiff">
+            <summary>
+                Gets the difference between two <see cref="T:System.DateTime" />s or <see cref="T:System.DateTimeOffset" />s.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.DateDiff.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime},FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new DATEDIFF expression.
+            </summary>
+            <param name="first">The left hand side of the date diff.</param>
+            <param name="second">The right hand side of the date diff.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.DateDiff.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset},FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new DATEDIFF expression.
+            </summary>
+            <param name="first">The left hand side of the date diff.</param>
+            <param name="second">The right hand side of the date diff.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Day">
+            <summary>
+                Gets the day-component of a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Day.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new DAY-expression for a <see cref="T:System.DateTime" />.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to get the day-component from.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Day.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new DAY-expression for a <see cref="T:System.DateTimeOffset" />.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the day-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Extensions.SumExtensions">
+            <summary>
+                Allows <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s to be summed.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Int32})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;int&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Int32}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;int?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Int64})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;long&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Int64}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;long?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Decimal})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;decimal&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Decimal}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;decimal?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Single})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;float&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Single}})">
+            <summary>
+                Sums the <paramref name="subject" />.
+            </summary>
+            <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;float?&gt;</see> to sum.</param>
+            <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Hour">
+            <summary>
+                Gets the hour-component of a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Hour.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new HOUR-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to get the hour-component from.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Hour.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new HOUR-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the hour-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Left">
+            <summary>
+                Gets the left part of a string.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Left.#ctor(FluentSQL.Modelling.SqlExpression{System.String})">
+            <summary>
+                Create a new LEFT-expression.
+            </summary>
+            <param name="expression">The string to apply this expression to.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Max`1">
+            <summary>
+                Gets the maximum of a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Max`1.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new MAX-expression.
+            </summary>
+            <param name="expression">The actual <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> where the maximum should be found.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Min`1">
+            <summary>
+                Gets the minimum of a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Min`1.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new MIN-expression.
+            </summary>
+            <param name="expression">The actual <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> where the minimum should be found.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Minute">
+            <summary>
+                Gets the minute-component of a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Minute.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new MINUTE-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to get the minute-component from.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Minute.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new MINUTE-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the minute-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Month">
+            <summary>
+                Gets the month-component of a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Month.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new MONTH-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to get the month-component from.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Month.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new MONTH-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the month-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Right">
+            <summary>
+                Gets the right part of a string.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Right.#ctor(FluentSQL.Modelling.SqlExpression{System.String})">
+            <summary>
+                Create a new LEFT-expression.
+            </summary>
+            <param name="expression">The string to apply this expression to.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Second">
+            <summary>
+                Gets the second-component of a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Second.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new SECOND-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to get the second-component from.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Second.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new SECOND-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the second-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Substring">
+            <summary>
+                Gets a substring of a string.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Substring.#ctor(FluentSQL.Modelling.SqlExpression{System.String})">
+            <summary>
+                Create a new SUBSTRING-expression.
+            </summary>
+            <param name="expression">The string to apply this expression to.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Sum`1">
+            <summary>
+                Sums a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Sum`1.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+            <summary>
+                Create a new SUM-expression.
+            </summary>
+            <param name="expression">The actual <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> that should be summed.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Trim">
+            <summary>
+                Trims a string.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Trim.#ctor(FluentSQL.Modelling.SqlExpression{System.String})">
+            <summary>
+                Create a new TRIM-expression.
+            </summary>
+            <param name="expression">The string to trim.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Year">
+            <summary>
+                Gets the year-component of a <see cref="T:System.DateTime" /> or <see cref="T:System.DateTimeOffset" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Year.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTime})">
+            <summary>
+                Create a new YEAR-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTime" /> to get the year-component from.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Year.#ctor(FluentSQL.Modelling.SqlExpression{System.DateTimeOffset})">
+            <summary>
+                Create a new YEAR-expression.
+            </summary>
+            <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the year-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.NoParameters">
+            <summary>
+                Used when the query does not have parameters.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Querying.QueryComponent`2">
+            <summary>
+                A component of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing the query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="P:FluentSQL.Querying.QueryComponent`2.QueryContext">
+            <summary>
+                Gets the underlying <see cref="T:FluentSQL.Querying.QueryContext`2" />.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Querying.QueryContext`2">
+            <summary>
+                The context containing all components of the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Databases.Database)">
+            <summary>
+                Create a new <see cref="T:FluentSQL.Querying.QueryContext`2" />.
+            </summary>
+            <param name="database">The <see cref="T:FluentSQL.Databases.Database" /> for this query.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1})">
+            <summary>
+                Create a new <see cref="T:FluentSQL.Querying.QueryContext`2" />.
+            </summary>
+            <param name="other">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> to copy the components from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.QueryContext`1">
+            <summary>
+                The context containing all components of a parameterless query.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.QueryContext`1.#ctor(FluentSQL.Databases.Database)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Querying.QueryContext`1.#ctor(FluentSQL.Querying.QueryContext{FluentSQL.Querying.NoParameters,`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Querying.QueryContext`1.WithParameters``1">
+            <summary>
+                Create a parameterized version of this <see cref="T:FluentSQL.Querying.QueryContext`1" />.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing the query.
+            </typeparam>
+            <returns>The parameterized version.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Alias">
+            <summary>
+                An alias.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Alias.#ctor(System.String)">
+            <summary>
+                Create a new alias.
+            </summary>
+            <param name="name">The alias.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Distinct`2">
+            <summary>
+                The <c>DISTINCT</c>-statement that selects unique records.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Distinct`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1})">
+            <summary>
+                Create a new <c>DISTINCT</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Distinct`2.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Exists`1">
+            <summary>
+                The <c>EXISTS</c>-statement that tests for the existence of a record.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Exists`1.#ctor(FluentSQL.Query{`0})">
+            <summary>
+                Create a new <c>EXISTS</c>-statement.
+            </summary>
+            <param name="subquery">The query that will check the existence of records.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Exists`1.op_Implicit(FluentSQL.Querying.Statements.Exists{`0})~System.Boolean">
+            <summary>
+                Convert this <see cref="T:FluentSQL.Querying.Statements.Exists`1" /> to a <c>bool</c>,
+                so that it can be used in a <c>WHERE</c>.
+            </summary>
+            <param name="exists">The <see cref="T:FluentSQL.Querying.Statements.Exists`1" /> to convert.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Exists`2">
+            <summary>
+                The <c>EXISTS</c>-statement that tests for the existence of a record.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Exists`2.#ctor(FluentSQL.Query{`0,`1})">
+            <summary>
+                Create a new <c>EXISTS</c>-statement.
+            </summary>
+            <param name="subquery">The query that will check the existence of records.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Exists`2.op_Implicit(FluentSQL.Querying.Statements.Exists{`0,`1})~System.Boolean">
+            <summary>
+                Convert this <see cref="T:FluentSQL.Querying.Statements.Exists`2" /> to a <c>bool</c>,
+                so that it can be used in a <c>WHERE</c>.
+            </summary>
+            <param name="exists">The <see cref="T:FluentSQL.Querying.Statements.Exists`2" /> to convert.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.DistinctExtensions">
+            <summary>
+                Adds <c>DISTINCT</c> to the <c>SELECT</c> of a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.DistinctExtensions.Distinct``2(FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                The <c>DISTINCT</c>-statement that selects unique records.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Distinct`2" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.ExistsExtensions">
+            <summary>
+                Adds <c>EXISTS</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.ExistsExtensions.Exists``2(FluentSQL.Query{``0,``1})">
+            <summary>
+                The <c>EXISTS</c>-statement.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="query">The <see cref="T:FluentSQL.Query`2" /> that tests for the existence of a record.</param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Exists`1"/>.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.ExistsExtensions.Exists``1(FluentSQL.Query{``0})">
+            <summary>
+                The <c>EXISTS</c>-statement.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="query">The <see cref="T:FluentSQL.Query`2" /> that tests for the existence of a record.</param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Exists`1"/>.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.FromExtensions">
+            <summary>
+                Adds <c>FROM</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.FromExtensions.From``3(FluentSQL.Querying.QueryContext{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>FROM</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">
+                The <see cref="T:System.Linq.Expressions.Expression" /> where to select
+                <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s from.
+            </typeparam>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="table">The expression for selecting <typeparamref name="TTable" />.</param>
+            <returns>The <see cref="M:FluentSQL.Querying.Statements.Extensions.FromExtensions.From``3(FluentSQL.Querying.QueryContext{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.GroupByExtensions">
+            <summary>
+                Adds <c>GROUP BY</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.GroupByExtensions.GroupBy``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>GROUP BY</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSqlExpression">The expression to group by.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> that indicates on
+                which columns to group.
+            </param>
+            <returns>
+                The <see cref="T:FluentSQL.Querying.Statements.GroupBy`3" />.
+            </returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.JoinExtensions">
+            <summary>
+                Adds <c>JOIN</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.LeftJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>LEFT JOIN</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.LeftJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.LeftJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``0,``2}}})">
+            <summary>
+                Add a new <c>LEFT JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TParameters, TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.LeftJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.LeftJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``2}}})">
+            <summary>
+                Add a new <c>LEFT JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.LeftJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.RightJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>RIGHT JOIN</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.RightJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.RightJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``0,``2}}})">
+            <summary>
+                Add a new <c>RIGHT JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TParameters, TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.RightJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.RightJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``2}}})">
+            <summary>
+                Add a new <c>RIGHT JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.RightJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.InnerJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>INNER JOIN</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.InnerJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.InnerJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``0,``2}}})">
+            <summary>
+                Add a new <c>INNER JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TParameters, TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.InnerJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.InnerJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``2}}})">
+            <summary>
+                Add a new <c>INNER JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.InnerJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.OuterJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>OUTER JOIN</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.OuterJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.OuterJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``0,``2}}})">
+            <summary>
+                Add a new <c>OUTER JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TParameters, TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.OuterJoin`3" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.JoinExtensions.OuterJoin``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{``2}}})">
+            <summary>
+                Add a new <c>OUTER JOIN</c> with a subquery to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSubqueryResult">The result type of the <paramref name="child" />.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;Query&lt;TSubqueryResult&gt;&gt;&gt;</see>
+                that selects the child to join with.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.OuterJoin`3" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.LimitExtensions">
+            <summary>
+                Adds <c>LIMIT</c> to the <c>SELECT</c> of a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.LimitExtensions.Limit``2(FluentSQL.Querying.QueryComponent{``0,``1},System.Int32)">
+            <summary>
+                Limits the number of results.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Limit`2" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.OrderByExtensions">
+            <summary>
+                Adds <c>ORDER BY</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.OrderByExtensions.OrderBy``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a new <c>ORDER BY</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSqlExpression">The expression to order by.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> that indicates on
+                which columns to order.
+            </param>
+            <returns>
+                The <see cref="T:FluentSQL.Querying.Statements.OrderBy`3" />.
+            </returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.SelectExtensions">
+            <summary>
+                Adds <c>SELECT</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.SelectExtensions.Select``3(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``2}})">
+            <summary>
+                Add a <c>SELECT</c> to this query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSqlExpression">The </typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1"> Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> to select.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Select`3" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.UnionExtensions">
+            <summary>
+                Adds <c>UNION</c> and <c>UNION ALL</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                <c>UNION</c> a query with an other query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+            <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1})">
+            <summary>
+                <c>UNION</c> a query with an other query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+            <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``2(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                <c>UNION</c> a query with an other query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+            <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                <c>UNION ALL</c> a query with an other query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+            <returns>The union all of <paramref name="first" /> and <paramref name="second" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1})">
+            <summary>
+                <c>UNION ALL</c> a query with an other query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+            <returns>The union al of <paramref name="first" /> and <paramref name="second" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``2(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
+            <summary>
+                <c>UNION ALL</c> a query with an other query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+            <returns>The union al of <paramref name="first" /> and <paramref name="second" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Extensions.WhereExtensions">
+            <summary>
+                Adds <c>WHERE</c> to a query.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.WhereExtensions.Where``2(FluentSQL.Querying.QueryComponent{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+                Add a new <c>WHERE</c> to the query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
+                which columns to join.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Where`2" />.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Extensions.WhereExtensions.Where``1(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``0},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+                Add a new <c>WHERE</c> to the query.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on
+                which columns to join.
+            </param>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Where`2" />.</returns>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.From`3">
+            <summary>
+                The <c>FROM</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">
+                The table where to select <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s from.
+            </typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.From`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>FROM</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.From`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.GroupBy`3">
+            <summary>
+                The <c>GROUP BY</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSqlExpression">The expression to group by.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.GroupBy`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>GROUP BY</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The <see cref="T:System.Linq.Expressions.Expression`1" /> to select.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.GroupBy`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.InnerJoin`3">
+            <summary>
+                The <c>INNER JOIN</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>INNER JOIN</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Join`3">
+            <summary>
+                A <c>JOIN</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Join`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>JOIN</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Join`3.On(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+                Adds the <c>ON</c> to indicate on which columns to join.
+            </summary>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on
+                which columns to join.
+            </param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Join`3.On(System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <summary>
+                Adds the <c>ON</c> to indicate on which columns to join.
+            </summary>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
+                which columns to join.
+            </param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Join`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.LeftJoin`3">
+            <summary>
+                The <c>LEFT JOIN</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>LEFT JOIN</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Limit`2">
+            <summary>
+                Limits the number of results.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Limit`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Int32)">
+            <summary>
+                Create a new <c>LIMIT</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="count">The number of rows.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Limit`2.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.OrderBy`3">
+            <summary>
+                The <c>ORDER BY</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSqlExpression">The expression to order by.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.OrderBy`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>ORDER BY</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> to select.
+            </param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.OrderBy`3.Ascending">
+            <summary>
+                Apply the ordering ascending.
+            </summary>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.OrderBy`3.Descending">
+            <summary>
+                Apply the ordering descending.
+            </summary>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.OrderBy`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.OuterJoin`3">
+            <summary>
+                The <c>OUTER JOIN</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>OUTER JOIN</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.RightJoin`3">
+            <summary>
+                The <c>RIGHT JOIN</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TTable">The child table.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>RIGHT JOIN</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="child">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+            </param>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Select`3">
+            <summary>
+                The <c>SELECT</c>-statement of a <see cref="T:FluentSQL.Query`2" />.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <typeparam name="TSqlExpression">The expression to select.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Select`3.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}})">
+            <summary>
+                Create a new <c>SELECT</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> to select.
+            </param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Select`3.As(System.String)">
+            <summary>
+                Sets the alias under which this expression will be known.
+            </summary>
+            <param name="alias">The alias.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Select`3.As(System.Linq.Expressions.Expression{System.Func{`1,System.Object}})">
+            <summary>
+                Sets the alias under which this expression will be known
+                where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
+            </summary>
+            <param name="alias">The alias.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Select`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Subquery`1">
+            <summary>
+                Represents a subquery to use in a different query.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Subquery`1.#ctor(System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{`0}}})">
+            <summary>
+                Create a new subquery.
+            </summary>
+            <param name="query">The underlying query.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Subquery`1.QueryResult">
+            <summary>
+                The <typeparamref name="TQueryResult" /> of the underlying query.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Subquery`2">
+            <summary>
+                Represents a subquery to use in a different query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Subquery`2.#ctor(System.Linq.Expressions.Expression{System.Func{FluentSQL.Query{`0,`1}}})">
+            <summary>
+                Create a new subquery.
+            </summary>
+            <param name="query">The underlying query.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Subquery`2.QueryResult">
+            <summary>
+                The <typeparamref name="TQueryResult" /> of the underlying query.
+            </summary>
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Union`3">
+            <summary>
+                The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
+            </summary>
+            <typeparam name="TParameters1">The parameter type for the first query.</typeparam>
+            <typeparam name="TParameters2">The parameter type for the second query.</typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <remarks>
+                Even though this class makes it possible to union queries with two different parameter types, the extension methods
+                don't support this. It is added because it should be possible to union a query with parameters with a query
+                without parameters.
+            </remarks>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Union`3.#ctor(FluentSQL.Querying.QueryComponent{`0,`2},FluentSQL.Querying.QueryComponent{`1,`2})">
+            <summary>
+                Create a new <c>UNION</c>-statement.
+            </summary>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Union`3.FluentSQL#Querying#QueryComponent{TParameters1,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.UnionAll`3">
+            <summary>
+                The <c>UNION ALL</c>-statement for combining two queries, allowing duplicates.
+            </summary>
+            <typeparam name="TParameters1">The parameter type for the first query.</typeparam>
+            <typeparam name="TParameters2">The parameter type for the second query.</typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <remarks>
+                Even though this class makes it possible to union queries with two different parameter types, the extension methods
+                don't support this. It is added because it should be possible to union a query with parameters with a query
+                without parameters.
+            </remarks>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.UnionAll`3.#ctor(FluentSQL.Querying.QueryComponent{`0,`2},FluentSQL.Querying.QueryComponent{`1,`2})">
+            <summary>
+                Create a new <c>UNION ALL</c>-statement.
+            </summary>
+            <param name="first">The first query.</param>
+            <param name="second">The second query.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.UnionAll`3.FluentSQL#Querying#QueryComponent{TParameters1,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.Where`2">
+            <summary>
+                The <c>WHERE</c>-statement of a query.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Where`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+                Create a new <c>WHERE</c>-statement.
+            </summary>
+            <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+            <param name="expression">The expression that represents the condition.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Where`2.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
