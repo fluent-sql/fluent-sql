@@ -34,7 +34,7 @@ namespace WeelinkIT.FluentSQL
             var p = new TParameters();
             parameters(p);
 
-            return Task.FromResult(default(TQueryResult));
+            return Database.QueryAsync<TQueryResult>(CommandText, p);
         }
 
         private Database Database { get; }
@@ -64,7 +64,7 @@ namespace WeelinkIT.FluentSQL
         /// <returns>The result of the query.</returns>
         public Task<TQueryResult> ExecuteAsync()
         {
-            return Task.FromResult(default(TQueryResult));
+            return Database.QueryAsync<TQueryResult>(CommandText);
         }
 
         private Database Database { get; }

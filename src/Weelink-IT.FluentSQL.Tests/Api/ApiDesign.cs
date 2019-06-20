@@ -52,6 +52,8 @@ namespace WeelinkIT.FluentSQL.Tests.Api
                     .Select(() => model.Customers.Name)
                     .Compile();
 
+            int parameterlessResult = await parameterless.ExecuteAsync();
+
             /*
              * SELECT i2.invoice_number AS InvoiceIdFromSubquery
              *   FROM dbo.invoices i2

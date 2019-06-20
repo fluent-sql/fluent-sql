@@ -3,7 +3,7 @@ using WeelinkIT.FluentSQL.Modelling;
 
 namespace WeelinkIT.FluentSQL.Tests.Examples
 {
-    public class ExampleModel : PersistenceModel<ExampleModel>
+    public class ExampleModel : PersistenceModel
     {
         public ExampleModel(Database database)
             : base(database)

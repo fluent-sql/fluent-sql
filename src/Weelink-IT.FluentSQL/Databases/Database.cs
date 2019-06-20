@@ -1,4 +1,6 @@
-﻿using WeelinkIT.FluentSQL.Compilation;
+﻿using System.Threading.Tasks;
+
+using WeelinkIT.FluentSQL.Compilation;
 using WeelinkIT.FluentSQL.Querying;
 
 namespace WeelinkIT.FluentSQL.Databases
@@ -45,6 +47,18 @@ namespace WeelinkIT.FluentSQL.Databases
 
             CompilationResult result = Compiler.Compile(contextWithoutParameters);
             return new Query<TQueryResult>(this, result.CommandText);
+        }
+
+        /// <summary>
+        ///     Execute the query.
+        /// </summary>
+        /// <param name="commandText">The SQL to execute.</param>
+        /// <param name="parameters">The optional parameters.</param>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        /// <returns>The result of the query.</returns>
+        public Task<TQueryResult> QueryAsync<TQueryResult>(string commandText, object parameters = null)
+        {
+            return Task.FromResult(default(TQueryResult));
         }
 
         private QueryCompiler Compiler { get; }
