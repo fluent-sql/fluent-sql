@@ -1,3 +1,3 @@
 # FluentSQL
 
-https://fluent-sqlgithubio.readthedocs.io/en/latest/
+https://fluent-sql.readthedocs.io/en/latest/
