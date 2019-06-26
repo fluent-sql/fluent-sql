@@ -18,20 +18,13 @@ namespace FluentSQL.Querying.Statements
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="expression">The expression that represents the condition.</param>
         internal Where(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TParameters, bool>> expression)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Expression = expression;
 
-            queryContext.WhereComponents.Add(this);
+            QueryContext.WhereComponents.Add(this);
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private Expression<Func<TParameters, bool>> Expression { get; }
     }
 }

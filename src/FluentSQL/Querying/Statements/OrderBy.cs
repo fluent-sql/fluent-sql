@@ -23,11 +23,11 @@ namespace FluentSQL.Querying.Statements
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> to select.
         /// </param>
         internal OrderBy(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Expression = expression;
 
-            queryContext.OrderByComponents.Add(this);
+            QueryContext.OrderByComponents.Add(this);
         }
 
         /// <summary>
@@ -46,13 +46,6 @@ namespace FluentSQL.Querying.Statements
             get { return this; }
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private Expression<Func<TSqlExpression>> Expression { get; }
     }
 }

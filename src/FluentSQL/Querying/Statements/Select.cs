@@ -23,11 +23,11 @@ namespace FluentSQL.Querying.Statements
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> to select.
         /// </param>
         internal Select(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Expression = expression;
 
-            queryContext.SelectComponents.Add(this);
+            QueryContext.SelectComponents.Add(this);
         }
 
         /// <summary>
@@ -53,13 +53,6 @@ namespace FluentSQL.Querying.Statements
             return this;
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private Expression<Func<TSqlExpression>> Expression { get; }
         private Alias Alias { get; set; }
     }

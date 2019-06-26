@@ -21,20 +21,13 @@ namespace FluentSQL.Querying.Statements
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="expression">The <see cref="Expression{TDelegate}" /> to select.</param>
         internal GroupBy(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TSqlExpression>> expression)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Expression = expression;
 
-            queryContext.GroupByComponents.Add(this);
+            QueryContext.GroupByComponents.Add(this);
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private Expression<Func<TSqlExpression>> Expression { get; }
     }
 }

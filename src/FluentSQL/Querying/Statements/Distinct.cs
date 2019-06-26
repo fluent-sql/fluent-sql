@@ -14,18 +14,9 @@
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         internal Distinct(QueryContext<TParameters, TQueryResult> queryContext)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
-
             QueryContext.Modifiers.Add(this);
         }
-
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
     }
 }

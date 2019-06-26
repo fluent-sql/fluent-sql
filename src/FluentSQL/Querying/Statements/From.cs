@@ -23,20 +23,13 @@ namespace FluentSQL.Querying.Statements
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
         internal From(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> expression)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Expression = expression;
 
             QueryContext.FromComponents.Add(this);
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private Expression<Func<TTable>> Expression { get; }
     }
 }

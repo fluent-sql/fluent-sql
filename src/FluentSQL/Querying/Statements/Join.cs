@@ -21,11 +21,11 @@ namespace FluentSQL.Querying.Statements
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
         /// </param>
         protected Join(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Child = child;
 
-            queryContext.JoinComponents.Add(this);
+            QueryContext.JoinComponents.Add(this);
         }
         
         /// <summary>
@@ -56,13 +56,6 @@ namespace FluentSQL.Querying.Statements
             return this;
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private Expression<Func<TTable>> Child { get; }
         private Expression<Func<bool>> ImplicitTableExpression { get; set; }
         private Expression<Func<TTable, bool>> ExplicitTableExpression { get; set; }

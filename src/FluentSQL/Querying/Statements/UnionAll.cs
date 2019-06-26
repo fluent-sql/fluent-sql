@@ -21,15 +21,10 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         internal UnionAll(QueryComponent<TParameters1, TQueryResult> first, QueryComponent<TParameters2, TQueryResult> second)
+            : base(first.QueryContext)
         {
             First = first;
             Second = second;
-        }
-
-        /// <inheritdoc />
-        QueryContext<TParameters1, TQueryResult> QueryComponent<TParameters1, TQueryResult>.QueryContext
-        {
-            get { return First.QueryContext; }
         }
 
         private QueryComponent<TParameters1, TQueryResult> First { get; }

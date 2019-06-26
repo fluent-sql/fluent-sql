@@ -1,4 +1,6 @@
-﻿namespace FluentSQL.Querying
+﻿using FluentSQL.Modelling;
+
+namespace FluentSQL.Querying
 {
     /// <summary>
     ///     A component of a query.
@@ -7,11 +9,20 @@
     ///     The parameters required for executing the query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public interface QueryComponent<TParameters, TQueryResult> where TParameters : new()
+    public abstract class QueryComponent<TParameters, TQueryResult> : SqlExpression<TQueryResult> where TParameters : new()
     {
         /// <summary>
-        ///     Gets the underlying <see cref="QueryContext{TParameters, TQueryResult} " />.
+        ///     Create a new <see cref="QueryComponent{TParameters, TQueryResult}" />.
         /// </summary>
-        QueryContext<TParameters, TQueryResult> QueryContext { get; }
+        /// <param name="queryContext">The underlying <see cref="QueryContext{TParameters, TQueryResult}" />.</param>
+        protected QueryComponent(QueryContext<TParameters, TQueryResult> queryContext)
+        {
+            QueryContext = queryContext;
+        }
+
+        /// <summary>
+        ///     Gets the underlying <see cref="QueryContext{TParameters, TQueryResult}" />.
+        /// </summary>
+        internal QueryContext<TParameters, TQueryResult> QueryContext { get; }
     }
 }

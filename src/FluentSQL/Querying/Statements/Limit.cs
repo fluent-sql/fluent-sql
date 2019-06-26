@@ -16,20 +16,13 @@ namespace FluentSQL.Querying.Statements
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="count">The number of rows.</param>
         internal Limit(QueryContext<TParameters, TQueryResult> queryContext, int count)
+            : base(queryContext)
         {
-            QueryContext = queryContext;
             Count = count;
 
             QueryContext.Modifiers.Add(this);
         }
 
-        /// <inheritdoc />
-        QueryContext<TParameters, TQueryResult> QueryComponent<TParameters, TQueryResult>.QueryContext
-        {
-            get { return QueryContext; }
-        }
-
-        private QueryContext<TParameters, TQueryResult> QueryContext { get; }
         private int Count { get; }
     }
 }

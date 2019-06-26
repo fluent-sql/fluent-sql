@@ -3,7 +3,7 @@
     /// <summary>
     ///     Represents a table.
     /// </summary>
-    public abstract class Table
+    public abstract class Table : SqlExpression<Table>
     {
     }
 }

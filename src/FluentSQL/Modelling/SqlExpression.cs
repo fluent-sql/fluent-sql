@@ -1,4 +1,5 @@
 ﻿using System;
+// ReSharper disable UnusedParameter.Global
 
 namespace FluentSQL.Modelling
 {
