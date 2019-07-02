@@ -10,10 +10,9 @@ namespace FluentSQL.Compilation
 {
     public sealed class QueryParser<TParameters, TQueryResult>  where TParameters : new()
     {
-        internal AbstractSyntaxTree Parse(QueryContext<TParameters, TQueryResult> context)
+        public QueryParser()
         {
-            context.Parse(this);
-            return new AbstractSyntaxTree();
+            RootNode = new Node();
         }
 
         internal void Distinct()
@@ -87,7 +86,13 @@ namespace FluentSQL.Compilation
             where TFirstParameters : new()
             where TSecondParameters : new()
         {
-            throw new NotImplementedException();
+            var firstParser = new QueryParser<TFirstParameters, TQueryResult>();
+            var secondParser = new QueryParser<TSecondParameters, TQueryResult>();
+
+            first.QueryContext.Parse(firstParser);
+            second.QueryContext.Parse(secondParser);
+
+            RootNode = new Union(firstParser.RootNode, secondParser.RootNode);
         }
 
         internal void Union(
@@ -117,7 +122,13 @@ namespace FluentSQL.Compilation
             where TFirstParameters : new()
             where TSecondParameters : new()
         {
-            throw new NotImplementedException();
+            var firstParser = new QueryParser<TFirstParameters, TQueryResult>();
+            var secondParser = new QueryParser<TSecondParameters, TQueryResult>();
+
+            first.QueryContext.Parse(firstParser);
+            second.QueryContext.Parse(secondParser);
+
+            RootNode = new UnionAll(firstParser.RootNode, secondParser.RootNode);
         }
 
         internal void UnionAll(
@@ -145,5 +156,7 @@ namespace FluentSQL.Compilation
         {
             throw new NotImplementedException();
         }
+ 
+        public Node RootNode { get; private set; }
     }
 }

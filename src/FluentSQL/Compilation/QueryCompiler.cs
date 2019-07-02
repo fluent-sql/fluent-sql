@@ -20,9 +20,9 @@ namespace FluentSQL.Compilation
             where TParameters : new()
         {
             var parser = new QueryParser<TParameters, TQueryResult>();
-            AbstractSyntaxTree ast = parser.Parse(context);
+            context.Parse(parser);
 
-            return new CompilationResult();
+            return new CompilationResult(parser.RootNode);
         }
     }
 }

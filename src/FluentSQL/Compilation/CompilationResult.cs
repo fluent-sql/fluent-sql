@@ -6,8 +6,17 @@
     public class CompilationResult
     {
         /// <summary>
-        ///     Gets the SQL to execute.
+        ///     Initializes a new <see cref="CompilationResult" />.
         /// </summary>
-        public string CommandText { get; }
+        /// <param name="queryNode">The AST of the parsed query.</param>
+        public CompilationResult(Node queryNode)
+        {
+            QueryNode = queryNode;
+        }
+
+        /// <summary>
+        ///     Gets the abstract syntax tree representing the query.
+        /// </summary>
+        public Node QueryNode { get; }
     }
 }
