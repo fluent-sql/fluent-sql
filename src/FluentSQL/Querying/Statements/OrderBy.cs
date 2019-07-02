@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using FluentSQL.Compilation;
+
 namespace FluentSQL.Querying.Statements
 {
     /// <summary>
@@ -26,8 +28,9 @@ namespace FluentSQL.Querying.Statements
             : base(queryContext)
         {
             Expression = expression;
+            SortDirection = SortDirection.Ascending;
 
-            QueryContext.OrderByComponents.Add(this);
+            QueryContext.Components.Add(this);
         }
 
         /// <summary>
@@ -35,7 +38,11 @@ namespace FluentSQL.Querying.Statements
         /// </summary>
         public OrderBy<TParameters, TQueryResult, TSqlExpression> Ascending
         {
-            get { return this; }
+            get
+            {
+                SortDirection = SortDirection.Ascending;
+                return this;
+            }
         }
 
         /// <summary>
@@ -43,9 +50,19 @@ namespace FluentSQL.Querying.Statements
         /// </summary>
         public OrderBy<TParameters, TQueryResult, TSqlExpression> Descending
         {
-            get { return this; }
+            get
+            {
+                SortDirection = SortDirection.Descending;
+                return this;
+            }
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.OrderBy(Expression, SortDirection);
         }
 
         private Expression<Func<TSqlExpression>> Expression { get; }
+        private SortDirection SortDirection { get; set; }
     }
 }

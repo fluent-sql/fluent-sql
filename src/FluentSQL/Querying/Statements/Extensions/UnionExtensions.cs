@@ -15,11 +15,11 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         /// <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
-        public static Union<TParameters, TParameters, TQueryResult> Union<TParameters, TQueryResult>(
+        public static UnionWithSameParameterTypes<TParameters, TQueryResult> Union<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
             where TParameters : new()
         {
-            return new Union<TParameters, TParameters, TQueryResult>(first, second);
+            return new UnionWithSameParameterTypes<TParameters, TQueryResult>(first.QueryContext, first, second);
         }
 
         /// <summary>
@@ -32,11 +32,11 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         /// <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
-        public static Union<TParameters, NoParameters, TQueryResult> Union<TParameters, TQueryResult>(
+        public static UnionParameterWithNoParameter<TParameters, TQueryResult> Union<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> first, QueryComponent<NoParameters, TQueryResult> second)
             where TParameters : new()
         {
-            return new Union<TParameters, NoParameters, TQueryResult>(first, second);
+            return new UnionParameterWithNoParameter<TParameters, TQueryResult>(first.QueryContext, first, second);
         }
 
         /// <summary>
@@ -49,11 +49,11 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         /// <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
-        public static Union<NoParameters, TParameters, TQueryResult> Union<TParameters, TQueryResult>(
+        public static UnionNoParametersWithParameter<TParameters, TQueryResult> Union<TParameters, TQueryResult>(
             this QueryComponent<NoParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
             where TParameters : new()
         {
-            return new Union<NoParameters, TParameters, TQueryResult>(first, second);
+            return new UnionNoParametersWithParameter<TParameters, TQueryResult>(second.QueryContext, first, second);
         }
 
         /// <summary>
@@ -66,11 +66,11 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         /// <returns>The union all of <paramref name="first" /> and <paramref name="second" />.</returns>
-        public static UnionAll<TParameters, TParameters, TQueryResult> UnionAll<TParameters, TQueryResult>(
+        public static UnionAllWithSameParameterTypes<TParameters, TQueryResult> UnionAll<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
             where TParameters : new()
         {
-            return new UnionAll<TParameters, TParameters, TQueryResult>(first, second);
+            return new UnionAllWithSameParameterTypes<TParameters, TQueryResult>(first.QueryContext, first, second);
         }
 
         /// <summary>
@@ -83,11 +83,11 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         /// <returns>The union al of <paramref name="first" /> and <paramref name="second" />.</returns>
-        public static UnionAll<TParameters, NoParameters, TQueryResult> UnionAll<TParameters, TQueryResult>(
+        public static UnionAllParameterWithNoParameter<TParameters, TQueryResult> UnionAll<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> first, QueryComponent<NoParameters, TQueryResult> second)
             where TParameters : new()
         {
-            return new UnionAll<TParameters, NoParameters, TQueryResult>(first, second);
+            return new UnionAllParameterWithNoParameter<TParameters, TQueryResult>(first.QueryContext, first, second);
         }
 
         /// <summary>
@@ -100,11 +100,11 @@
         /// <param name="first">The first query.</param>
         /// <param name="second">The second query.</param>
         /// <returns>The union al of <paramref name="first" /> and <paramref name="second" />.</returns>
-        public static UnionAll<NoParameters, TParameters, TQueryResult> UnionAll<TParameters, TQueryResult>(
+        public static UnionAllNoParametersWithParameter<TParameters, TQueryResult> UnionAll<TParameters, TQueryResult>(
             this QueryComponent<NoParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
             where TParameters : new()
         {
-            return new UnionAll<NoParameters, TParameters, TQueryResult>(first, second);
+            return new UnionAllNoParametersWithParameter<TParameters, TQueryResult>(second.QueryContext, first, second);
         }
     }
 }

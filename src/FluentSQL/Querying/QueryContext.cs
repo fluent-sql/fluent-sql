@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using FluentSQL.Compilation;
 using FluentSQL.Databases;
 
 namespace FluentSQL.Querying
@@ -20,13 +21,7 @@ namespace FluentSQL.Querying
         /// <param name="database">The <see cref="Databases.Database" /> for this query.</param>
         internal QueryContext(Database database)
         {
-            FromComponents = new List<QueryComponent<TParameters, TQueryResult>>();
-            SelectComponents = new List<QueryComponent<TParameters, TQueryResult>>();
-            JoinComponents = new List<QueryComponent<TParameters, TQueryResult>>();
-            WhereComponents = new List<QueryComponent<TParameters, TQueryResult>>();
-            OrderByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
-            GroupByComponents = new List<QueryComponent<TParameters, TQueryResult>>();
-            Modifiers = new List<QueryComponent<TParameters, TQueryResult>>();
+            Components = new List<QueryComponent<TParameters, TQueryResult>>();
 
             Database = database;
         }
@@ -37,26 +32,21 @@ namespace FluentSQL.Querying
         /// <param name="other">The <see cref="QueryContext{TParameters, TQueryResult}" /> to copy the components from.</param>
         public QueryContext(QueryContext<TParameters, TQueryResult> other)
         {
-            FromComponents = other.FromComponents.ToList();
-            SelectComponents = other.SelectComponents.ToList();
-            JoinComponents = other.JoinComponents.ToList();
-            WhereComponents = other.WhereComponents.ToList();
-            OrderByComponents = other.OrderByComponents.ToList();
-            GroupByComponents = other.GroupByComponents.ToList();
-            Modifiers = other.Modifiers.ToList();
+            Components = other.Components.ToList();
 
             Database = other.Database;
         }
 
-        internal Database Database { get; }
+        internal void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            foreach (QueryComponent<TParameters, TQueryResult> component in Components)
+            {
+                component.Parse(parser);
+            }
+        }
 
-        internal IList<QueryComponent<TParameters, TQueryResult>> FromComponents { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> SelectComponents { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> JoinComponents { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> WhereComponents { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> OrderByComponents { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> GroupByComponents { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> Modifiers { get; }
+        internal Database Database { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> Components { get; }
     }
 
     /// <summary>

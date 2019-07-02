@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using FluentSQL.Compilation;
+
 namespace FluentSQL.Querying.Statements
 {
     /// <summary>
@@ -27,7 +29,7 @@ namespace FluentSQL.Querying.Statements
         {
             Expression = expression;
 
-            QueryContext.SelectComponents.Add(this);
+            QueryContext.Components.Add(this);
         }
 
         /// <summary>
@@ -51,6 +53,18 @@ namespace FluentSQL.Querying.Statements
         {
             Alias = new Alias("TODO");
             return this;
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            if (Alias != null)
+            {
+                parser.Select(Expression, Alias);
+            }
+            else
+            {
+                parser.Select(Expression);
+            }
         }
 
         private Expression<Func<TSqlExpression>> Expression { get; }

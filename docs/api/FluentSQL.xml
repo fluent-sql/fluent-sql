@@ -105,6 +105,12 @@
             </summary>
             <typeparam name="TType">The column type.</typeparam>
         </member>
+        <member name="M:FluentSQL.Modelling.Column`1.#ctor(System.String)">
+            <summary>
+                Create a new column.
+            </summary>
+            <param name="name">The name of the column.</param>
+        </member>
         <member name="T:FluentSQL.Modelling.PersistenceModel">
             <summary>
                 Represents the model in the database.
@@ -223,6 +229,13 @@
             <summary>
                 Represents a table.
             </summary>
+        </member>
+        <member name="M:FluentSQL.Modelling.Table.#ctor(System.String,System.String)">
+            <summary>
+                Create a new table.
+            </summary>
+            <param name="schema">The schema.</param>
+            <param name="name">The name of the table.</param>
         </member>
         <member name="T:FluentSQL.Query`2">
             <summary>
@@ -651,6 +664,12 @@
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
         </member>
+        <member name="M:FluentSQL.Querying.QueryComponent`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1})">
+            <summary>
+                Create a new <see cref="T:FluentSQL.Querying.QueryComponent`2" />.
+            </summary>
+            <param name="queryContext">The underlying <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
+        </member>
         <member name="P:FluentSQL.Querying.QueryComponent`2.QueryContext">
             <summary>
                 Gets the underlying <see cref="T:FluentSQL.Querying.QueryContext`2" />.
@@ -723,9 +742,6 @@
                 Create a new <c>DISTINCT</c>-statement.
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
-        </member>
-        <member name="P:FluentSQL.Querying.Statements.Distinct`2.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Exists`1">
             <summary>
@@ -1230,9 +1246,6 @@
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
         </member>
-        <member name="P:FluentSQL.Querying.Statements.From`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
-        </member>
         <member name="T:FluentSQL.Querying.Statements.GroupBy`3">
             <summary>
                 The <c>GROUP BY</c>-statement of a query.
@@ -1249,9 +1262,6 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="expression">The <see cref="T:System.Linq.Expressions.Expression`1" /> to select.</param>
-        </member>
-        <member name="P:FluentSQL.Querying.Statements.GroupBy`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.InnerJoin`3">
             <summary>
@@ -1271,6 +1281,12 @@
             <param name="child">
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Join`3">
             <summary>
@@ -1311,8 +1327,21 @@
             </param>
             <returns><c>this</c> for method chaining.</returns>
         </member>
-        <member name="P:FluentSQL.Querying.Statements.Join`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
+        <member name="M:FluentSQL.Querying.Statements.Join`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <summary>
+                Parse this join.
+            </summary>
+            <param name="parser"></param>
+            <param name="child">The expression to select the child.</param>
+            <param name="expression">The join expression where the parent table is implied.</param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.Join`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <summary>
+                Parse the compiler for processing this join.
+            </summary>
+            <param name="parser"></param>
+            <param name="child">The expression to select the child.</param>
+            <param name="expression">The join expression where the parent table is explicitly given.</param>
         </member>
         <member name="T:FluentSQL.Querying.Statements.LeftJoin`3">
             <summary>
@@ -1333,6 +1362,12 @@
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
         </member>
+        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <inheritdoc />
+        </member>
         <member name="T:FluentSQL.Querying.Statements.Limit`2">
             <summary>
                 Limits the number of results.
@@ -1348,9 +1383,6 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="count">The number of rows.</param>
-        </member>
-        <member name="P:FluentSQL.Querying.Statements.Limit`2.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.OrderBy`3">
             <summary>
@@ -1381,9 +1413,6 @@
                 Apply the ordering descending.
             </summary>
         </member>
-        <member name="P:FluentSQL.Querying.Statements.OrderBy`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
-        </member>
         <member name="T:FluentSQL.Querying.Statements.OuterJoin`3">
             <summary>
                 The <c>OUTER JOIN</c>-statement of a query.
@@ -1403,6 +1432,12 @@
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
         </member>
+        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <inheritdoc />
+        </member>
         <member name="T:FluentSQL.Querying.Statements.RightJoin`3">
             <summary>
                 The <c>RIGHT JOIN</c>-statement of a query.
@@ -1421,6 +1456,12 @@
             <param name="child">
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+            <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Select`3">
             <summary>
@@ -1456,8 +1497,20 @@
             <param name="alias">The alias.</param>
             <returns><c>this</c> for method chaining.</returns>
         </member>
-        <member name="P:FluentSQL.Querying.Statements.Select`3.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
+        <member name="T:FluentSQL.Querying.Statements.SortDirection">
+            <summary>
+                The direction to sort the results.
+            </summary>
+        </member>
+        <member name="F:FluentSQL.Querying.Statements.SortDirection.Ascending">
+            <summary>
+                Sort the results in ascending order.
+            </summary>
+        </member>
+        <member name="F:FluentSQL.Querying.Statements.SortDirection.Descending">
+            <summary>
+                Sort the results in descending order.
+            </summary>
         </member>
         <member name="T:FluentSQL.Querying.Statements.Subquery`1">
             <summary>
@@ -1496,50 +1549,76 @@
                 The <typeparamref name="TQueryResult" /> of the underlying query.
             </summary>
         </member>
-        <member name="T:FluentSQL.Querying.Statements.Union`3">
+        <member name="T:FluentSQL.Querying.Statements.UnionWithSameParameterTypes`2">
+            <summary>
+                The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.UnionWithSameParameterTypes`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.UnionNoParametersWithParameter`2">
+            <summary>
+                The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.UnionNoParametersWithParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.UnionParameterWithNoParameter`2">
+            <summary>
+                The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
+            </summary>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.UnionParameterWithNoParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1})">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.UnionAllWithSameParameterTypes`2">
             <summary>
                 The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
             </summary>
-            <typeparam name="TParameters1">The parameter type for the first query.</typeparam>
-            <typeparam name="TParameters2">The parameter type for the second query.</typeparam>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <remarks>
-                Even though this class makes it possible to union queries with two different parameter types, the extension methods
-                don't support this. It is added because it should be possible to union a query with parameters with a query
-                without parameters.
-            </remarks>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.Union`3.#ctor(FluentSQL.Querying.QueryComponent{`0,`2},FluentSQL.Querying.QueryComponent{`1,`2})">
-            <summary>
-                Create a new <c>UNION</c>-statement.
-            </summary>
-            <param name="first">The first query.</param>
-            <param name="second">The second query.</param>
-        </member>
-        <member name="P:FluentSQL.Querying.Statements.Union`3.FluentSQL#Querying#QueryComponent{TParameters1,TQueryResult}#QueryContext">
+        <member name="M:FluentSQL.Querying.Statements.UnionAllWithSameParameterTypes`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
             <inheritdoc />
         </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionAll`3">
+        <member name="T:FluentSQL.Querying.Statements.UnionAllNoParametersWithParameter`2">
             <summary>
-                The <c>UNION ALL</c>-statement for combining two queries, allowing duplicates.
+                The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
             </summary>
-            <typeparam name="TParameters1">The parameter type for the first query.</typeparam>
-            <typeparam name="TParameters2">The parameter type for the second query.</typeparam>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <remarks>
-                Even though this class makes it possible to union queries with two different parameter types, the extension methods
-                don't support this. It is added because it should be possible to union a query with parameters with a query
-                without parameters.
-            </remarks>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionAll`3.#ctor(FluentSQL.Querying.QueryComponent{`0,`2},FluentSQL.Querying.QueryComponent{`1,`2})">
+        <member name="M:FluentSQL.Querying.Statements.UnionAllNoParametersWithParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentSQL.Querying.Statements.UnionAllParameterWithNoParameter`2">
             <summary>
-                Create a new <c>UNION ALL</c>-statement.
+                The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
             </summary>
-            <param name="first">The first query.</param>
-            <param name="second">The second query.</param>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
         </member>
-        <member name="P:FluentSQL.Querying.Statements.UnionAll`3.FluentSQL#Querying#QueryComponent{TParameters1,TQueryResult}#QueryContext">
+        <member name="M:FluentSQL.Querying.Statements.UnionAllParameterWithNoParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1})">
             <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Where`2">
@@ -1557,9 +1636,6 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="expression">The expression that represents the condition.</param>
-        </member>
-        <member name="P:FluentSQL.Querying.Statements.Where`2.FluentSQL#Querying#QueryComponent{TParameters,TQueryResult}#QueryContext">
-            <inheritdoc />
         </member>
     </members>
 </doc>

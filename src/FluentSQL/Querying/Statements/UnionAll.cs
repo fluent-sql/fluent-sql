@@ -1,33 +1,97 @@
-﻿namespace FluentSQL.Querying.Statements
+﻿using FluentSQL.Compilation;
+
+namespace FluentSQL.Querying.Statements
 {
     /// <summary>
-    ///     The <c>UNION ALL</c>-statement for combining two queries, allowing duplicates.
+    ///     The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
     /// </summary>
-    /// <typeparam name="TParameters1">The parameter type for the first query.</typeparam>
-    /// <typeparam name="TParameters2">The parameter type for the second query.</typeparam>
+    /// <typeparam name="TParameters">
+    ///     The parameters required for executing this query.
+    /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    /// <remarks>
-    ///     Even though this class makes it possible to union queries with two different parameter types, the extension methods
-    ///     don't support this. It is added because it should be possible to union a query with parameters with a query
-    ///     without parameters.
-    /// </remarks>
-    public class UnionAll<TParameters1, TParameters2, TQueryResult> : QueryComponent<TParameters1, TQueryResult>
-        where TParameters1 : new()
-        where TParameters2 : new()
+    public class UnionAllWithSameParameterTypes<TParameters, TQueryResult> :
+        QueryComponent<TParameters, TQueryResult>
+        where TParameters : new()
     {
-        /// <summary>
-        ///     Create a new <c>UNION ALL</c>-statement.
-        /// </summary>
-        /// <param name="first">The first query.</param>
-        /// <param name="second">The second query.</param>
-        internal UnionAll(QueryComponent<TParameters1, TQueryResult> first, QueryComponent<TParameters2, TQueryResult> second)
-            : base(first.QueryContext)
+        /// <inheritdoc />
+        public UnionAllWithSameParameterTypes(
+            QueryContext<TParameters, TQueryResult> queryContext,
+            QueryComponent<TParameters, TQueryResult> first,
+            QueryComponent<TParameters, TQueryResult> second)
+            : base(queryContext)
         {
             First = first;
             Second = second;
         }
 
-        private QueryComponent<TParameters1, TQueryResult> First { get; }
-        private QueryComponent<TParameters2, TQueryResult> Second { get; }
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.UnionAll(First, Second);
+        }
+
+        private QueryComponent<TParameters, TQueryResult> First { get; }
+        private QueryComponent<TParameters, TQueryResult> Second { get; }
+    }
+
+    /// <summary>
+    ///     The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
+    /// </summary>
+    /// <typeparam name="TParameters">
+    ///     The parameters required for executing this query.
+    /// </typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
+    public class UnionAllNoParametersWithParameter<TParameters, TQueryResult> :
+        QueryComponent<TParameters, TQueryResult>
+        where TParameters : new()
+    {
+        /// <inheritdoc />
+        public UnionAllNoParametersWithParameter(
+            QueryContext<TParameters, TQueryResult> queryContext,
+            QueryComponent<NoParameters, TQueryResult> first,
+            QueryComponent<TParameters, TQueryResult> second)
+            : base(queryContext)
+        {
+            First = first;
+            Second = second;
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.UnionAll(First, Second);
+        }
+
+        private QueryComponent<NoParameters, TQueryResult> First { get; }
+        private QueryComponent<TParameters, TQueryResult> Second { get; }
+    }
+
+    /// <summary>
+    ///     The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
+    /// </summary>
+    /// <typeparam name="TParameters">
+    ///     The parameters required for executing this query.
+    /// </typeparam>
+    /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
+    public class UnionAllParameterWithNoParameter<TParameters, TQueryResult> :
+        QueryComponent<TParameters, TQueryResult>
+        where TParameters : new()
+    {
+        /// <inheritdoc />
+        public UnionAllParameterWithNoParameter(
+            QueryContext<TParameters, TQueryResult> queryContext,
+            QueryComponent<TParameters, TQueryResult> first,
+            QueryComponent<NoParameters, TQueryResult> second)
+            : base(queryContext)
+        {
+            First = first;
+            Second = second;
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.UnionAll(First, Second);
+        }
+
+        private QueryComponent<TParameters, TQueryResult> First { get; }
+        private QueryComponent<NoParameters, TQueryResult> Second { get; }
     }
 }

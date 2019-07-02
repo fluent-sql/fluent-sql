@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using FluentSQL.Compilation;
+
 namespace FluentSQL.Querying.Statements
 {
     /// <summary>
@@ -23,6 +25,21 @@ namespace FluentSQL.Querying.Statements
         internal RightJoin(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
             : base(queryContext, child)
         {
+        }
+
+        
+        /// <inheritdoc />
+        protected override void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
+            Expression<Func<bool>> expression)
+        {
+            parser.RightJoin(child, expression);
+        }
+
+        /// <inheritdoc />
+        protected override void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
+            Expression<Func<TTable, bool>> expression)
+        {
+            parser.RightJoin(child, expression);
         }
     }
 }

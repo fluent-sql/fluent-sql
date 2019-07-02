@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using FluentSQL.Compilation;
+
 namespace FluentSQL.Querying.Statements
 {
     /// <summary>
@@ -25,7 +27,7 @@ namespace FluentSQL.Querying.Statements
         {
             Child = child;
 
-            QueryContext.JoinComponents.Add(this);
+            QueryContext.Components.Add(this);
         }
         
         /// <summary>
@@ -55,6 +57,36 @@ namespace FluentSQL.Querying.Statements
             ExplicitTableExpression = expression;
             return this;
         }
+
+        internal sealed override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            if (ImplicitTableExpression != null)
+            {
+                Parse(parser, Child, ImplicitTableExpression);
+            }
+            else
+            {
+                Parse(parser, Child, ExplicitTableExpression);
+            }
+        }
+
+        /// <summary>
+        ///     Parse this join.
+        /// </summary>
+        /// <param name="parser"></param>
+        /// <param name="child">The expression to select the child.</param>
+        /// <param name="expression">The join expression where the parent table is implied.</param>
+        protected abstract void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
+            Expression<Func<bool>> expression);
+
+        /// <summary>
+        ///     Parse the compiler for processing this join.
+        /// </summary>
+        /// <param name="parser"></param>
+        /// <param name="child">The expression to select the child.</param>
+        /// <param name="expression">The join expression where the parent table is explicitly given.</param>
+        protected abstract void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
+            Expression<Func<TTable, bool>> expression);
 
         private Expression<Func<TTable>> Child { get; }
         private Expression<Func<bool>> ImplicitTableExpression { get; set; }

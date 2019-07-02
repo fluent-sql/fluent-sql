@@ -1,5 +1,4 @@
 ﻿using FluentSQL.Compilation;
-using FluentSQL.Modelling;
 
 namespace FluentSQL
 {
@@ -10,7 +9,7 @@ namespace FluentSQL
     /// <typeparam name="TParameters">
     ///     The parameters required for executing this query.
     /// </typeparam>
-    public class Query<TParameters, TQueryResult> : SqlExpression<TQueryResult> where TParameters : new()
+    public class Query<TParameters, TQueryResult> where TParameters : new()
     {
         /// <summary>
         ///     Create a new query.
@@ -28,7 +27,7 @@ namespace FluentSQL
     ///     The compiled query to execute.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type.</typeparam>
-    public class Query<TQueryResult> : SqlExpression<TQueryResult>
+    public class Query<TQueryResult>
     {
         /// <summary>
         ///     Create a new query.

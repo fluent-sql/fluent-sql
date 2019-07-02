@@ -16,9 +16,12 @@ namespace FluentSQL.Compilation
         /// </typeparam>
         /// <param name="context">The <see cref="QueryContext{TParameters, TQueryResult}" /> that contains all query parts.</param>
         /// <returns>The compilation result.</returns>
-        public CompilationResult Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
+        internal CompilationResult Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
             where TParameters : new()
         {
+            var parser = new QueryParser<TParameters, TQueryResult>();
+            AbstractSyntaxTree ast = parser.Parse(context);
+
             return new CompilationResult();
         }
     }

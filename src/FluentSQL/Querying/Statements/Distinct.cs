@@ -1,4 +1,6 @@
-﻿namespace FluentSQL.Querying.Statements
+﻿using FluentSQL.Compilation;
+
+namespace FluentSQL.Querying.Statements
 {
     /// <summary>
     ///     The <c>DISTINCT</c>-statement that selects unique records.
@@ -16,7 +18,12 @@
         internal Distinct(QueryContext<TParameters, TQueryResult> queryContext)
             : base(queryContext)
         {
-            QueryContext.Modifiers.Add(this);
+            QueryContext.Components.Add(this);
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.Distinct();
         }
     }
 }

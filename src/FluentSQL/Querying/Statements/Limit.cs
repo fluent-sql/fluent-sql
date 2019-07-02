@@ -1,4 +1,6 @@
 ﻿
+using FluentSQL.Compilation;
+
 namespace FluentSQL.Querying.Statements
 {
     /// <summary>
@@ -20,7 +22,12 @@ namespace FluentSQL.Querying.Statements
         {
             Count = count;
 
-            QueryContext.Modifiers.Add(this);
+            QueryContext.Components.Add(this);
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.Limit(Count);
         }
 
         private int Count { get; }

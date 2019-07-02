@@ -1,4 +1,5 @@
-﻿using FluentSQL.Modelling;
+﻿using FluentSQL.Compilation;
+using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying
 {
@@ -19,6 +20,8 @@ namespace FluentSQL.Querying
         {
             QueryContext = queryContext;
         }
+
+        internal abstract void Parse(QueryParser<TParameters, TQueryResult> parser);
 
         /// <summary>
         ///     Gets the underlying <see cref="QueryContext{TParameters, TQueryResult}" />.

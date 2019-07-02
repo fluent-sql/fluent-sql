@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using FluentSQL.Compilation;
+
 namespace FluentSQL.Querying.Statements
 {
     /// <summary>
@@ -22,7 +24,12 @@ namespace FluentSQL.Querying.Statements
         {
             Expression = expression;
 
-            QueryContext.WhereComponents.Add(this);
+            QueryContext.Components.Add(this);
+        }
+
+        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        {
+            parser.Where(Expression);
         }
 
         private Expression<Func<TParameters, bool>> Expression { get; }

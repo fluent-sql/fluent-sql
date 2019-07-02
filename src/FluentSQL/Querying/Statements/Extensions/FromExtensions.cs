@@ -25,7 +25,9 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <param name="table">The expression for selecting <typeparamref name="TTable" />.</param>
         /// <returns>The <see cref="From{TParameters, TQueryResult, TTable}" />.</returns>
         public static From<TParameters, TQueryResult, TTable> From<TParameters, TQueryResult, TTable>(
-            this QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> table) where TParameters : new()
+            this QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> table)
+            where TParameters : new()
+            where TTable : Table
         {
             return new From<TParameters, TQueryResult, TTable>(queryContext, table);
         }
