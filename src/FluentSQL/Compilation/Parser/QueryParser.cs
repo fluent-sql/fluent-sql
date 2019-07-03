@@ -4,23 +4,39 @@ using System.Linq.Expressions;
 using FluentSQL.Modelling;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements;
+
 #pragma warning disable 1591
 
-namespace FluentSQL.Compilation
+namespace FluentSQL.Compilation.Parser
 {
     public sealed class QueryParser<TParameters, TQueryResult>  where TParameters : new()
     {
         public QueryParser()
         {
-            RootNode = new Node();
+            SelectNode = new SelectNode();
+            ResultNode = SelectNode;
+        }
+
+        private AstNode ResultNode { get; set; }
+        private SelectNode SelectNode { get; }
+
+        internal AstNode Parse(QueryContext<TParameters, TQueryResult> queryContext)
+        {
+            queryContext.Parse(this);
+            return ResultNode;
         }
 
         internal void Distinct()
         {
-            throw new NotImplementedException();
+            SelectNode.Distinct.Distinct = true;
         }
 
         internal void From<TTable>(Expression<Func<TTable>> expression) where TTable : Table
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void From<TTable>(Expression<Func<TTable>> expression, Alias alias) where TTable : Table
         {
             throw new NotImplementedException();
         }
@@ -62,7 +78,7 @@ namespace FluentSQL.Compilation
 
         internal void Limit(int count)
         {
-            throw new NotImplementedException();
+            SelectNode.Limit.Limit = count;
         }
 
         internal void OrderBy<TSqlExpression>(Expression<Func<TSqlExpression>> expression, SortDirection sortDirection)
@@ -87,31 +103,25 @@ namespace FluentSQL.Compilation
             where TSecondParameters : new()
         {
             var firstParser = new QueryParser<TFirstParameters, TQueryResult>();
+            AstNode firstResult = firstParser.Parse(first.QueryContext);
+
             var secondParser = new QueryParser<TSecondParameters, TQueryResult>();
+            AstNode secondResult = secondParser.Parse(second.QueryContext);
 
-            first.QueryContext.Parse(firstParser);
-            second.QueryContext.Parse(secondParser);
-
-            RootNode = new Union(firstParser.RootNode, secondParser.RootNode);
+            ResultNode = new UnionSetOperator(firstResult, secondResult);
         }
 
-        internal void Union(
-            QueryComponent<TParameters, TQueryResult> first,
-            QueryComponent<NoParameters, TQueryResult> second)
+        internal void Union(QueryComponent<TParameters, TQueryResult> first, QueryComponent<NoParameters, TQueryResult> second)
         {
             Union<TParameters, NoParameters>(first, second);
         }
 
-        internal void Union(
-            QueryComponent<NoParameters, TQueryResult> first,
-            QueryComponent<TParameters, TQueryResult> second)
+        internal void Union(QueryComponent<NoParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
         {
             Union<NoParameters, TParameters>(first, second);
         }
         
-        internal void Union(
-            QueryComponent<TParameters, TQueryResult> first,
-            QueryComponent<TParameters, TQueryResult> second)
+        internal void Union(QueryComponent<TParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
         {
             Union<TParameters, TParameters>(first, second);
         }
@@ -123,31 +133,25 @@ namespace FluentSQL.Compilation
             where TSecondParameters : new()
         {
             var firstParser = new QueryParser<TFirstParameters, TQueryResult>();
+            AstNode firstResult = firstParser.Parse(first.QueryContext);
+
             var secondParser = new QueryParser<TSecondParameters, TQueryResult>();
+            AstNode secondResult = secondParser.Parse(second.QueryContext);
 
-            first.QueryContext.Parse(firstParser);
-            second.QueryContext.Parse(secondParser);
-
-            RootNode = new UnionAll(firstParser.RootNode, secondParser.RootNode);
+            ResultNode = new UnionAllSetOperator(firstResult, secondResult);
         }
 
-        internal void UnionAll(
-            QueryComponent<TParameters, TQueryResult> first,
-            QueryComponent<NoParameters, TQueryResult> second)
+        internal void UnionAll(QueryComponent<TParameters, TQueryResult> first, QueryComponent<NoParameters, TQueryResult> second)
         {
             UnionAll<TParameters, NoParameters>(first, second);
         }
 
-        internal void UnionAll(
-            QueryComponent<NoParameters, TQueryResult> first,
-            QueryComponent<TParameters, TQueryResult> second)
+        internal void UnionAll(QueryComponent<NoParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
         {
             UnionAll<NoParameters, TParameters>(first, second);
         }
         
-        internal void UnionAll(
-            QueryComponent<TParameters, TQueryResult> first,
-            QueryComponent<TParameters, TQueryResult> second)
+        internal void UnionAll(QueryComponent<TParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
         {
             UnionAll<TParameters, TParameters>(first, second);
         }
@@ -156,7 +160,5 @@ namespace FluentSQL.Compilation
         {
             throw new NotImplementedException();
         }
- 
-        public Node RootNode { get; private set; }
     }
 }

@@ -44,7 +44,7 @@ namespace FluentSQL.Tests.Api
             Invoices i2 = model.Invoices;
 
             /*
-             * SELECT customers.name
+             * SELECT customers.*
              *   FROM dbo.customers
              *  WHERE dbo.customers.id > 0
              */
@@ -53,7 +53,7 @@ namespace FluentSQL.Tests.Api
                     .Query<int>()
                     .From(() => model.Customers)
                     .Where(() => model.Customers.Id > 0)
-                    .Select(() => model.Customers.Name)
+                    .Select(() => model.Customers.All())
                     .Compile();
 
             int parameterlessResult = await SomeConnection.ExecuteAsync(parameterless);

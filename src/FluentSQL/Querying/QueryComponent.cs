@@ -1,4 +1,4 @@
-﻿using FluentSQL.Compilation;
+﻿using FluentSQL.Compilation.Parser;
 using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying

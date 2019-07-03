@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 
 namespace FluentSQL.Querying.Statements
 {

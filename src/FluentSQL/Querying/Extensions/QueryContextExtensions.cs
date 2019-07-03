@@ -1,4 +1,6 @@
-﻿namespace FluentSQL.Querying.Extensions
+﻿using FluentSQL.Databases;
+
+namespace FluentSQL.Querying.Extensions
 {
     /// <summary>
     ///     Extends <see cref="QueryContext{TParameters, TQueryResult}" />s.

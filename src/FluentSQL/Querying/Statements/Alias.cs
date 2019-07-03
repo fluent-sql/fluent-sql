@@ -14,6 +14,9 @@
             Name = name;
         }
 
-        private string Name { get; }
+        /// <summary>
+        ///     The alias.
+        /// </summary>
+        public string Name { get; }
     }
 }

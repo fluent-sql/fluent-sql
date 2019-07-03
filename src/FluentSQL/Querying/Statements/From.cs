@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying.Statements
@@ -32,12 +32,43 @@ namespace FluentSQL.Querying.Statements
 
             QueryContext.Components.Add(this);
         }
+        
+        /// <summary>
+        ///     Sets the alias under which this table will be known.
+        /// </summary>
+        /// <param name="alias">The alias.</param>
+        /// <returns><c>this</c> for method chaining.</returns>
+        public From<TParameters, TQueryResult, TTable> As(string alias)
+        {
+            Alias = new Alias(alias);
+            return this;
+        }
+  
+        /// <summary>
+        ///     Sets the alias under which this table will be known
+        ///     where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
+        /// </summary>
+        /// <param name="alias">The alias.</param>
+        /// <returns><c>this</c> for method chaining.</returns>
+        public From<TParameters, TQueryResult, TTable> As(Expression<Func<TQueryResult, object>> alias)
+        {
+            Alias = new Alias("TODO");
+            return this;
+        }
 
         internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
         {
-            parser.From(Expression);
+            if (Alias != null)
+            {
+                parser.From(Expression, Alias);
+            }
+            else
+            {
+                parser.From(Expression);
+            }
         }
 
         private Expression<Func<TTable>> Expression { get; }
+        private Alias Alias { get; set; }
     }
 }

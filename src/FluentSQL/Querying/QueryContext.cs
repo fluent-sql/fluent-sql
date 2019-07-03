@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 using FluentSQL.Databases;
+using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying
 {
@@ -19,11 +20,12 @@ namespace FluentSQL.Querying
         ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
         /// </summary>
         /// <param name="database">The <see cref="Databases.Database" /> for this query.</param>
-        internal QueryContext(Database database)
+        /// <param name="model">The <see cref="PersistenceModel" /> where this query is executed for.</param>
+        internal QueryContext(Database database, PersistenceModel model)
         {
             Components = new List<QueryComponent<TParameters, TQueryResult>>();
-
             Database = database;
+            Model = model;
         }
 
         /// <summary>
@@ -33,8 +35,8 @@ namespace FluentSQL.Querying
         public QueryContext(QueryContext<TParameters, TQueryResult> other)
         {
             Components = other.Components.ToList();
-
             Database = other.Database;
+            Model = other.Model;
         }
 
         internal void Parse(QueryParser<TParameters, TQueryResult> parser)
@@ -46,6 +48,7 @@ namespace FluentSQL.Querying
         }
 
         internal Database Database { get; }
+        internal PersistenceModel Model { get; }
         internal IList<QueryComponent<TParameters, TQueryResult>> Components { get; }
     }
 
@@ -55,15 +58,8 @@ namespace FluentSQL.Querying
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
     {
-        /// <inheritdoc />
-        public QueryContext(Database database)
-            : base(database)
-        {
-        }
-
-        /// <inheritdoc />
-        public QueryContext(QueryContext<NoParameters, TQueryResult> other)
-            : base(other)
+        internal QueryContext(Database database, PersistenceModel model)
+            : base(database, model)
         {
         }
 
@@ -76,7 +72,7 @@ namespace FluentSQL.Querying
         /// <returns>The parameterized version.</returns>
         public QueryContext<TParameters, TQueryResult> WithParameters<TParameters>() where TParameters : new()
         {
-            return new QueryContext<TParameters, TQueryResult>(Database);
+            return new QueryContext<TParameters, TQueryResult>(Database, Model);
         }
     }
 }

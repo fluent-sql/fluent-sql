@@ -1,4 +1,6 @@
-﻿namespace FluentSQL.Modelling
+﻿using FluentSQL.Compilation.Parser;
+
+namespace FluentSQL.Modelling
 {
     /// <summary>
     ///     Represents a table.
@@ -16,7 +18,7 @@
             Name = name;
         }
 
-        private string Schema { get; }
-        private string Name { get; }
+        internal string Schema { get; }
+        internal string Name { get; }
     }
 }
