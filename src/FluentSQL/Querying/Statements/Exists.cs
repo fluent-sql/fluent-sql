@@ -35,7 +35,7 @@
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Exists<TParameters, TQueryResult> where TParameters : new()
+    public class Exists<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>EXISTS</c>-statement.

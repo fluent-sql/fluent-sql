@@ -14,7 +14,7 @@
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <returns>The <see cref="Statements.Limit{TParameters,TQueryResult}" />.</returns>
         public static Limit<TParameters, TQueryResult> Limit<TParameters, TQueryResult>(
-            this QueryComponent<TParameters, TQueryResult> queryComponent, int limit) where TParameters : new()
+            this QueryComponent<TParameters, TQueryResult> queryComponent, int limit)
         {
             return new Limit<TParameters, TQueryResult>(queryComponent.QueryContext, limit);
         }

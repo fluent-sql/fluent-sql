@@ -8,32 +8,29 @@ using FluentSQL.Querying.Functions.Extensions;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Examples;
 
-using Xunit;
-
 namespace FluentSQL.Tests.Api
 {
+    public class ExampleParameters
+    {
+        public int Limit { get; set; }
+        public string InvoiceNumber { get; set; }
+    }
+        
+    public class UnionResult
+    {
+        public string CustomerName { get; set; }
+        public int TotalAmount { get; set; }
+    }
+
+    public class SubqueryResult
+    {
+        public int InvoiceIdFromSubquery { get; set; }
+    }
+
     public sealed class ApiDesign
     {
-        public class ExampleParameters
-        {
-            public int Limit { get; set; }
-            public string InvoiceNumber { get; set; }
-        }
-        
-        public class UnionResult
-        {
-            public string CustomerName { get; set; }
-            public int TotalAmount { get; set; }
-        }
-
-        public class SubqueryResult
-        {
-            public int InvoiceIdFromSubquery { get; set; }
-        }
-
         private IDbConnection SomeConnection { get; }
 
-        [Fact]
         public async Task TestApi()
         {
             var model = new ExampleModel(new SqlServerDatabase());

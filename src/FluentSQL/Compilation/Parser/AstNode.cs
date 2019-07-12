@@ -1,7 +1,18 @@
-﻿namespace FluentSQL.Compilation.Parser
+﻿using System.Collections.Generic;
+
+namespace FluentSQL.Compilation.Parser
 {
-    public abstract class AstNode
+    public class AstNode
     {
-        public abstract void Compile(QueryCompiler compiler);
+        public AstNode()
+        {
+            ChildNodes = new List<AstNode>();
+        }
+
+        public IList<AstNode> ChildNodes { get; }
+    }
+
+    public class FromNode : AstNode
+    {
     }
 }

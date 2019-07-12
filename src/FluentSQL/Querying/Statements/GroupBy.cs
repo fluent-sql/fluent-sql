@@ -15,7 +15,6 @@ namespace FluentSQL.Querying.Statements
     /// <typeparam name="TSqlExpression">The expression to group by.</typeparam>
     public class GroupBy<TParameters, TQueryResult, TSqlExpression> :
         QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
     {
         /// <summary>
         ///     Create a new <c>GROUP BY</c>-statement.

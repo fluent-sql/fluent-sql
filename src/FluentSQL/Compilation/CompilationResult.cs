@@ -1,6 +1,4 @@
-﻿using FluentSQL.Compilation.Parser;
-
-namespace FluentSQL.Compilation
+﻿namespace FluentSQL.Compilation
 {
     /// <summary>
     ///     The result of the compilation of a query.
@@ -10,15 +8,15 @@ namespace FluentSQL.Compilation
         /// <summary>
         ///     Initializes a new <see cref="CompilationResult" />.
         /// </summary>
-        /// <param name="astNode">The AST of the parsed query.</param>
-        public CompilationResult(AstNode astNode)
+        /// <param name="sql">The SQL.</param>
+        public CompilationResult(string sql)
         {
-            AstNode = astNode;
+            Sql = sql;
         }
 
         /// <summary>
         ///     Gets the abstract syntax tree representing the query.
         /// </summary>
-        public AstNode AstNode { get; }
+        public string Sql { get; }
     }
 }

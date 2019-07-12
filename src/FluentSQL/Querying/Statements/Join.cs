@@ -13,7 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TTable">The child table.</typeparam>
-    public abstract class Join<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
+    public abstract class Join<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>JOIN</c>-statement.

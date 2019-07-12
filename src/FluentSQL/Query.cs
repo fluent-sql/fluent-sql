@@ -9,7 +9,7 @@ namespace FluentSQL
     /// <typeparam name="TParameters">
     ///     The parameters required for executing this query.
     /// </typeparam>
-    public class Query<TParameters, TQueryResult> where TParameters : new()
+    public class Query<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new query.

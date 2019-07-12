@@ -1,6 +1,4 @@
-﻿using FluentSQL.Databases;
-
-namespace FluentSQL.Querying.Extensions
+﻿namespace FluentSQL.Querying.Extensions
 {
     /// <summary>
     ///     Extends <see cref="QueryContext{TParameters, TQueryResult}" />s.
@@ -29,7 +27,6 @@ namespace FluentSQL.Querying.Extensions
         /// <returns>A compiled query.</returns>
         public static Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(
             this QueryContext<TParameters, TQueryResult> queryContext)
-            where TParameters : new()
         {
             return queryContext.Database.Compile(queryContext);
         }
@@ -56,7 +53,6 @@ namespace FluentSQL.Querying.Extensions
         /// <returns>A compiled query.</returns>
         public static Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent)
-            where TParameters : new()
         {
             return queryComponent.QueryContext.Compile();
         }

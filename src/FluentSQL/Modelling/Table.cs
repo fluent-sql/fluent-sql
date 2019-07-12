@@ -1,6 +1,4 @@
-﻿using FluentSQL.Compilation.Parser;
-
-namespace FluentSQL.Modelling
+﻿namespace FluentSQL.Modelling
 {
     /// <summary>
     ///     Represents a table.

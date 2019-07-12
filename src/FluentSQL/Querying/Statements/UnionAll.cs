@@ -9,9 +9,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class UnionAllWithSameParameterTypes<TParameters, TQueryResult> :
-        QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
+    public class UnionAllWithSameParameterTypes<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
     {
         /// <inheritdoc />
         public UnionAllWithSameParameterTypes(
@@ -40,9 +38,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class UnionAllNoParametersWithParameter<TParameters, TQueryResult> :
-        QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
+    public class UnionAllNoParametersWithParameter<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
     {
         /// <inheritdoc />
         public UnionAllNoParametersWithParameter(
@@ -71,9 +67,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class UnionAllParameterWithNoParameter<TParameters, TQueryResult> :
-        QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
+    public class UnionAllParameterWithNoParameter<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
     {
         /// <inheritdoc />
         public UnionAllParameterWithNoParameter(

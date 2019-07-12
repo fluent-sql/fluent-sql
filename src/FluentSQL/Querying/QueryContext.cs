@@ -13,7 +13,7 @@ namespace FluentSQL.Querying
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class QueryContext<TParameters, TQueryResult> where TParameters : new()
+    public class QueryContext<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
@@ -58,7 +58,7 @@ namespace FluentSQL.Querying
         ///     The parameters required for executing the query.
         /// </typeparam>
         /// <returns>The parameterized version.</returns>
-        public QueryContext<TParameters, TQueryResult> WithParameters<TParameters>() where TParameters : new()
+        public QueryContext<TParameters, TQueryResult> WithParameters<TParameters>()
         {
             return new QueryContext<TParameters, TQueryResult>(Database, Model);
         }

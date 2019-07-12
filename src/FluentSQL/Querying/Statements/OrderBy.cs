@@ -13,9 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to order by.</typeparam>
-    public class OrderBy<TParameters, TQueryResult, TSqlExpression> :
-        QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
+    public class OrderBy<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>ORDER BY</c>-statement.

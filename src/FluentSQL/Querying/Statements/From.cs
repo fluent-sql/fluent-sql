@@ -17,8 +17,6 @@ namespace FluentSQL.Querying.Statements
     ///     The table where to select <see cref="SqlExpression{TExpressionType}" />s from.
     /// </typeparam>
     public class From<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
-        where TTable : Table
     {
         /// <summary>
         ///     Create a new <c>FROM</c>-statement.
@@ -41,18 +39,6 @@ namespace FluentSQL.Querying.Statements
         public From<TParameters, TQueryResult, TTable> As(string alias)
         {
             Alias = new Alias(alias);
-            return this;
-        }
-  
-        /// <summary>
-        ///     Sets the alias under which this table will be known
-        ///     where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
-        /// </summary>
-        /// <param name="alias">The alias.</param>
-        /// <returns><c>this</c> for method chaining.</returns>
-        public From<TParameters, TQueryResult, TTable> As(Expression<Func<TQueryResult, object>> alias)
-        {
-            Alias = new Alias("TODO");
             return this;
         }
 

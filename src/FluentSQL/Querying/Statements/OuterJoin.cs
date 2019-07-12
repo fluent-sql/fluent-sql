@@ -13,7 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TTable">The child table.</typeparam>
-    public class OuterJoin<TParameters, TQueryResult, TTable> : Join<TParameters, TQueryResult, TTable> where TParameters : new()
+    public class OuterJoin<TParameters, TQueryResult, TTable> : Join<TParameters, TQueryResult, TTable>
     {
         /// <summary>
         ///     Create a new <c>OUTER JOIN</c>-statement.

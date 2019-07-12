@@ -14,7 +14,7 @@
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <returns>The <see cref="Statements.Distinct{TParameters,TQueryResult}" />.</returns>
         public static Distinct<TParameters, TQueryResult> Distinct<TParameters, TQueryResult>(
-            this QueryComponent<TParameters, TQueryResult> queryComponent) where TParameters : new()
+            this QueryComponent<TParameters, TQueryResult> queryComponent)
         {
             return new Distinct<TParameters, TQueryResult>(queryComponent.QueryContext);
         }

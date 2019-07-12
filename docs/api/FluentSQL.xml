@@ -9,13 +9,13 @@
                 The result of the compilation of a query.
             </summary>
         </member>
-        <member name="M:FluentSQL.Compilation.CompilationResult.#ctor(FluentSQL.Compilation.Parser.AstNode)">
+        <member name="M:FluentSQL.Compilation.CompilationResult.#ctor(System.String)">
             <summary>
                 Initializes a new <see cref="T:FluentSQL.Compilation.CompilationResult" />.
             </summary>
-            <param name="astNode">The AST of the parsed query.</param>
+            <param name="sql">The SQL.</param>
         </member>
-        <member name="P:FluentSQL.Compilation.CompilationResult.AstNode">
+        <member name="P:FluentSQL.Compilation.CompilationResult.Sql">
             <summary>
                 Gets the abstract syntax tree representing the query.
             </summary>
@@ -24,6 +24,13 @@
             <summary>
                 Compiles a <see cref="T:FluentSQL.Querying.QueryContext`2" /> to a query.
             </summary>
+        </member>
+        <member name="M:FluentSQL.Compilation.QueryCompiler.Compile(FluentSQL.Compilation.Parser.AstNode)">
+            <summary>
+                Compile <paramref name="node" /> and return the result.
+            </summary>
+            <param name="node">The node to compile.</param>
+            <returns>The result of the compilation.</returns>
         </member>
         <member name="T:FluentSQL.Databases.Database">
             <summary>

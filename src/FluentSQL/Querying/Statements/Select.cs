@@ -13,9 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to select.</typeparam>
-    public class Select<TParameters, TQueryResult, TSqlExpression> :
-        QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
+    public class Select<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>SELECT</c>-statement.
