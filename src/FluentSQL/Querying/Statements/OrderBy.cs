@@ -57,7 +57,7 @@ namespace FluentSQL.Querying.Statements
             }
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.OrderBy(Expression, SortDirection);
         }

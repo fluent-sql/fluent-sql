@@ -24,7 +24,7 @@ namespace FluentSQL.Querying.Statements
             Second = second;
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.UnionAll(First, Second);
         }
@@ -55,7 +55,7 @@ namespace FluentSQL.Querying.Statements
             Second = second;
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.UnionAll(First, Second);
         }
@@ -86,7 +86,7 @@ namespace FluentSQL.Querying.Statements
             Second = second;
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.UnionAll(First, Second);
         }

@@ -9,26 +9,21 @@
                 The result of the compilation of a query.
             </summary>
         </member>
-        <member name="P:FluentSQL.Compilation.CompilationResult.CommandText">
+        <member name="M:FluentSQL.Compilation.CompilationResult.#ctor(FluentSQL.Compilation.Parser.AstNode)">
             <summary>
-                Gets the SQL to execute.
+                Initializes a new <see cref="T:FluentSQL.Compilation.CompilationResult" />.
+            </summary>
+            <param name="astNode">The AST of the parsed query.</param>
+        </member>
+        <member name="P:FluentSQL.Compilation.CompilationResult.AstNode">
+            <summary>
+                Gets the abstract syntax tree representing the query.
             </summary>
         </member>
         <member name="T:FluentSQL.Compilation.QueryCompiler">
             <summary>
                 Compiles a <see cref="T:FluentSQL.Querying.QueryContext`2" /> to a query.
             </summary>
-        </member>
-        <member name="M:FluentSQL.Compilation.QueryCompiler.Compile``2(FluentSQL.Querying.QueryContext{``0,``1})">
-            <summary>
-                Compile <paramref name="context" /> to an executable query.
-            </summary>
-            <typeparam name="TQueryResult">The result type.</typeparam>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <param name="context">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> that contains all query parts.</param>
-            <returns>The compilation result.</returns>
         </member>
         <member name="T:FluentSQL.Databases.Database">
             <summary>
@@ -59,6 +54,17 @@
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> to compile.</param>
             <returns>A compiled query.</returns>
+        </member>
+        <member name="M:FluentSQL.Databases.Database.CompileInternal``2(FluentSQL.Querying.QueryContext{``0,``1})">
+            <summary>
+                Compile <paramref name="context" /> to an executable query.
+            </summary>
+            <typeparam name="TQueryResult">The result type.</typeparam>
+            <typeparam name="TParameters">
+                The parameters required for executing this query.
+            </typeparam>
+            <param name="context">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> that contains all query parts.</param>
+            <returns>The compilation result.</returns>
         </member>
         <member name="T:FluentSQL.Databases.SqlServer.SqlServerDatabase">
             <summary>
@@ -322,6 +328,17 @@
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" /> to compile.</param>
             <returns>A compiled query.</returns>
         </member>
+        <member name="T:FluentSQL.Querying.Functions.All">
+            <summary>
+                Represents all columns in a table.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.All.#ctor(FluentSQL.Modelling.Table)">
+            <summary>
+                Create a new <c>*</c> expression.
+            </summary>
+            <param name="table">The table to get all columns from.</param>
+        </member>
         <member name="T:FluentSQL.Querying.Functions.Average`1">
             <summary>
                 Averages a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
@@ -426,6 +443,18 @@
                 Create a new DAY-expression for a <see cref="T:System.DateTimeOffset" />.
             </summary>
             <param name="expression">The <see cref="T:System.DateTimeOffset" /> to get the day-component from.</param>
+        </member>
+        <member name="T:FluentSQL.Querying.Functions.Extensions.AllExtensions">
+            <summary>
+                Extends <see cref="T:FluentSQL.Modelling.Table" />.
+            </summary>
+        </member>
+        <member name="M:FluentSQL.Querying.Functions.Extensions.AllExtensions.All(FluentSQL.Modelling.Table)">
+            <summary>
+                All the columns in a table.
+            </summary>
+            <param name="table">The table to select all columns from.</param>
+            <returns>A <see cref="M:FluentSQL.Querying.Functions.Extensions.AllExtensions.All(FluentSQL.Modelling.Table)" /> representing all columns.</returns>
         </member>
         <member name="T:FluentSQL.Querying.Functions.Extensions.SumExtensions">
             <summary>
@@ -684,29 +713,18 @@
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
         </member>
-        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Databases.Database)">
+        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Databases.Database,FluentSQL.Modelling.PersistenceModel)">
             <summary>
                 Create a new <see cref="T:FluentSQL.Querying.QueryContext`2" />.
             </summary>
             <param name="database">The <see cref="T:FluentSQL.Databases.Database" /> for this query.</param>
-        </member>
-        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1})">
-            <summary>
-                Create a new <see cref="T:FluentSQL.Querying.QueryContext`2" />.
-            </summary>
-            <param name="other">The <see cref="T:FluentSQL.Querying.QueryContext`2" /> to copy the components from.</param>
+            <param name="model">The <see cref="T:FluentSQL.Modelling.PersistenceModel" /> where this query is executed for.</param>
         </member>
         <member name="T:FluentSQL.Querying.QueryContext`1">
             <summary>
                 The context containing all components of a parameterless query.
             </summary>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
-        </member>
-        <member name="M:FluentSQL.Querying.QueryContext`1.#ctor(FluentSQL.Databases.Database)">
-            <inheritdoc />
-        </member>
-        <member name="M:FluentSQL.Querying.QueryContext`1.#ctor(FluentSQL.Querying.QueryContext{FluentSQL.Querying.NoParameters,`0})">
-            <inheritdoc />
         </member>
         <member name="M:FluentSQL.Querying.QueryContext`1.WithParameters``1">
             <summary>
@@ -727,6 +745,11 @@
                 Create a new alias.
             </summary>
             <param name="name">The alias.</param>
+        </member>
+        <member name="P:FluentSQL.Querying.Statements.Alias.Name">
+            <summary>
+                The alias.
+            </summary>
         </member>
         <member name="T:FluentSQL.Querying.Statements.Distinct`2">
             <summary>
@@ -1246,6 +1269,21 @@
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="expression">The expression for selecting <typeparamref name="TTable" />.</param>
         </member>
+        <member name="M:FluentSQL.Querying.Statements.From`3.As(System.String)">
+            <summary>
+                Sets the alias under which this table will be known.
+            </summary>
+            <param name="alias">The alias.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
+        <member name="M:FluentSQL.Querying.Statements.From`3.As(System.Linq.Expressions.Expression{System.Func{`1,System.Object}})">
+            <summary>
+                Sets the alias under which this table will be known
+                where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
+            </summary>
+            <param name="alias">The alias.</param>
+            <returns><c>this</c> for method chaining.</returns>
+        </member>
         <member name="T:FluentSQL.Querying.Statements.GroupBy`3">
             <summary>
                 The <c>GROUP BY</c>-statement of a query.
@@ -1282,10 +1320,10 @@
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
             <inheritdoc />
         </member>
-        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
             <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Join`3">
@@ -1327,7 +1365,7 @@
             </param>
             <returns><c>this</c> for method chaining.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.Join`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.Join`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
             <summary>
                 Parse this join.
             </summary>
@@ -1335,7 +1373,7 @@
             <param name="child">The expression to select the child.</param>
             <param name="expression">The join expression where the parent table is implied.</param>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.Join`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.Join`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
             <summary>
                 Parse the compiler for processing this join.
             </summary>
@@ -1362,10 +1400,10 @@
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
             <inheritdoc />
         </member>
-        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
             <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Limit`2">
@@ -1432,10 +1470,10 @@
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
             <inheritdoc />
         </member>
-        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
             <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.RightJoin`3">
@@ -1457,10 +1495,10 @@
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
             </param>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
             <inheritdoc />
         </member>
-        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.QueryParser{`0,`1},System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
+        <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
             <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Select`3">

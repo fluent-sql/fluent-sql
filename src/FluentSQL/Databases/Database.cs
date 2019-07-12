@@ -19,6 +19,35 @@ namespace FluentSQL.Databases
         }
 
         /// <summary>
+        ///     Compile <paramref name="queryContext" /> into a query.
+        /// </summary>
+        /// <typeparam name="TParameters">
+        ///     The parameters required for executing this query.
+        /// </typeparam>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        /// <param name="queryContext">The <see cref="QueryContext{TParameters,TQueryResult}" /> to compile.</param>
+        /// <returns>A compiled query.</returns>
+        public Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(
+            QueryContext<TParameters, TQueryResult> queryContext)
+            where TParameters : new()
+        {
+            CompilationResult result = CompileInternal(queryContext);
+            return new Query<TParameters, TQueryResult>(result);
+        }
+
+        /// <summary>
+        ///     Compile <paramref name="queryContext" /> into a query.
+        /// </summary>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        /// <param name="queryContext">The <see cref="QueryContext{TParameters, TQueryResult}" /> to compile.</param>
+        /// <returns>A compiled query.</returns>
+        public Query<TQueryResult> Compile<TQueryResult>(QueryContext<NoParameters, TQueryResult> queryContext)
+        {
+            CompilationResult result = CompileInternal(queryContext);
+            return new Query<TQueryResult>(result);
+        }
+
+        /// <summary>
         ///     Compile <paramref name="context" /> to an executable query.
         /// </summary>
         /// <typeparam name="TQueryResult">The result type.</typeparam>
@@ -30,7 +59,7 @@ namespace FluentSQL.Databases
         internal CompilationResult CompileInternal<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
             where TParameters : new()
         {
-            var parser = new QueryParser<TParameters, TQueryResult>();
+            var parser = new QueryParser();
             AstNode result = parser.Parse(context);
             result.Compile(Compiler);
 

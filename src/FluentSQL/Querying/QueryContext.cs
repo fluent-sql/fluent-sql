@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 using FluentSQL.Compilation.Parser;
 using FluentSQL.Databases;
@@ -28,18 +27,7 @@ namespace FluentSQL.Querying
             Model = model;
         }
 
-        /// <summary>
-        ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
-        /// </summary>
-        /// <param name="other">The <see cref="QueryContext{TParameters, TQueryResult}" /> to copy the components from.</param>
-        public QueryContext(QueryContext<TParameters, TQueryResult> other)
-        {
-            Components = other.Components.ToList();
-            Database = other.Database;
-            Model = other.Model;
-        }
-
-        internal void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal void Parse(QueryParser parser)
         {
             foreach (QueryComponent<TParameters, TQueryResult> component in Components)
             {

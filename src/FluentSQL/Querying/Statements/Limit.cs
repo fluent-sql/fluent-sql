@@ -24,7 +24,7 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.Limit(Count);
         }

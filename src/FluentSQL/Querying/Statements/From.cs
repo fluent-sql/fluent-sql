@@ -56,7 +56,7 @@ namespace FluentSQL.Querying.Statements
             return this;
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             if (Alias != null)
             {

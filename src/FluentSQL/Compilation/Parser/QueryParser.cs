@@ -9,7 +9,7 @@ using FluentSQL.Querying.Statements;
 
 namespace FluentSQL.Compilation.Parser
 {
-    public sealed class QueryParser<TParameters, TQueryResult>  where TParameters : new()
+    public sealed class QueryParser
     {
         public QueryParser()
         {
@@ -20,7 +20,8 @@ namespace FluentSQL.Compilation.Parser
         private AstNode ResultNode { get; set; }
         private SelectNode SelectNode { get; }
 
-        internal AstNode Parse(QueryContext<TParameters, TQueryResult> queryContext)
+        internal AstNode Parse<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> queryContext)
+            where TParameters : new()
         {
             queryContext.Parse(this);
             return ResultNode;
@@ -96,67 +97,85 @@ namespace FluentSQL.Compilation.Parser
             throw new NotImplementedException();
         }
 
-        internal void Union<TFirstParameters, TSecondParameters>(
+        private void Union<TFirstParameters, TSecondParameters, TQueryResult>(
             QueryComponent<TFirstParameters, TQueryResult> first,
-            QueryComponent<TSecondParameters, TQueryResult> second) 
+            QueryComponent<TSecondParameters, TQueryResult> second)
             where TFirstParameters : new()
             where TSecondParameters : new()
         {
-            var firstParser = new QueryParser<TFirstParameters, TQueryResult>();
+            var firstParser = new QueryParser();
             AstNode firstResult = firstParser.Parse(first.QueryContext);
 
-            var secondParser = new QueryParser<TSecondParameters, TQueryResult>();
+            var secondParser = new QueryParser();
             AstNode secondResult = secondParser.Parse(second.QueryContext);
 
             ResultNode = new UnionSetOperator(firstResult, secondResult);
         }
 
-        internal void Union(QueryComponent<TParameters, TQueryResult> first, QueryComponent<NoParameters, TQueryResult> second)
+        internal void Union<TParameters, TQueryResult>(
+            QueryComponent<TParameters, TQueryResult> first,
+            QueryComponent<NoParameters, TQueryResult> second)
+            where TParameters : new()
         {
-            Union<TParameters, NoParameters>(first, second);
+            Union<TParameters, NoParameters, TQueryResult>(first, second);
         }
 
-        internal void Union(QueryComponent<NoParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
+        internal void Union<TParameters, TQueryResult>(
+            QueryComponent<NoParameters, TQueryResult> first,
+            QueryComponent<TParameters, TQueryResult> second)
+            where TParameters : new()
         {
-            Union<NoParameters, TParameters>(first, second);
-        }
-        
-        internal void Union(QueryComponent<TParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
-        {
-            Union<TParameters, TParameters>(first, second);
+            Union<NoParameters, TParameters, TQueryResult>(first, second);
         }
 
-        internal void UnionAll<TFirstParameters, TSecondParameters>(
+        internal void Union<TParameters, TQueryResult>(
+            QueryComponent<TParameters, TQueryResult> first,
+            QueryComponent<TParameters, TQueryResult> second)
+            where TParameters : new()
+        {
+            Union<TParameters, TParameters, TQueryResult>(first, second);
+        }
+
+        private void UnionAll<TFirstParameters, TSecondParameters, TQueryResult>(
             QueryComponent<TFirstParameters, TQueryResult> first,
-            QueryComponent<TSecondParameters, TQueryResult> second) 
+            QueryComponent<TSecondParameters, TQueryResult> second)
             where TFirstParameters : new()
             where TSecondParameters : new()
         {
-            var firstParser = new QueryParser<TFirstParameters, TQueryResult>();
+            var firstParser = new QueryParser();
             AstNode firstResult = firstParser.Parse(first.QueryContext);
 
-            var secondParser = new QueryParser<TSecondParameters, TQueryResult>();
+            var secondParser = new QueryParser();
             AstNode secondResult = secondParser.Parse(second.QueryContext);
 
             ResultNode = new UnionAllSetOperator(firstResult, secondResult);
         }
 
-        internal void UnionAll(QueryComponent<TParameters, TQueryResult> first, QueryComponent<NoParameters, TQueryResult> second)
+        internal void UnionAll<TParameters, TQueryResult>(
+            QueryComponent<TParameters, TQueryResult> first,
+            QueryComponent<NoParameters, TQueryResult> second)
+            where TParameters : new()
         {
-            UnionAll<TParameters, NoParameters>(first, second);
+            UnionAll<TParameters, NoParameters, TQueryResult>(first, second);
         }
 
-        internal void UnionAll(QueryComponent<NoParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
+        internal void UnionAll<TParameters, TQueryResult>(
+            QueryComponent<NoParameters, TQueryResult> first,
+            QueryComponent<TParameters, TQueryResult> second)
+            where TParameters : new()
         {
-            UnionAll<NoParameters, TParameters>(first, second);
-        }
-        
-        internal void UnionAll(QueryComponent<TParameters, TQueryResult> first, QueryComponent<TParameters, TQueryResult> second)
-        {
-            UnionAll<TParameters, TParameters>(first, second);
+            UnionAll<NoParameters, TParameters, TQueryResult>(first, second);
         }
 
-        internal void Where(Expression<Func<TParameters, bool>> expression)
+        internal void UnionAll<TParameters, TQueryResult>(
+            QueryComponent<TParameters, TQueryResult> first,
+            QueryComponent<TParameters, TQueryResult> second)
+            where TParameters : new()
+        {
+            UnionAll<TParameters, TParameters, TQueryResult>(first, second);
+        }
+
+        internal void Where<TParameters>(Expression<Func<TParameters, bool>> expression)
         {
             throw new NotImplementedException();
         }

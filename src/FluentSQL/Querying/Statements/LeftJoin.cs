@@ -28,15 +28,13 @@ namespace FluentSQL.Querying.Statements
         }
 
         /// <inheritdoc />
-        protected override void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
-            Expression<Func<bool>> expression)
+        protected override void Parse(QueryParser parser, Expression<Func<TTable>> child, Expression<Func<bool>> expression)
         {
             parser.LeftJoin(child, expression);
         }
 
         /// <inheritdoc />
-        protected override void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
-            Expression<Func<TTable, bool>> expression)
+        protected override void Parse(QueryParser parser, Expression<Func<TTable>> child, Expression<Func<TTable, bool>> expression)
         {
             parser.LeftJoin(child, expression);
         }

@@ -21,7 +21,7 @@ namespace FluentSQL.Querying
             QueryContext = queryContext;
         }
 
-        internal abstract void Parse(QueryParser<TParameters, TQueryResult> parser);
+        internal abstract void Parse(QueryParser parser);
 
         /// <summary>
         ///     Gets the underlying <see cref="QueryContext{TParameters, TQueryResult}" />.
