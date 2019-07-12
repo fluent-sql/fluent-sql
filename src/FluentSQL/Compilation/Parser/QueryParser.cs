@@ -34,47 +34,38 @@ namespace FluentSQL.Compilation.Parser
 
         internal void From<TTable>(Expression<Func<TTable>> expression) where TTable : Table
         {
-            throw new NotImplementedException();
         }
 
         internal void From<TTable>(Expression<Func<TTable>> expression, Alias alias) where TTable : Table
         {
-            throw new NotImplementedException();
         }
 
         internal void GroupBy<TSqlExpression>(Expression<Func<TSqlExpression>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void LeftJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<bool>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void LeftJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<TTable, bool>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void RightJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<bool>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void RightJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<TTable, bool>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void OuterJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<bool>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void OuterJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<TTable, bool>> expression)
         {
-            throw new NotImplementedException();
         }
 
         internal void Limit(int count)
@@ -84,17 +75,14 @@ namespace FluentSQL.Compilation.Parser
 
         internal void OrderBy<TSqlExpression>(Expression<Func<TSqlExpression>> expression, SortDirection sortDirection)
         {
-            throw new NotImplementedException();
         }
 
         internal void Select<TSqlExpression>(Expression<Func<TSqlExpression>> expression, Alias alias)
         {
-            throw new NotImplementedException();
         }
 
         internal void Select<TSqlExpression>(Expression<Func<TSqlExpression>> expression)
         {
-            throw new NotImplementedException();
         }
 
         private void Union<TFirstParameters, TSecondParameters, TQueryResult>(
@@ -177,7 +165,6 @@ namespace FluentSQL.Compilation.Parser
 
         internal void Where<TParameters>(Expression<Func<TParameters, bool>> expression)
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using FluentAssertions;
-
-using FluentSQL.Databases;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Extensions;
 using FluentSQL.Querying.Statements.Extensions;
-using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
+using FluentSQL.Tests.Examples.Builders;
 
 using Xunit;
 
@@ -17,9 +15,7 @@ namespace FluentSQL.Tests.Querying
         {
             protected override QueryComponent<NoParameters, string> EstablishContext()
             {
-                Database database = new DatabaseBuilder().Build();
-
-                var model = new ExampleModel(database);
+                ExampleModel model = new ExampleModelBuilder().Build();
                 QueryComponent<NoParameters, string> queryComponent =
                     model.Query<string>()
                         .From(() => model.Customers)

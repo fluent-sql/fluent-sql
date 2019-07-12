@@ -16,7 +16,6 @@
 
         public override void Compile(QueryCompiler compiler)
         {
-            throw new System.NotImplementedException();
         }
 
         public WhereClause Where { get; }
