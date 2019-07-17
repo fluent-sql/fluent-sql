@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Modelling;
-
 namespace FluentSQL.Querying.Statements.Extensions
 {
     /// <summary>

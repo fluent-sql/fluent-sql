@@ -153,8 +153,8 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_contain_both_queries()
             {
-                RootNode.As<UnionNode>().First.ChildNodes.OfType<FromNode>().Single().Alias.Should().Be(FirstAlias);
-                RootNode.As<UnionNode>().Second.ChildNodes.OfType<FromNode>().Single().Alias.Should().Be(SecondAlias);
+                RootNode.As<UnionNode>().First.Should().Contain<FromNode>().Which.Should().HaveAlias(FirstAlias);
+                RootNode.As<UnionNode>().Second.Should().Contain<FromNode>().Which.Should().HaveAlias(SecondAlias);
             }
 
             private AstNode RootNode { get; set; }
@@ -201,8 +201,8 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_contain_both_queries()
             {
-                RootNode.As<UnionAllNode>().First.ChildNodes.OfType<FromNode>().Single().Alias.Should().Be(FirstAlias);
-                RootNode.As<UnionAllNode>().Second.ChildNodes.OfType<FromNode>().Single().Alias.Should().Be(SecondAlias);
+                RootNode.As<UnionAllNode>().First.Should().Contain<FromNode>().Which.Should().HaveAlias(FirstAlias);
+                RootNode.As<UnionAllNode>().Second.Should().Contain<FromNode>().Which.Should().HaveAlias(SecondAlias);
             }
 
             private AstNode RootNode { get; set; }
