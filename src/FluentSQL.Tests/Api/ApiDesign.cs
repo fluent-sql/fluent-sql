@@ -10,23 +10,6 @@ using FluentSQL.Tests.Examples;
 
 namespace FluentSQL.Tests.Api
 {
-    public class ExampleParameters
-    {
-        public int Limit { get; set; }
-        public string InvoiceNumber { get; set; }
-    }
-        
-    public class UnionResult
-    {
-        public string CustomerName { get; set; }
-        public int TotalAmount { get; set; }
-    }
-
-    public class SubqueryResult
-    {
-        public int InvoiceIdFromSubquery { get; set; }
-    }
-
     public sealed class ApiDesign
     {
         private IDbConnection SomeConnection { get; }
