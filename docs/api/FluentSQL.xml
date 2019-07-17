@@ -1153,72 +1153,30 @@
                 Adds <c>UNION</c> and <c>UNION ALL</c> to a query.
             </summary>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``3(FluentSQL.Querying.QueryComponent{``0,``2},FluentSQL.Querying.QueryComponent{``1,``2})">
             <summary>
                 <c>UNION</c> a query with an other query.
             </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
+            <typeparam name="TFirstParameters">
+                The parameters required for executing the first query.
+            </typeparam>
+            <typeparam name="TSecondParameters">
+                The parameters required for executing the second query.
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="first">The first query.</param>
             <param name="second">The second query.</param>
             <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1})">
-            <summary>
-                <c>UNION</c> a query with an other query.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <param name="first">The first query.</param>
-            <param name="second">The second query.</param>
-            <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.Union``2(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
-            <summary>
-                <c>UNION</c> a query with an other query.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <param name="first">The first query.</param>
-            <param name="second">The second query.</param>
-            <returns>The union of <paramref name="first" /> and <paramref name="second" />.</returns>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
+        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``3(FluentSQL.Querying.QueryComponent{``0,``2},FluentSQL.Querying.QueryComponent{``1,``2})">
             <summary>
                 <c>UNION ALL</c> a query with an other query.
             </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
+            <typeparam name="TFirstParameters">
+                The parameters required for executing the first query.
             </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <param name="first">The first query.</param>
-            <param name="second">The second query.</param>
-            <returns>The union all of <paramref name="first" /> and <paramref name="second" />.</returns>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``2(FluentSQL.Querying.QueryComponent{``0,``1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1})">
-            <summary>
-                <c>UNION ALL</c> a query with an other query.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <param name="first">The first query.</param>
-            <param name="second">The second query.</param>
-            <returns>The union al of <paramref name="first" /> and <paramref name="second" />.</returns>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.Extensions.UnionExtensions.UnionAll``2(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``1},FluentSQL.Querying.QueryComponent{``0,``1})">
-            <summary>
-                <c>UNION ALL</c> a query with an other query.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
+            <typeparam name="TSecondParameters">
+                The parameters required for executing the second query.
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="first">The first query.</param>
@@ -1279,14 +1237,6 @@
         <member name="M:FluentSQL.Querying.Statements.From`3.As(System.String)">
             <summary>
                 Sets the alias under which this table will be known.
-            </summary>
-            <param name="alias">The alias.</param>
-            <returns><c>this</c> for method chaining.</returns>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.From`3.As(System.Linq.Expressions.Expression{System.Func{`1,System.Object}})">
-            <summary>
-                Sets the alias under which this table will be known
-                where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
             </summary>
             <param name="alias">The alias.</param>
             <returns><c>this</c> for method chaining.</returns>
@@ -1594,76 +1544,31 @@
                 The <typeparamref name="TQueryResult" /> of the underlying query.
             </summary>
         </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionWithSameParameterTypes`2">
+        <member name="T:FluentSQL.Querying.Statements.Union`3">
             <summary>
                 The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
             </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
+            <typeparam name="TFirstParameters">
+                The parameters required for executing the first query.
+            </typeparam>
+            <typeparam name="TSecondParameters">
+                The parameters required for executing the second query.
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionWithSameParameterTypes`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionNoParametersWithParameter`2">
-            <summary>
-                The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionNoParametersWithParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionParameterWithNoParameter`2">
-            <summary>
-                The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionParameterWithNoParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1})">
-            <inheritdoc />
-        </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionAllWithSameParameterTypes`2">
+        <member name="T:FluentSQL.Querying.Statements.UnionAll`3">
             <summary>
                 The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
             </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
+            <typeparam name="TFirstParameters">
+                The parameters required for executing the first query.
+            </typeparam>
+            <typeparam name="TSecondParameters">
+                The parameters required for executing the second query.
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
         </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionAllWithSameParameterTypes`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionAllNoParametersWithParameter`2">
-            <summary>
-                The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionAllNoParametersWithParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1},FluentSQL.Querying.QueryComponent{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="T:FluentSQL.Querying.Statements.UnionAllParameterWithNoParameter`2">
-            <summary>
-                The <c>UNION ALL</c>-statement for combining two queries, filtering out duplicates.
-            </summary>
-            <typeparam name="TParameters">
-                The parameters required for executing this query.
-            </typeparam>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-        </member>
-        <member name="M:FluentSQL.Querying.Statements.UnionAllParameterWithNoParameter`2.#ctor(FluentSQL.Querying.QueryContext{`0,`1},FluentSQL.Querying.QueryComponent{`0,`1},FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,`1})">
+        <member name="M:FluentSQL.Querying.Statements.UnionAll`3.#ctor(FluentSQL.Querying.QueryComponent{`0,`2},FluentSQL.Querying.QueryComponent{`1,`2})">
             <inheritdoc />
         </member>
         <member name="T:FluentSQL.Querying.Statements.Where`2">
