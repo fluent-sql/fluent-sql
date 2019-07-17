@@ -16,7 +16,6 @@
         /// <returns>The <see cref="Statements.Exists{TQueryResult}"/>.</returns>
         public static Exists<TParameters, TQueryResult> Exists<TParameters, TQueryResult>(
             this Query<TParameters, TQueryResult> query)
-            where TParameters : new()
         {
             return new Exists<TParameters, TQueryResult>(query);
         }

@@ -26,7 +26,7 @@ namespace FluentSQL.Modelling
         /// <returns>A new <see cref="QueryContext{TQueryResult}" />.</returns>
         public QueryContext<TQueryResult> Query<TQueryResult>()
         {
-            return new QueryContext<TQueryResult>(Database);
+            return new QueryContext<TQueryResult>(Database, this);
         }
 
         private Database Database { get; }

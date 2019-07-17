@@ -1,4 +1,4 @@
-﻿using FluentSQL.Compilation;
+﻿using FluentSQL.Compilation.Parser;
 using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying
@@ -10,7 +10,7 @@ namespace FluentSQL.Querying
     ///     The parameters required for executing the query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public abstract class QueryComponent<TParameters, TQueryResult> : SqlExpression<TQueryResult> where TParameters : new()
+    public abstract class QueryComponent<TParameters, TQueryResult> : SqlExpression<TQueryResult>
     {
         /// <summary>
         ///     Create a new <see cref="QueryComponent{TParameters, TQueryResult}" />.
@@ -21,7 +21,7 @@ namespace FluentSQL.Querying
             QueryContext = queryContext;
         }
 
-        internal abstract void Parse(QueryParser<TParameters, TQueryResult> parser);
+        internal abstract void Parse(QueryParser parser);
 
         /// <summary>
         ///     Gets the underlying <see cref="QueryContext{TParameters, TQueryResult}" />.

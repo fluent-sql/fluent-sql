@@ -1,4 +1,5 @@
-﻿using FluentSQL.Querying;
+﻿using FluentSQL.Compilation.Parser;
+using FluentSQL.Querying;
 
 namespace FluentSQL.Compilation
 {
@@ -8,21 +9,10 @@ namespace FluentSQL.Compilation
     public abstract class QueryCompiler
     {
         /// <summary>
-        ///     Compile <paramref name="context" /> to an executable query.
+        ///     Compile <paramref name="node" /> and return the result.
         /// </summary>
-        /// <typeparam name="TQueryResult">The result type.</typeparam>
-        /// <typeparam name="TParameters">
-        ///     The parameters required for executing this query.
-        /// </typeparam>
-        /// <param name="context">The <see cref="QueryContext{TParameters, TQueryResult}" /> that contains all query parts.</param>
-        /// <returns>The compilation result.</returns>
-        internal CompilationResult Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
-            where TParameters : new()
-        {
-            var parser = new QueryParser<TParameters, TQueryResult>();
-            context.Parse(parser);
-
-            return new CompilationResult(parser.RootNode);
-        }
+        /// <param name="node">The node to compile.</param>
+        /// <returns>The result of the compilation.</returns>
+        public abstract CompilationResult Compile(AstNode node);
     }
 }

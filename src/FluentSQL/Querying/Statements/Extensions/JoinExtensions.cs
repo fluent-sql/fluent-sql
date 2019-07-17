@@ -26,8 +26,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static LeftJoin<TParameters, TQueryResult, TTable> LeftJoin<TParameters, TQueryResult, TTable>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<TTable>> child)
-            where TParameters : new()
-            where TTable : Table
         {
             return new LeftJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
         }
@@ -49,7 +47,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static LeftJoin<TParameters, TQueryResult, TSubqueryResult> LeftJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TParameters, TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TParameters, TSubqueryResult>(child);
 
@@ -73,7 +70,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static LeftJoin<TParameters, TQueryResult, TSubqueryResult> LeftJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TSubqueryResult>(child);
 
@@ -96,7 +92,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static RightJoin<TParameters, TQueryResult, TTable> RightJoin<TParameters, TQueryResult, TTable>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<TTable>> child)
-            where TParameters : new()
         {
             return new RightJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
         }
@@ -118,7 +113,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static RightJoin<TParameters, TQueryResult, TSubqueryResult> RightJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TParameters, TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TParameters, TSubqueryResult>(child);
 
@@ -142,7 +136,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static RightJoin<TParameters, TQueryResult, TSubqueryResult> RightJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TSubqueryResult>(child);
 
@@ -165,7 +158,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static InnerJoin<TParameters, TQueryResult, TTable> InnerJoin<TParameters, TQueryResult, TTable>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<TTable>> child)
-            where TParameters : new()
         {
             return new InnerJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
         }
@@ -187,7 +179,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static InnerJoin<TParameters, TQueryResult, TSubqueryResult> InnerJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TParameters, TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TParameters, TSubqueryResult>(child);
 
@@ -211,7 +202,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static InnerJoin<TParameters, TQueryResult, TSubqueryResult> InnerJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TSubqueryResult>(child);
 
@@ -234,7 +224,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static OuterJoin<TParameters, TQueryResult, TTable> OuterJoin<TParameters, TQueryResult, TTable>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<TTable>> child)
-            where TParameters : new()
         {
             return new OuterJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
         }
@@ -256,7 +245,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static OuterJoin<TParameters, TQueryResult, TSubqueryResult> OuterJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TParameters, TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TParameters, TSubqueryResult>(child);
 
@@ -280,7 +268,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static OuterJoin<TParameters, TQueryResult, TSubqueryResult> OuterJoin<TParameters, TQueryResult, TSubqueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<Query<TSubqueryResult>>> child)
-            where TParameters : new()
         {
             var subquery = new Subquery<TSubqueryResult>(child);
 

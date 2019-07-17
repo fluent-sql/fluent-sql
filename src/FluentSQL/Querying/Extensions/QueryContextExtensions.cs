@@ -27,7 +27,6 @@
         /// <returns>A compiled query.</returns>
         public static Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(
             this QueryContext<TParameters, TQueryResult> queryContext)
-            where TParameters : new()
         {
             return queryContext.Database.Compile(queryContext);
         }
@@ -54,7 +53,6 @@
         /// <returns>A compiled query.</returns>
         public static Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent)
-            where TParameters : new()
         {
             return queryComponent.QueryContext.Compile();
         }

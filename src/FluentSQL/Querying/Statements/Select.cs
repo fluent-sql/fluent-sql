@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 
 namespace FluentSQL.Querying.Statements
 {
@@ -13,9 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to select.</typeparam>
-    public class Select<TParameters, TQueryResult, TSqlExpression> :
-        QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
+    public class Select<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>SELECT</c>-statement.
@@ -55,7 +53,7 @@ namespace FluentSQL.Querying.Statements
             return this;
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             if (Alias != null)
             {

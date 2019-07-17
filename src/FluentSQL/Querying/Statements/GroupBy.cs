@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 
 namespace FluentSQL.Querying.Statements
 {
@@ -15,7 +15,6 @@ namespace FluentSQL.Querying.Statements
     /// <typeparam name="TSqlExpression">The expression to group by.</typeparam>
     public class GroupBy<TParameters, TQueryResult, TSqlExpression> :
         QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
     {
         /// <summary>
         ///     Create a new <c>GROUP BY</c>-statement.
@@ -30,7 +29,7 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.GroupBy(Expression);
         }

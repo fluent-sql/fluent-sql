@@ -8,15 +8,15 @@
         /// <summary>
         ///     Initializes a new <see cref="CompilationResult" />.
         /// </summary>
-        /// <param name="queryNode">The AST of the parsed query.</param>
-        public CompilationResult(Node queryNode)
+        /// <param name="sql">The SQL.</param>
+        public CompilationResult(string sql)
         {
-            QueryNode = queryNode;
+            Sql = sql;
         }
 
         /// <summary>
         ///     Gets the abstract syntax tree representing the query.
         /// </summary>
-        public Node QueryNode { get; }
+        public string Sql { get; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 
 namespace FluentSQL.Querying.Statements
 {
@@ -13,7 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TTable">The child table.</typeparam>
-    public abstract class Join<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
+    public abstract class Join<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>JOIN</c>-statement.
@@ -58,7 +58,7 @@ namespace FluentSQL.Querying.Statements
             return this;
         }
 
-        internal sealed override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal sealed override void Parse(QueryParser parser)
         {
             if (ImplicitTableExpression != null)
             {
@@ -76,7 +76,7 @@ namespace FluentSQL.Querying.Statements
         /// <param name="parser"></param>
         /// <param name="child">The expression to select the child.</param>
         /// <param name="expression">The join expression where the parent table is implied.</param>
-        protected abstract void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
+        protected abstract void Parse(QueryParser parser, Expression<Func<TTable>> child,
             Expression<Func<bool>> expression);
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace FluentSQL.Querying.Statements
         /// <param name="parser"></param>
         /// <param name="child">The expression to select the child.</param>
         /// <param name="expression">The join expression where the parent table is explicitly given.</param>
-        protected abstract void Parse(QueryParser<TParameters, TQueryResult> parser, Expression<Func<TTable>> child,
+        protected abstract void Parse(QueryParser parser, Expression<Func<TTable>> child,
             Expression<Func<TTable, bool>> expression);
 
         private Expression<Func<TTable>> Child { get; }

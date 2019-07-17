@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying.Statements
@@ -17,8 +17,6 @@ namespace FluentSQL.Querying.Statements
     ///     The table where to select <see cref="SqlExpression{TExpressionType}" />s from.
     /// </typeparam>
     public class From<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult>
-        where TParameters : new()
-        where TTable : Table
     {
         /// <summary>
         ///     Create a new <c>FROM</c>-statement.
@@ -32,12 +30,31 @@ namespace FluentSQL.Querying.Statements
 
             QueryContext.Components.Add(this);
         }
-
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        
+        /// <summary>
+        ///     Sets the alias under which this table will be known.
+        /// </summary>
+        /// <param name="alias">The alias.</param>
+        /// <returns><c>this</c> for method chaining.</returns>
+        public From<TParameters, TQueryResult, TTable> As(string alias)
         {
-            parser.From(Expression);
+            Alias = new Alias(alias);
+            return this;
+        }
+
+        internal override void Parse(QueryParser parser)
+        {
+            if (Alias != null)
+            {
+                parser.From(Expression, Alias);
+            }
+            else
+            {
+                parser.From(Expression);
+            }
         }
 
         private Expression<Func<TTable>> Expression { get; }
+        private Alias Alias { get; set; }
     }
 }

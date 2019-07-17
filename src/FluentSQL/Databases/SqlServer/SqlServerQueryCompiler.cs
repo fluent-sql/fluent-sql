@@ -1,4 +1,5 @@
 ﻿using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 using FluentSQL.Querying;
 
 namespace FluentSQL.Databases.SqlServer
@@ -8,5 +9,9 @@ namespace FluentSQL.Databases.SqlServer
     /// </summary>
     public class SqlServerQueryCompiler : QueryCompiler
     {
+        public override CompilationResult Compile(AstNode node)
+        {
+            return new CompilationResult("");
+        }
     }
 }

@@ -26,7 +26,6 @@ namespace FluentSQL.Querying.Statements.Extensions
         public static Where<TParameters, TQueryResult> Where<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
             Expression<Func<TParameters, bool>> expression)
-            where TParameters : new()
         {
             return new Where<TParameters, TQueryResult>(queryComponent.QueryContext, expression);
         }

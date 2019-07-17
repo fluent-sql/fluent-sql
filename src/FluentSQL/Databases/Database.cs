@@ -1,4 +1,5 @@
 ﻿using FluentSQL.Compilation;
+using FluentSQL.Compilation.Parser;
 using FluentSQL.Querying;
 
 namespace FluentSQL.Databases
@@ -24,12 +25,11 @@ namespace FluentSQL.Databases
         ///     The parameters required for executing this query.
         /// </typeparam>
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-        /// <param name="queryContext">The <see cref="QueryContext{TParameters, TQueryResult}" /> to compile.</param>
+        /// <param name="queryContext">The <see cref="QueryContext{TParameters,TQueryResult}" /> to compile.</param>
         /// <returns>A compiled query.</returns>
-        internal Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> queryContext)
-            where TParameters : new()
+        public Query<TParameters, TQueryResult> Compile<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> queryContext)
         {
-            CompilationResult result = Compiler.Compile(queryContext);
+            CompilationResult result = CompileInternal(queryContext);
             return new Query<TParameters, TQueryResult>(result);
         }
 
@@ -39,12 +39,29 @@ namespace FluentSQL.Databases
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TQueryResult}" /> to compile.</param>
         /// <returns>A compiled query.</returns>
-        internal Query<TQueryResult> Compile<TQueryResult>(QueryContext<NoParameters, TQueryResult> queryContext)
+        public Query<TQueryResult> Compile<TQueryResult>(QueryContext<NoParameters, TQueryResult> queryContext)
         {
-            var contextWithoutParameters = new QueryContext<NoParameters, TQueryResult>(queryContext);
-
-            CompilationResult result = Compiler.Compile(contextWithoutParameters);
+            CompilationResult result = CompileInternal(queryContext);
             return new Query<TQueryResult>(result);
+        }
+
+        /// <summary>
+        ///     Compile <paramref name="context" /> to an executable query.
+        /// </summary>
+        /// <typeparam name="TQueryResult">The result type.</typeparam>
+        /// <typeparam name="TParameters">
+        ///     The parameters required for executing this query.
+        /// </typeparam>
+        /// <param name="context">The <see cref="QueryContext{TParameters, TQueryResult}" /> that contains all query parts.</param>
+        /// <returns>The compilation result.</returns>
+        internal CompilationResult CompileInternal<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> context)
+        {
+            var parser = new QueryParser();
+            AstNode node = parser.Parse(context);
+
+            CompilationResult result = Compiler.Compile(node);
+
+            return result;
         }
 
         private QueryCompiler Compiler { get; }

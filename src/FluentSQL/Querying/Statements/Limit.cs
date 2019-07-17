@@ -1,5 +1,4 @@
-﻿
-using FluentSQL.Compilation;
+﻿using FluentSQL.Compilation.Parser;
 
 namespace FluentSQL.Querying.Statements
 {
@@ -10,7 +9,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Limit<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult> where TParameters : new()
+    public class Limit<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>LIMIT</c>-statement.
@@ -25,7 +24,7 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
-        internal override void Parse(QueryParser<TParameters, TQueryResult> parser)
+        internal override void Parse(QueryParser parser)
         {
             parser.Limit(Count);
         }
