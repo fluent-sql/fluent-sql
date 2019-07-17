@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace FluentSQL.Tests
+namespace FluentSQL.Tests.Builders
 {
     public class RandomStringBuilder : TestDataBuilder<string>
     {

@@ -5,6 +5,7 @@ using FluentAssertions;
 using FluentSQL.Compilation.Parser;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements.Extensions;
+using FluentSQL.Tests.Builders;
 using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Examples;
