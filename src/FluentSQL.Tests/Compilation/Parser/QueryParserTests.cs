@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 using FluentAssertions;
 
@@ -81,7 +80,7 @@ namespace FluentSQL.Tests.Compilation.Parser
         {
             protected override QueryParser EstablishContext()
             {
-                Alias = Guid.NewGuid().ToString();
+                Alias = new RandomStringBuilder().ThatStartsWithLetter.Build();
                 ExampleModel model = new ExampleModelBuilder().Build();
 
                 QueryContext =
@@ -121,8 +120,8 @@ namespace FluentSQL.Tests.Compilation.Parser
             {
                 ExampleModel model = new ExampleModelBuilder().Build();
 
-                FirstAlias = new RandomStringBuilder().WithMinimumLength(5).WithMaximumLength(15).StartsWithLetter.Build();
-                SecondAlias = new RandomStringBuilder().WithMinimumLength(5).WithMaximumLength(15).StartsWithLetter.Build();
+                FirstAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
+                SecondAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
 
                 QueryComponent<NoParameters, string> first =
                     model.Query<string>()
@@ -169,8 +168,8 @@ namespace FluentSQL.Tests.Compilation.Parser
             {
                 ExampleModel model = new ExampleModelBuilder().Build();
 
-                FirstAlias = new RandomStringBuilder().WithMinimumLength(5).WithMaximumLength(15).StartsWithLetter.Build();
-                SecondAlias = new RandomStringBuilder().WithMinimumLength(5).WithMaximumLength(15).StartsWithLetter.Build();
+                FirstAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
+                SecondAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
 
                 QueryComponent<NoParameters, string> first =
                     model.Query<string>()

@@ -12,14 +12,14 @@ namespace FluentSQL.Tests
         {
             Random = new Random();
 
-            MinimumLength = 1;
-            MaximumLength = Random.Next(2, 10);
+            WithMinimumLength(1);
+            WithMaximumLength(Random.Next(2, 10));
         }
 
         protected override string OnBuild()
         {
             var stringBuilder = new StringBuilder();
-            if (ShouldStartWithLetter)
+            if (StartsWithLetter)
             {
                 stringBuilder.Append(BuildRandomString(Characters.Substring(10), 1));
                 MaximumLength--;
@@ -53,11 +53,11 @@ namespace FluentSQL.Tests
             return this;
         }
 
-        public RandomStringBuilder StartsWithLetter
+        public RandomStringBuilder ThatStartsWithLetter
         {
             get
             {
-                ShouldStartWithLetter = true;
+                StartsWithLetter = true;
                 return this;
             }
         }
@@ -65,6 +65,6 @@ namespace FluentSQL.Tests
         private int MinimumLength { get; set; }
         private int MaximumLength { get; set; }
         private Random Random { get; }
-        private bool ShouldStartWithLetter { get; set; }
+        private bool StartsWithLetter { get; set; }
     }
 }
