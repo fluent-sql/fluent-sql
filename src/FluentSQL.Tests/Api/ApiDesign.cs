@@ -118,7 +118,7 @@ namespace FluentSQL.Tests.Api
              *
              * UNION
              *
-             *      SELECT "other_dummy", id
+             *      SELECT "other_dummy" AS CustomerName, id
              *        FROM dbo.customers
              */
             Query<ExampleParameters, UnionResult> unionQuery =
@@ -129,28 +129,25 @@ namespace FluentSQL.Tests.Api
                     .Select(() => c.Name).As(result => result.CustomerName)
                     .Select(() => l.Price.Sum()).As(result => result.TotalAmount)
                     .Where(p => c.Id > p.Limit)
-                    .UnionAll(
-                        model.Query<UnionResult>()
-                            .From(() => c)
-                            .Select(() => c.Name).As(result => result.CustomerName)
-                            .Select(() => 1).As(result => result.TotalAmount)
-                            .Union(
-                                model.Query<UnionResult>()
-                                    .WithParameters<ExampleParameters>()
-                                    .From(() => model.Customers)
-                                    .Select(() => "dummy")
-                                    .Select(() => 1)
-                                    .Union(
-                                        model.Query<UnionResult>()
-                                            .From(() => model.Customers)
-                                            .Select(() => "other_dummy")
-                                            .Select(() => model.Customers.Id))))
+                    .UnionAll(model.Query<UnionResult>()
+                        .From(() => c)
+                        .Select(() => c.Name).As(result => result.CustomerName)
+                        .Select(() => 1).As(result => result.TotalAmount)
+                    )
+                    .Union(model.Query<UnionResult>()
+                        .WithParameters<ExampleParameters>()
+                        .From(() => model.Customers)
+                        .Select(() => "dummy")
+                        .Select(() => 1)
+                    )
+                    .Union(model.Query<UnionResult>()
+                        .From(() => model.Customers)
+                        .Select(() => "other_dummy").As(result => result.CustomerName)
+                        .Select(() => model.Customers.Id)
+                    )
                     .Compile();
 
-            UnionResult unionResult = await SomeConnection.ExecuteAsync(unionQuery, p =>
-            {
-                p.Limit = 122;
-            });
+            UnionResult unionResult = await SomeConnection.ExecuteAsync(unionQuery, p => p.Limit = 122);
         }
     }
 }
