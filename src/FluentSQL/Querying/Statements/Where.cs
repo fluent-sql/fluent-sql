@@ -12,7 +12,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Where<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
+    public sealed class Where<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>WHERE</c>-statement.
@@ -27,11 +27,11 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
+        private Expression<Func<TParameters, bool>> Expression { get; }
+
         internal override void Parse(QueryParser parser)
         {
             parser.Where(Expression);
         }
-
-        private Expression<Func<TParameters, bool>> Expression { get; }
     }
 }

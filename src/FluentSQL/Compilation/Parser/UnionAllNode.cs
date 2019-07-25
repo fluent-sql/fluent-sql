@@ -1,6 +1,6 @@
 ﻿namespace FluentSQL.Compilation.Parser
 {
-    public class UnionAllNode : AstNode
+    public sealed class UnionAllNode : AstNode
     {
         public UnionAllNode(AstNode first, AstNode second)
         {

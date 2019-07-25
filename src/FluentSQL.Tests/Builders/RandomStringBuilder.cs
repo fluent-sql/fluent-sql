@@ -16,6 +16,20 @@ namespace FluentSQL.Tests.Builders
             WithMaximumLength(Random.Next(2, 10));
         }
 
+        public RandomStringBuilder ThatStartsWithLetter
+        {
+            get
+            {
+                StartsWithLetter = true;
+                return this;
+            }
+        }
+
+        private int MinimumLength { get; set; }
+        private int MaximumLength { get; set; }
+        private Random Random { get; }
+        private bool StartsWithLetter { get; set; }
+
         protected override string OnBuild()
         {
             var stringBuilder = new StringBuilder();
@@ -52,19 +66,5 @@ namespace FluentSQL.Tests.Builders
             MaximumLength = maximumLength;
             return this;
         }
-
-        public RandomStringBuilder ThatStartsWithLetter
-        {
-            get
-            {
-                StartsWithLetter = true;
-                return this;
-            }
-        }
-
-        private int MinimumLength { get; set; }
-        private int MaximumLength { get; set; }
-        private Random Random { get; }
-        private bool StartsWithLetter { get; set; }
     }
 }

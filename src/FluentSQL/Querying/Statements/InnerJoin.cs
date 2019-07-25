@@ -13,14 +13,15 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TTable">The child table.</typeparam>
-    public class InnerJoin<TParameters, TQueryResult, TTable> : Join<TParameters, TQueryResult, TTable>
+    public sealed class InnerJoin<TParameters, TQueryResult, TTable> : Join<TParameters, TQueryResult, TTable>
     {
         /// <summary>
         ///     Create a new <c>INNER JOIN</c>-statement.
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="child">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+        ///     with.
         /// </param>
         internal InnerJoin(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
             : base(queryContext, child)

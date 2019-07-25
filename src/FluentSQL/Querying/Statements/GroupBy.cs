@@ -13,7 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to group by.</typeparam>
-    public class GroupBy<TParameters, TQueryResult, TSqlExpression> :
+    public sealed class GroupBy<TParameters, TQueryResult, TSqlExpression> :
         QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
@@ -29,11 +29,11 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
+        private Expression<Func<TSqlExpression>> Expression { get; }
+
         internal override void Parse(QueryParser parser)
         {
             parser.GroupBy(Expression);
         }
-
-        private Expression<Func<TSqlExpression>> Expression { get; }
     }
 }

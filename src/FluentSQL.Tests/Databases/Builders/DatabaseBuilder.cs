@@ -6,6 +6,8 @@ namespace FluentSQL.Tests.Databases.Builders
 {
     public class DatabaseBuilder : TestDataBuilder<Database>
     {
+        private QueryCompiler QueryCompiler { get; set; }
+
         protected override void OnPreBuild()
         {
             if (QueryCompiler == null)
@@ -24,8 +26,6 @@ namespace FluentSQL.Tests.Databases.Builders
             QueryCompiler = queryCompiler;
             return this;
         }
-
-        private QueryCompiler QueryCompiler { get; set; }
 
         private class DatabaseStub : Database
         {

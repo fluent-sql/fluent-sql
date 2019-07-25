@@ -27,6 +27,10 @@ namespace FluentSQL.Querying
             Model = model;
         }
 
+        internal Database Database { get; }
+        internal PersistenceModel Model { get; }
+        internal IList<QueryComponent<TParameters, TQueryResult>> Components { get; }
+
         internal void Parse(QueryParser parser)
         {
             foreach (QueryComponent<TParameters, TQueryResult> component in Components)
@@ -34,17 +38,13 @@ namespace FluentSQL.Querying
                 component.Parse(parser);
             }
         }
-
-        internal Database Database { get; }
-        internal PersistenceModel Model { get; }
-        internal IList<QueryComponent<TParameters, TQueryResult>> Components { get; }
     }
 
     /// <summary>
     ///     The context containing all components of a parameterless query.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
+    public sealed class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
     {
         internal QueryContext(Database database, PersistenceModel model)
             : base(database, model)

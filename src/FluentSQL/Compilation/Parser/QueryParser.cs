@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements;
 
@@ -13,6 +14,8 @@ namespace FluentSQL.Compilation.Parser
         {
             ResultNode = new AstNode();
         }
+
+        private AstNode ResultNode { get; set; }
 
         internal AstNode Parse<TParameters, TQueryResult>(QueryContext<TParameters, TQueryResult> queryContext)
         {
@@ -53,7 +56,7 @@ namespace FluentSQL.Compilation.Parser
         internal void RightJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<TTable, bool>> expression)
         {
         }
-        
+
         internal void InnerJoin<TTable>(Expression<Func<TTable>> child, Expression<Func<bool>> expression)
         {
         }
@@ -116,13 +119,12 @@ namespace FluentSQL.Compilation.Parser
 
             var secondParser = new QueryParser();
             AstNode secondResult = secondParser.Parse(second.QueryContext);
+
             return (firstResult, secondResult);
         }
 
         internal void Where<TParameters>(Expression<Func<TParameters, bool>> expression)
         {
         }
-
-        private AstNode ResultNode { get; set; }
     }
 }

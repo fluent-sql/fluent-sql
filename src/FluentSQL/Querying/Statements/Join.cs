@@ -20,7 +20,8 @@ namespace FluentSQL.Querying.Statements
         /// </summary>
         /// <param name="queryContext">The <see cref="QueryContext{TParameters, TResult}" />.</param>
         /// <param name="child">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+        ///     with.
         /// </param>
         protected Join(QueryContext<TParameters, TQueryResult> queryContext, Expression<Func<TTable>> child)
             : base(queryContext)
@@ -29,7 +30,11 @@ namespace FluentSQL.Querying.Statements
 
             QueryContext.Components.Add(this);
         }
-        
+
+        private Expression<Func<TTable>> Child { get; }
+        private Expression<Func<bool>> ImplicitTableExpression { get; set; }
+        private Expression<Func<TTable, bool>> ExplicitTableExpression { get; set; }
+
         /// <summary>
         ///     Adds the <c>ON</c> to indicate on which columns to join.
         /// </summary>
@@ -87,9 +92,5 @@ namespace FluentSQL.Querying.Statements
         /// <param name="expression">The join expression where the parent table is explicitly given.</param>
         protected abstract void Parse(QueryParser parser, Expression<Func<TTable>> child,
             Expression<Func<TTable, bool>> expression);
-
-        private Expression<Func<TTable>> Child { get; }
-        private Expression<Func<bool>> ImplicitTableExpression { get; set; }
-        private Expression<Func<TTable, bool>> ExplicitTableExpression { get; set; }
     }
 }

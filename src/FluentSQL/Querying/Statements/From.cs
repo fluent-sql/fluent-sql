@@ -16,7 +16,7 @@ namespace FluentSQL.Querying.Statements
     /// <typeparam name="TTable">
     ///     The table where to select <see cref="SqlExpression{TExpressionType}" />s from.
     /// </typeparam>
-    public class From<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult>
+    public sealed class From<TParameters, TQueryResult, TTable> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>FROM</c>-statement.
@@ -30,7 +30,10 @@ namespace FluentSQL.Querying.Statements
 
             QueryContext.Components.Add(this);
         }
-        
+
+        private Expression<Func<TTable>> Expression { get; }
+        private Alias Alias { get; set; }
+
         /// <summary>
         ///     Sets the alias under which this table will be known.
         /// </summary>
@@ -53,8 +56,5 @@ namespace FluentSQL.Querying.Statements
                 parser.From(Expression);
             }
         }
-
-        private Expression<Func<TTable>> Expression { get; }
-        private Alias Alias { get; set; }
     }
 }

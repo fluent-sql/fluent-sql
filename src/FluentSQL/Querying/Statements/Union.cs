@@ -2,7 +2,6 @@
 
 namespace FluentSQL.Querying.Statements
 {
-    
     /// <summary>
     ///     The <c>UNION</c>-statement for combining two queries, filtering out duplicates.
     /// </summary>
@@ -13,7 +12,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing the second query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Union<TFirstParameters, TSecondParameters, TQueryResult> : QueryComponent<TFirstParameters, TQueryResult>
+    public sealed class Union<TFirstParameters, TSecondParameters, TQueryResult> : QueryComponent<TFirstParameters, TQueryResult>
     {
         public Union(
             QueryComponent<TFirstParameters, TQueryResult> first,
@@ -25,12 +24,12 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
+        private QueryComponent<TFirstParameters, TQueryResult> First { get; }
+        private QueryComponent<TSecondParameters, TQueryResult> Second { get; }
+
         internal override void Parse(QueryParser parser)
         {
             parser.Union(First, Second);
         }
-
-        private QueryComponent<TFirstParameters, TQueryResult> First { get; }
-        private QueryComponent<TSecondParameters, TQueryResult> Second { get; }
     }
 }

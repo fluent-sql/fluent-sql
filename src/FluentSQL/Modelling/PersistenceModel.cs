@@ -19,6 +19,8 @@ namespace FluentSQL.Modelling
             Database = database;
         }
 
+        private Database Database { get; }
+
         /// <summary>
         ///     Query this persistence model.
         /// </summary>
@@ -28,7 +30,5 @@ namespace FluentSQL.Modelling
         {
             return new QueryContext<TQueryResult>(Database, this);
         }
-
-        private Database Database { get; }
     }
 }

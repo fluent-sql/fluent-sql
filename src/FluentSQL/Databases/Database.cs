@@ -18,6 +18,8 @@ namespace FluentSQL.Databases
             Compiler = compiler;
         }
 
+        private QueryCompiler Compiler { get; }
+
         /// <summary>
         ///     Compile <paramref name="queryContext" /> into a query.
         /// </summary>
@@ -63,7 +65,5 @@ namespace FluentSQL.Databases
 
             return result;
         }
-
-        private QueryCompiler Compiler { get; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FluentSQL.Compilation.Parser
 {
-    public class FromNode : AstNode
+    public sealed class FromNode : AstNode
     {
         public FromNode()
             : this(null)

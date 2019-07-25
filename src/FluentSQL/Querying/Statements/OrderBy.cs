@@ -13,7 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to order by.</typeparam>
-    public class OrderBy<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
+    public sealed class OrderBy<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>ORDER BY</c>-statement.
@@ -55,6 +55,9 @@ namespace FluentSQL.Querying.Statements
             }
         }
 
+        private Expression<Func<TSqlExpression>> Expression { get; }
+        private bool SortAscending { get; set; }
+
         internal override void Parse(QueryParser parser)
         {
             if (SortAscending)
@@ -66,8 +69,5 @@ namespace FluentSQL.Querying.Statements
                 parser.OrderByDescending(Expression);
             }
         }
-
-        private Expression<Func<TSqlExpression>> Expression { get; }
-        private bool SortAscending { get; set; }
     }
 }

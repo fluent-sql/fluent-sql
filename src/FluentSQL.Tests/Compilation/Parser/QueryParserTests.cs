@@ -26,14 +26,14 @@ namespace FluentSQL.Tests.Compilation.Parser
                 RootNode = sut.Parse(QueryContext);
             }
 
+            private AstNode RootNode { get; set; }
+            private QueryContext<NoParameters, string> QueryContext { get; set; }
+
             [Fact]
             public void It_should_create_an_empty_node()
             {
                 RootNode.Should().BeEmpty();
             }
-
-            private AstNode RootNode { get; set; }
-            private QueryContext<NoParameters, string> QueryContext { get; set; }
         }
     }
 }

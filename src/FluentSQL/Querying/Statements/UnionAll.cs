@@ -12,7 +12,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing the second query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class UnionAll<TFirstParameters, TSecondParameters, TQueryResult> : QueryComponent<TFirstParameters, TQueryResult>
+    public sealed class UnionAll<TFirstParameters, TSecondParameters, TQueryResult> : QueryComponent<TFirstParameters, TQueryResult>
     {
         /// <inheritdoc />
         public UnionAll(
@@ -25,12 +25,12 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
+        private QueryComponent<TFirstParameters, TQueryResult> First { get; }
+        private QueryComponent<TSecondParameters, TQueryResult> Second { get; }
+
         internal override void Parse(QueryParser parser)
         {
             parser.UnionAll(First, Second);
         }
-
-        private QueryComponent<TFirstParameters, TQueryResult> First { get; }
-        private QueryComponent<TSecondParameters, TQueryResult> Second { get; }
     }
 }

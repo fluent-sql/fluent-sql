@@ -3,7 +3,7 @@
     /// <summary>
     ///     The result of the compilation of a query.
     /// </summary>
-    public class CompilationResult
+    public sealed class CompilationResult
     {
         /// <summary>
         ///     Initializes a new <see cref="CompilationResult" />.

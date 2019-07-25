@@ -13,7 +13,7 @@ namespace FluentSQL.Querying.Statements
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     /// <typeparam name="TSqlExpression">The expression to select.</typeparam>
-    public class Select<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
+    public sealed class Select<TParameters, TQueryResult, TSqlExpression> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>SELECT</c>-statement.
@@ -30,6 +30,9 @@ namespace FluentSQL.Querying.Statements
             QueryContext.Components.Add(this);
         }
 
+        private Expression<Func<TSqlExpression>> Expression { get; }
+        private Alias Alias { get; set; }
+
         /// <summary>
         ///     Sets the alias under which this expression will be known.
         /// </summary>
@@ -40,10 +43,10 @@ namespace FluentSQL.Querying.Statements
             Alias = new Alias(alias);
             return this;
         }
-  
+
         /// <summary>
         ///     Sets the alias under which this expression will be known
-        ///     where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
+        ///     where the name is derived from a property in the class <typeparamref name="TQueryResult" />.
         /// </summary>
         /// <param name="alias">The alias.</param>
         /// <returns><c>this</c> for method chaining.</returns>
@@ -55,17 +58,14 @@ namespace FluentSQL.Querying.Statements
 
         internal override void Parse(QueryParser parser)
         {
-            if (Alias != null)
-            {
-                parser.Select(Expression, Alias);
-            }
-            else
+            if (Alias == null)
             {
                 parser.Select(Expression);
             }
+            else
+            {
+                parser.Select(Expression, Alias);
+            }
         }
-
-        private Expression<Func<TSqlExpression>> Expression { get; }
-        private Alias Alias { get; set; }
     }
 }

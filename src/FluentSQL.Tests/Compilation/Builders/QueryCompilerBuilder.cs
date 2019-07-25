@@ -7,6 +7,8 @@ namespace FluentSQL.Tests.Compilation.Builders
 {
     public class QueryCompilerBuilder : TestDataBuilder<QueryCompiler>
     {
+        private Func<AstNode, string> Compiler { get; set; }
+
         protected override void OnPreBuild()
         {
             if (Compiler == null)
@@ -35,8 +37,6 @@ namespace FluentSQL.Tests.Compilation.Builders
             });
         }
 
-        private Func<AstNode, string> Compiler { get; set; }
-
         private class QueryCompilerStub : QueryCompiler
         {
             public QueryCompilerStub(QueryCompilerBuilder builder)
@@ -44,14 +44,14 @@ namespace FluentSQL.Tests.Compilation.Builders
                 Builder = builder;
             }
 
+            private QueryCompilerBuilder Builder { get; }
+
             public override CompilationResult Compile(AstNode node)
             {
                 string sql = Builder.Compiler(node);
 
                 return new CompilationResult(sql);
             }
-
-            private QueryCompilerBuilder Builder { get; }
         }
     }
 }

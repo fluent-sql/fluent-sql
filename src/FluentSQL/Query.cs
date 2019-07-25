@@ -9,7 +9,7 @@ namespace FluentSQL
     /// <typeparam name="TParameters">
     ///     The parameters required for executing this query.
     /// </typeparam>
-    public class Query<TParameters, TQueryResult>
+    public sealed class Query<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new query.
@@ -27,7 +27,7 @@ namespace FluentSQL
     ///     The compiled query to execute.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type.</typeparam>
-    public class Query<TQueryResult>
+    public sealed class Query<TQueryResult>
     {
         /// <summary>
         ///     Create a new query.

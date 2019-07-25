@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+
 using FluentSQL.Querying;
 using FluentSQL.Querying.Extensions;
 using FluentSQL.Querying.Statements.Extensions;
@@ -29,13 +30,13 @@ namespace FluentSQL.Tests.Querying
                 Query = sut.Compile();
             }
 
+            private Query<string> Query { get; set; }
+
             [Fact]
             public void It_should_create_the_query()
             {
                 Query.Should().NotBeNull();
             }
-
-            private Query<string> Query { get; set; }
         }
     }
 }

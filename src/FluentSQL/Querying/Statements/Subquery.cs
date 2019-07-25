@@ -7,7 +7,7 @@ namespace FluentSQL.Querying.Statements
     ///     Represents a subquery to use in a different query.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Subquery<TQueryResult>
+    public sealed class Subquery<TQueryResult>
     {
         /// <summary>
         ///     Create a new subquery.
@@ -36,7 +36,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Subquery<TParameters, TQueryResult>
+    public sealed class Subquery<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new subquery.

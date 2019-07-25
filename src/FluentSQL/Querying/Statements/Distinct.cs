@@ -9,7 +9,7 @@ namespace FluentSQL.Querying.Statements
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Distinct<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
+    public sealed class Distinct<TParameters, TQueryResult> : QueryComponent<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>DISTINCT</c>-statement.

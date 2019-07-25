@@ -3,8 +3,8 @@
     /// <summary>
     ///     Represents a column.
     /// </summary>
-    /// <typeparam name="TType">The column type.</typeparam>
-    public class Column<TType> : SqlExpression<TType>
+    /// <typeparam name="TExpressionType">The column type.</typeparam>
+    public sealed class Column<TExpressionType> : SqlExpression<TExpressionType>
     {
         /// <summary>
         ///     Create a new column.

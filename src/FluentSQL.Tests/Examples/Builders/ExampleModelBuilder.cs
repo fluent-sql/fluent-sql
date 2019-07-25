@@ -5,6 +5,8 @@ namespace FluentSQL.Tests.Examples.Builders
 {
     public class ExampleModelBuilder : TestDataBuilder<ExampleModel>
     {
+        private Database Database { get; set; }
+
         protected override void OnPreBuild()
         {
             if (Database == null)
@@ -23,7 +25,5 @@ namespace FluentSQL.Tests.Examples.Builders
             Database = database;
             return this;
         }
-
-        private Database Database { get; set; }
     }
 }

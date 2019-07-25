@@ -29,7 +29,7 @@ namespace FluentSQL.Tests.Compilation.Parser
                         .From(() => model.Customers).As(FirstAlias)
                         .Select(() => model.Customers.Name);
 
-                QueryComponent<NoParameters, string>  second =
+                QueryComponent<NoParameters, string> second =
                     model.Query<string>()
                         .From(() => model.Invoices).As(SecondAlias)
                         .Select(() => model.Invoices.InvoiceNumber);
@@ -43,13 +43,12 @@ namespace FluentSQL.Tests.Compilation.Parser
             {
                 RootNode = sut.Parse(QueryContext);
             }
-            
-            [Fact]
-            public void It_should_return_an_union_node()
-            {
-                RootNode.Should().BeOfType<UnionAllNode>();
-            }
-            
+
+            private AstNode RootNode { get; set; }
+            private string FirstAlias { get; set; }
+            private string SecondAlias { get; set; }
+            private QueryContext<NoParameters, string> QueryContext { get; set; }
+
             [Fact]
             public void It_should_contain_both_queries()
             {
@@ -57,10 +56,11 @@ namespace FluentSQL.Tests.Compilation.Parser
                 RootNode.As<UnionAllNode>().Second.Should().Contain<FromNode>().Which.Should().HaveAlias(SecondAlias);
             }
 
-            private AstNode RootNode { get; set; }
-            private string FirstAlias { get; set; }
-            private string SecondAlias { get; set; }
-            private QueryContext<NoParameters, string> QueryContext { get; set; }
+            [Fact]
+            public void It_should_return_an_union_node()
+            {
+                RootNode.Should().BeOfType<UnionAllNode>();
+            }
         }
     }
 }

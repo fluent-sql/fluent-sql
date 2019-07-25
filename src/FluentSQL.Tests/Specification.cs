@@ -9,6 +9,18 @@ namespace FluentSQL.Tests
             SetUp();
         }
 
+        private T Sut { get; set; }
+
+        public void Dispose()
+        {
+            CleanUpContext(Sut);
+
+            if (Sut is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
+        }
+
         private void SetUp()
         {
             Sut = EstablishContext();
@@ -27,17 +39,5 @@ namespace FluentSQL.Tests
         protected virtual void CleanUpContext(T sut)
         {
         }
-
-        public void Dispose()
-        {
-            CleanUpContext(Sut);
-
-            if (Sut is IDisposable disposable)
-            {
-                disposable.Dispose();
-            }
-        }
-
-        private T Sut { get; set; }
     }
 }

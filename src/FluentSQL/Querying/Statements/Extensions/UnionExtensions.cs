@@ -39,7 +39,7 @@
         /// <returns>The union al of <paramref name="first" /> and <paramref name="second" />.</returns>
         public static UnionAll<TFirstParameters, TSecondParameters, TQueryResult>
             UnionAll<TFirstParameters, TSecondParameters, TQueryResult>(
-            this QueryComponent<TFirstParameters, TQueryResult> first, QueryComponent<TSecondParameters, TQueryResult> second)
+                this QueryComponent<TFirstParameters, TQueryResult> first, QueryComponent<TSecondParameters, TQueryResult> second)
         {
             return new UnionAll<TFirstParameters, TSecondParameters, TQueryResult>(first, second);
         }

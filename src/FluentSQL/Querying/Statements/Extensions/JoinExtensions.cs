@@ -18,7 +18,8 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+        ///     with.
         /// </param>
         /// <returns>The <see cref="Statements.LeftJoin{TParameters,TQueryResult,TTable}" />.</returns>
         public static LeftJoin<TParameters, TQueryResult, TTable> LeftJoin<TParameters, TQueryResult, TTable>(
@@ -84,7 +85,8 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+        ///     with.
         /// </param>
         /// <returns>The <see cref="Statements.RightJoin{TParameters,TQueryResult,TTable}" />.</returns>
         public static RightJoin<TParameters, TQueryResult, TTable> RightJoin<TParameters, TQueryResult, TTable>(
@@ -150,7 +152,8 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+        ///     with.
         /// </param>
         /// <returns>The <see cref="Statements.InnerJoin{TParameters,TQueryResult,TTable}" />.</returns>
         public static InnerJoin<TParameters, TQueryResult, TTable> InnerJoin<TParameters, TQueryResult, TTable>(
@@ -159,7 +162,7 @@ namespace FluentSQL.Querying.Statements.Extensions
         {
             return new InnerJoin<TParameters, TQueryResult, TTable>(queryComponent.QueryContext, child);
         }
-        
+
         /// <summary>
         ///     Add a new <c>INNER JOIN</c> with a subquery to the query.
         /// </summary>
@@ -216,7 +219,8 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <typeparam name="TTable">The child table.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="child">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+        ///     with.
         /// </param>
         /// <returns>The <see cref="Statements.OuterJoin{TParameters,TQueryResult,TTable}" />.</returns>
         public static OuterJoin<TParameters, TQueryResult, TTable> OuterJoin<TParameters, TQueryResult, TTable>(

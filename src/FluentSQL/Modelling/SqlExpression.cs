@@ -7,7 +7,7 @@ namespace FluentSQL.Modelling
     /// <summary>
     ///     Any expression of type <typeparamref name="TExpressionType" /> that can be used in SQL.
     /// </summary>
-    /// <typeparam name="TExpressionType">The result type of evaluating this <see cref="SqlExpression{TType}" />.</typeparam>
+    /// <typeparam name="TExpressionType">The result type of evaluating this SQL expression.</typeparam>
     public abstract class SqlExpression<TExpressionType>
     {
         /// <inheritdoc />
@@ -41,7 +41,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>equals</c> comparison between a <see cref="SqlExpression{TType}" /> and
+        ///     Allows for an <c>equals</c> comparison between a <see cref="SqlExpression{TExpressionType}" /> and
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator ==(SqlExpression<TExpressionType> expression, TExpressionType value)
@@ -50,7 +50,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for a <c>not equals</c> comparison between a <see cref="SqlExpression{TType}" /> and
+        ///     Allows for a <c>not equals</c> comparison between a <see cref="SqlExpression{TExpressionType}" /> and
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator !=(SqlExpression<TExpressionType> expression, TExpressionType value)
@@ -59,7 +59,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>greater than</c> comparison between a <see cref="SqlExpression{TType}" /> and
+        ///     Allows for an <c>greater than</c> comparison between a <see cref="SqlExpression{TExpressionType}" /> and
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator >(SqlExpression<TExpressionType> expression, TExpressionType value)
@@ -68,7 +68,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>less than</c> comparison between a <see cref="SqlExpression{TType}" /> and
+        ///     Allows for an <c>less than</c> comparison between a <see cref="SqlExpression{TExpressionType}" /> and
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator <(SqlExpression<TExpressionType> expression, TExpressionType value)
@@ -77,7 +77,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>greater than or equal</c> comparison between a <see cref="SqlExpression{TType}" /> and
+        ///     Allows for an <c>greater than or equal</c> comparison between a <see cref="SqlExpression{TExpressionType}" /> and
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator >=(SqlExpression<TExpressionType> expression, TExpressionType value)
@@ -86,7 +86,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>less than or equal</c> comparison between a <see cref="SqlExpression{TType}" /> and
+        ///     Allows for an <c>less than or equal</c> comparison between a <see cref="SqlExpression{TExpressionType}" /> and
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator <=(SqlExpression<TExpressionType> expression, TExpressionType value)
@@ -95,16 +95,15 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>equals</c> comparison between two <see cref="SqlExpression{TType}" />s.
+        ///     Allows for an <c>equals</c> comparison between two <see cref="SqlExpression{TExpressionType}" />s.
         /// </summary>
         public static bool operator ==(SqlExpression<TExpressionType> expression, SqlExpression<TExpressionType> other)
         {
             return false;
         }
 
-
         /// <summary>
-        ///     Allows for a <c>not equals</c> comparison between two <see cref="SqlExpression{TType}" />s.
+        ///     Allows for a <c>not equals</c> comparison between two <see cref="SqlExpression{TExpressionType}" />s.
         ///     a value of type <typeparamref name="TExpressionType" />.
         /// </summary>
         public static bool operator !=(SqlExpression<TExpressionType> expression, SqlExpression<TExpressionType> other)
@@ -113,16 +112,15 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>greater than</c> comparison between two <see cref="SqlExpression{TType}" />s.
+        ///     Allows for an <c>greater than</c> comparison between two <see cref="SqlExpression{TExpressionType}" />s.
         /// </summary>
         public static bool operator >(SqlExpression<TExpressionType> expression, SqlExpression<TExpressionType> other)
         {
             return false;
         }
 
-
         /// <summary>
-        ///     Allows for an <c>less than</c> comparison between two <see cref="SqlExpression{TType}" />s.
+        ///     Allows for an <c>less than</c> comparison between two <see cref="SqlExpression{TExpressionType}" />s.
         /// </summary>
         public static bool operator <(SqlExpression<TExpressionType> expression, SqlExpression<TExpressionType> other)
         {
@@ -130,7 +128,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>greater than or equal</c> comparison between two <see cref="SqlExpression{TType}" />s.
+        ///     Allows for an <c>greater than or equal</c> comparison between two <see cref="SqlExpression{TExpressionType}" />s.
         /// </summary>
         public static bool operator >=(SqlExpression<TExpressionType> expression, SqlExpression<TExpressionType> other)
         {
@@ -138,7 +136,7 @@ namespace FluentSQL.Modelling
         }
 
         /// <summary>
-        ///     Allows for an <c>less than or equal</c> comparison between two <see cref="SqlExpression{TType}" />s.
+        ///     Allows for an <c>less than or equal</c> comparison between two <see cref="SqlExpression{TExpressionType}" />s.
         /// </summary>
         public static bool operator <=(SqlExpression<TExpressionType> expression, SqlExpression<TExpressionType> other)
         {

@@ -4,7 +4,7 @@
     ///     The <c>EXISTS</c>-statement that tests for the existence of a record.
     /// </summary>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Exists<TQueryResult>
+    public sealed class Exists<TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>EXISTS</c>-statement.
@@ -35,7 +35,7 @@
     ///     The parameters required for executing this query.
     /// </typeparam>
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
-    public class Exists<TParameters, TQueryResult>
+    public sealed class Exists<TParameters, TQueryResult>
     {
         /// <summary>
         ///     Create a new <c>EXISTS</c>-statement.
