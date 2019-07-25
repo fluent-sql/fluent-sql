@@ -5,19 +5,19 @@ using FluentSQL.Modelling;
 namespace FluentSQL.Querying.Functions
 {
     /// <summary>
-    ///     Represents all columns in a table.
+    ///     Represents all columns in a @object.
     /// </summary>
     public sealed class All : SqlExpression<IEnumerable<object>>
     {
         /// <summary>
         ///     Create a new <c>*</c> expression.
         /// </summary>
-        /// <param name="table">The table to get all columns from.</param>
-        public All(Table table)
+        /// <param name="object">The object to get all properties from.</param>
+        public All(object @object)
         {
-            Table = table;
+            Object = @object;
         }
 
-        private Table Table { get; }
+        private object Object { get; }
     }
 }

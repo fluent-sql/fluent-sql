@@ -1,20 +1,18 @@
-﻿using FluentSQL.Modelling;
-
-namespace FluentSQL.Querying.Functions.Extensions
+﻿namespace FluentSQL.Querying.Functions.Extensions
 {
     /// <summary>
-    ///     Extends <see cref="Table" />.
+    ///     Extends <see cref="object" /> to include the possibility for selecting all properties.
     /// </summary>
     public static class AllExtensions
     {
         /// <summary>
-        ///     All the columns in a table.
+        ///     All the properties of an object.
         /// </summary>
-        /// <param name="table">The table to select all columns from.</param>
-        /// <returns>A <see cref="All" /> representing all columns.</returns>
-        public static All All(this Table table)
+        /// <param name="object">The object to select all properties from.</param>
+        /// <returns>A <see cref="All" /> representing all properties.</returns>
+        public static All All(this object @object)
         {
-            return new All(table);
+            return new All(@object);
         }
     }
 }

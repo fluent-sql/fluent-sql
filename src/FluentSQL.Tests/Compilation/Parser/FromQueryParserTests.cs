@@ -12,7 +12,6 @@ using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
-using FluentSQL.Tests.Examples.Builders;
 
 using Xunit;
 
@@ -25,11 +24,11 @@ namespace FluentSQL.Tests.Compilation.Parser
             protected override QueryParser EstablishContext()
             {
                 Database database = new DatabaseBuilder().Build();
-                ExampleModel model = new ExampleModelBuilder().Build();
+                var customer = new Customer();
 
                 QueryContext =
                     database.Query<string>()
-                        .From(() => model.Customers)
+                        .From(() => customer)
                         .QueryContext;
 
                 return new QueryParserBuilder().Build();
@@ -61,13 +60,13 @@ namespace FluentSQL.Tests.Compilation.Parser
             protected override QueryParser EstablishContext()
             {
                 Database database = new DatabaseBuilder().Build();
-                ExampleModel model = new ExampleModelBuilder().Build();
+                var customer = new Customer();
                 
                 Alias = new RandomStringBuilder().ThatStartsWithLetter.Build();
 
                 QueryContext =
                     database.Query<string>()
-                        .From(() => model.Customers).As(Alias)
+                        .From(() => customer).As(Alias)
                         .QueryContext;
 
                 return new QueryParserBuilder().Build();

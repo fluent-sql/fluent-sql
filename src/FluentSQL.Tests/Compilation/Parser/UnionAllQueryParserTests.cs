@@ -10,7 +10,6 @@ using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
-using FluentSQL.Tests.Examples.Builders;
 
 using Xunit;
 
@@ -23,20 +22,22 @@ namespace FluentSQL.Tests.Compilation.Parser
             protected override QueryParser EstablishContext()
             {
                 Database database = new DatabaseBuilder().Build();
-                ExampleModel model = new ExampleModelBuilder().Build();
 
                 FirstAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
                 SecondAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
 
+                var customer = new Customer();
+                var invoice = new Invoice();
+
                 QueryComponent<NoParameters, string> first =
                     database.Query<string>()
-                        .From(() => model.Customers).As(FirstAlias)
-                        .Select(() => model.Customers.Name);
+                        .From(() => customer).As(FirstAlias)
+                        .Select(() => customer.Name);
 
                 QueryComponent<NoParameters, string> second =
                     database.Query<string>()
-                        .From(() => model.Invoices).As(SecondAlias)
-                        .Select(() => model.Invoices.InvoiceNumber);
+                        .From(() => invoice).As(SecondAlias)
+                        .Select(() => invoice.InvoiceNumber);
 
                 QueryContext = first.UnionAll(second).QueryContext;
 

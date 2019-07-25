@@ -11,11 +11,11 @@ namespace FluentSQL.Querying.Functions
         ///     Create a new SUM-expression.
         /// </summary>
         /// <param name="expression">The actual <see cref="SqlExpression{TExpressionType}" /> that should be summed.</param>
-        public Sum(SqlExpression<TExpressionType> expression)
+        public Sum(TExpressionType expression)
         {
             Expression = expression;
         }
 
-        private SqlExpression<TExpressionType> Expression { get; }
+        private TExpressionType Expression { get; }
     }
 }

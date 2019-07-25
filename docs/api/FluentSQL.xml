@@ -25,7 +25,7 @@
                 Compiles a <see cref="T:FluentSQL.Querying.QueryContext`2" /> to a query.
             </summary>
         </member>
-        <member name="M:FluentSQL.Compilation.QueryCompiler.Compile(FluentSQL.Compilation.Parser.AstNode)">
+        <member name="M:FluentSQL.Compilation.QueryCompiler.Compile(FluentSQL.Compilation.Parser.Nodes.AstNode)">
             <summary>
                 Compile <paramref name="node" /> and return the result.
             </summary>
@@ -42,6 +42,13 @@
                 Construct a new database.
             </summary>
             <param name="compiler">The <see cref="T:FluentSQL.Compilation.QueryCompiler" /> to use for compiling queries.</param>
+        </member>
+        <member name="M:FluentSQL.Databases.Database.Query``1">
+            <summary>
+                Query this database.
+            </summary>
+            <typeparam name="TQueryResult">The result type of the query.</typeparam>
+            <returns>A new <see cref="T:FluentSQL.Querying.QueryContext`1" />.</returns>
         </member>
         <member name="M:FluentSQL.Databases.Database.Compile``2(FluentSQL.Querying.QueryContext{``0,``1})">
             <summary>
@@ -121,38 +128,6 @@
             <param name="query">The query to execute.</param>
             <param name="transaction">The optional transaction.</param>
             <returns>The result of the query.</returns>
-        </member>
-        <member name="T:FluentSQL.Modelling.Column`1">
-            <summary>
-                Represents a column.
-            </summary>
-            <typeparam name="TExpressionType">The column type.</typeparam>
-        </member>
-        <member name="M:FluentSQL.Modelling.Column`1.#ctor(System.String)">
-            <summary>
-                Create a new column.
-            </summary>
-            <param name="name">The name of the column.</param>
-        </member>
-        <member name="T:FluentSQL.Modelling.PersistenceModel">
-            <summary>
-                Represents the model in the database.
-            </summary>
-        </member>
-        <member name="M:FluentSQL.Modelling.PersistenceModel.#ctor(FluentSQL.Databases.Database)">
-            <summary>
-                Create a new <see cref="T:FluentSQL.Modelling.PersistenceModel" />.
-            </summary>
-            <param name="database">
-                The database where this persistence model is located.
-            </param>
-        </member>
-        <member name="M:FluentSQL.Modelling.PersistenceModel.Query``1">
-            <summary>
-                Query this persistence model.
-            </summary>
-            <typeparam name="TQueryResult">The result type of the query.</typeparam>
-            <returns>A new <see cref="T:FluentSQL.Querying.QueryContext`1" />.</returns>
         </member>
         <member name="T:FluentSQL.Modelling.SqlExpression`1">
             <summary>
@@ -248,18 +223,6 @@
                 Allows for an <c>less than or equal</c> comparison between two <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s.
             </summary>
         </member>
-        <member name="T:FluentSQL.Modelling.Table">
-            <summary>
-                Represents a table.
-            </summary>
-        </member>
-        <member name="M:FluentSQL.Modelling.Table.#ctor(System.String,System.String)">
-            <summary>
-                Create a new table.
-            </summary>
-            <param name="schema">The schema.</param>
-            <param name="name">The name of the table.</param>
-        </member>
         <member name="T:FluentSQL.Query`2">
             <summary>
                 The compiled query to execute.
@@ -347,14 +310,14 @@
         </member>
         <member name="T:FluentSQL.Querying.Functions.All">
             <summary>
-                Represents all columns in a table.
+                Represents all columns in a @object.
             </summary>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.All.#ctor(FluentSQL.Modelling.Table)">
+        <member name="M:FluentSQL.Querying.Functions.All.#ctor(System.Object)">
             <summary>
                 Create a new <c>*</c> expression.
             </summary>
-            <param name="table">The table to get all columns from.</param>
+            <param name="object">The object to get all properties from.</param>
         </member>
         <member name="T:FluentSQL.Querying.Functions.Average`1">
             <summary>
@@ -463,71 +426,71 @@
         </member>
         <member name="T:FluentSQL.Querying.Functions.Extensions.AllExtensions">
             <summary>
-                Extends <see cref="T:FluentSQL.Modelling.Table" />.
+                Extends <see cref="T:System.Object" /> to include the possibility for selecting all properties.
             </summary>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.AllExtensions.All(FluentSQL.Modelling.Table)">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.AllExtensions.All(System.Object)">
             <summary>
-                All the columns in a table.
+                All the properties of an object.
             </summary>
-            <param name="table">The table to select all columns from.</param>
-            <returns>A <see cref="M:FluentSQL.Querying.Functions.Extensions.AllExtensions.All(FluentSQL.Modelling.Table)" /> representing all columns.</returns>
+            <param name="object">The object to select all properties from.</param>
+            <returns>A <see cref="M:FluentSQL.Querying.Functions.Extensions.AllExtensions.All(System.Object)" /> representing all properties.</returns>
         </member>
         <member name="T:FluentSQL.Querying.Functions.Extensions.SumExtensions">
             <summary>
                 Allows <see cref="T:FluentSQL.Modelling.SqlExpression`1" />s to be summed.
             </summary>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Int32})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Int32)">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;int&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Int32}})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Nullable{System.Int32})">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;int?&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Int64})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Int64)">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;long&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Int64}})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Nullable{System.Int64})">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;long?&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Decimal})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Decimal)">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;decimal&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Decimal}})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Nullable{System.Decimal})">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;decimal?&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Single})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Single)">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
             <param name="subject">The <see cref="T:FluentSQL.Modelling.SqlExpression`1">SqlExpression&lt;float&gt;</see> to sum.</param>
             <returns>A <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> representing the summed total.</returns>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(FluentSQL.Modelling.SqlExpression{System.Nullable{System.Single}})">
+        <member name="M:FluentSQL.Querying.Functions.Extensions.SumExtensions.Sum(System.Nullable{System.Single})">
             <summary>
                 Sums the <paramref name="subject" />.
             </summary>
@@ -662,7 +625,7 @@
                 Sums a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
             </summary>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Sum`1.#ctor(FluentSQL.Modelling.SqlExpression{`0})">
+        <member name="M:FluentSQL.Querying.Functions.Sum`1.#ctor(`0)">
             <summary>
                 Create a new SUM-expression.
             </summary>
@@ -730,12 +693,11 @@
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
         </member>
-        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Databases.Database,FluentSQL.Modelling.PersistenceModel)">
+        <member name="M:FluentSQL.Querying.QueryContext`2.#ctor(FluentSQL.Databases.Database)">
             <summary>
                 Create a new <see cref="T:FluentSQL.Querying.QueryContext`2" />.
             </summary>
             <param name="database">The <see cref="T:FluentSQL.Databases.Database" /> for this query.</param>
-            <param name="model">The <see cref="T:FluentSQL.Modelling.PersistenceModel" /> where this query is executed for.</param>
         </member>
         <member name="T:FluentSQL.Querying.QueryContext`1">
             <summary>

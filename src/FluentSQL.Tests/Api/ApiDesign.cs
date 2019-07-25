@@ -8,7 +8,6 @@ using FluentSQL.Querying.Functions.Extensions;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
-using FluentSQL.Tests.Examples.Builders;
 
 namespace FluentSQL.Tests.Api
 {
@@ -19,24 +18,23 @@ namespace FluentSQL.Tests.Api
         public async Task TestApi()
         {
             Database database = new DatabaseBuilder().Build();
-            ExampleModel model = new ExampleModelBuilder().Build();
-            Customers c = model.Customers;
-            Invoices i = model.Invoices;
-            InvoiceLines l = model.InvoiceLines;
+            var c = new Customer();
+            var i = new Invoice();
+            var l = new InvoiceLine();
 
-            Invoices i2 = model.Invoices;
+            Invoice i2 = i;
 
             /*
              * SELECT customers.*
-             *   FROM dbo.customers
+             *   FROM dbo.customers c
              *  WHERE dbo.customers.id > 0
              */
             Query<int> parameterless =
                 database
                     .Query<int>()
-                    .From(() => model.Customers)
-                    .Where(() => model.Customers.Id > 0)
-                    .Select(() => model.Customers.All())
+                    .From(() => c)
+                    .Where(() => c.Id > 0)
+                    .Select(() => c.All())
                     .Compile();
 
             int parameterlessResult = await SomeConnection.ExecuteAsync(parameterless);
@@ -89,7 +87,7 @@ namespace FluentSQL.Tests.Api
                     .Where(p => parameterless.Exists())
                     .Select(() => c.Name)
                     .Select(() => i.InvoiceDate)
-                    .Select(() => l.Price.Sum()).As("total")
+                    .Select(() => l.Price).As("total")
                     .OrderBy(() => c.Name).Descending
                     .GroupBy(() => c.Name)
                     .GroupBy(() => i.InvoiceDate)
@@ -142,14 +140,14 @@ namespace FluentSQL.Tests.Api
                     )
                     .Union(database.Query<UnionResult>()
                         .WithParameters<ExampleParameters>()
-                        .From(() => model.Customers)
+                        .From(() => c)
                         .Select(() => "dummy")
                         .Select(() => 1)
                     )
                     .Union(database.Query<UnionResult>()
-                        .From(() => model.Customers)
+                        .From(() => c)
                         .Select(() => "other_dummy").As(result => result.CustomerName)
-                        .Select(() => model.Customers.Id)
+                        .Select(() => c.Id)
                     )
                     .Compile();
 
