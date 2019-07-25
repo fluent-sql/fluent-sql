@@ -26,7 +26,7 @@ namespace FluentSQL.Querying.Statements
             : base(queryContext)
         {
             Expression = expression;
-            SortDirection = SortDirection.Ascending;
+            SortAscending = true;
 
             QueryContext.Components.Add(this);
         }
@@ -38,7 +38,7 @@ namespace FluentSQL.Querying.Statements
         {
             get
             {
-                SortDirection = SortDirection.Ascending;
+                SortAscending = true;
                 return this;
             }
         }
@@ -50,17 +50,24 @@ namespace FluentSQL.Querying.Statements
         {
             get
             {
-                SortDirection = SortDirection.Descending;
+                SortAscending = false;
                 return this;
             }
         }
 
         internal override void Parse(QueryParser parser)
         {
-            parser.OrderBy(Expression, SortDirection);
+            if (SortAscending)
+            {
+                parser.OrderByAscending(Expression);
+            }
+            else
+            {
+                parser.OrderByDescending(Expression);
+            }
         }
 
         private Expression<Func<TSqlExpression>> Expression { get; }
-        private SortDirection SortDirection { get; set; }
+        private bool SortAscending { get; set; }
     }
 }

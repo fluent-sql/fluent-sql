@@ -2,7 +2,12 @@
 {
     public class FromNode : AstNode
     {
-        public FromNode(string @alias)
+        public FromNode()
+            : this(null)
+        {
+        }
+
+        public FromNode(string alias)
         {
             Alias = alias;
         }
