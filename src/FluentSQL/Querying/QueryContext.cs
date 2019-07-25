@@ -2,7 +2,6 @@
 
 using FluentSQL.Compilation.Parser;
 using FluentSQL.Databases;
-using FluentSQL.Modelling;
 
 namespace FluentSQL.Querying
 {
@@ -19,16 +18,13 @@ namespace FluentSQL.Querying
         ///     Create a new <see cref="QueryContext{TParameters, TQueryResult}" />.
         /// </summary>
         /// <param name="database">The <see cref="Databases.Database" /> for this query.</param>
-        /// <param name="model">The <see cref="PersistenceModel" /> where this query is executed for.</param>
-        internal QueryContext(Database database, PersistenceModel model)
+        internal QueryContext(Database database)
         {
             Components = new List<QueryComponent<TParameters, TQueryResult>>();
             Database = database;
-            Model = model;
         }
 
         internal Database Database { get; }
-        internal PersistenceModel Model { get; }
         internal IList<QueryComponent<TParameters, TQueryResult>> Components { get; }
 
         internal void Parse(QueryParser parser)
@@ -46,8 +42,8 @@ namespace FluentSQL.Querying
     /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
     public sealed class QueryContext<TQueryResult> : QueryContext<NoParameters, TQueryResult>
     {
-        internal QueryContext(Database database, PersistenceModel model)
-            : base(database, model)
+        internal QueryContext(Database database)
+            : base(database)
         {
         }
 
@@ -60,7 +56,7 @@ namespace FluentSQL.Querying
         /// <returns>The parameterized version.</returns>
         public QueryContext<TParameters, TQueryResult> WithParameters<TParameters>()
         {
-            return new QueryContext<TParameters, TQueryResult>(Database, Model);
+            return new QueryContext<TParameters, TQueryResult>(Database);
         }
     }
 }

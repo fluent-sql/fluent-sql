@@ -1,10 +1,10 @@
 ﻿using FluentSQL.Compilation.Parser;
 using FluentSQL.Compilation.Parser.Nodes;
+using FluentSQL.Databases;
 using FluentSQL.Querying;
 using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
-using FluentSQL.Tests.Examples;
-using FluentSQL.Tests.Examples.Builders;
+using FluentSQL.Tests.Databases.Builders;
 
 using Xunit;
 
@@ -16,8 +16,8 @@ namespace FluentSQL.Tests.Compilation.Parser
         {
             protected override QueryParser EstablishContext()
             {
-                ExampleModel model = new ExampleModelBuilder().Build();
-                QueryContext = model.Query<string>();
+                Database database = new DatabaseBuilder().Build();
+                QueryContext = database.Query<string>();
 
                 return new QueryParserBuilder().Build();
             }

@@ -2,11 +2,13 @@
 
 using FluentSQL.Compilation.Parser;
 using FluentSQL.Compilation.Parser.Nodes;
+using FluentSQL.Databases;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Builders;
 using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
+using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
 using FluentSQL.Tests.Examples.Builders;
 
@@ -20,18 +22,19 @@ namespace FluentSQL.Tests.Compilation.Parser
         {
             protected override QueryParser EstablishContext()
             {
+                Database database = new DatabaseBuilder().Build();
                 ExampleModel model = new ExampleModelBuilder().Build();
 
                 FirstAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
                 SecondAlias = new RandomStringBuilder().ThatStartsWithLetter.Build();
 
                 QueryComponent<NoParameters, string> first =
-                    model.Query<string>()
+                    database.Query<string>()
                         .From(() => model.Customers).As(FirstAlias)
                         .Select(() => model.Customers.Name);
 
                 QueryComponent<NoParameters, string> second =
-                    model.Query<string>()
+                    database.Query<string>()
                         .From(() => model.Invoices).As(SecondAlias)
                         .Select(() => model.Invoices.InvoiceNumber);
 

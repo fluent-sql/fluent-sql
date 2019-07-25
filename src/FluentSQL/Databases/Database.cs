@@ -19,6 +19,16 @@ namespace FluentSQL.Databases
             Compiler = compiler;
         }
 
+        /// <summary>
+        ///     Query this database.
+        /// </summary>
+        /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
+        /// <returns>A new <see cref="QueryContext{TQueryResult}" />.</returns>
+        public QueryContext<TQueryResult> Query<TQueryResult>()
+        {
+            return new QueryContext<TQueryResult>(this);
+        }
+
         private QueryCompiler Compiler { get; }
 
         /// <summary>

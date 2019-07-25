@@ -1,12 +1,14 @@
 ﻿using System.Data;
 using System.Threading.Tasks;
 
-using FluentSQL.Databases.SqlServer;
+using FluentSQL.Databases;
 using FluentSQL.Extensions;
 using FluentSQL.Querying.Extensions;
 using FluentSQL.Querying.Functions.Extensions;
 using FluentSQL.Querying.Statements.Extensions;
+using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
+using FluentSQL.Tests.Examples.Builders;
 
 namespace FluentSQL.Tests.Api
 {
@@ -16,7 +18,8 @@ namespace FluentSQL.Tests.Api
 
         public async Task TestApi()
         {
-            var model = new ExampleModel(new SqlServerDatabase());
+            Database database = new DatabaseBuilder().Build();
+            ExampleModel model = new ExampleModelBuilder().Build();
             Customers c = model.Customers;
             Invoices i = model.Invoices;
             InvoiceLines l = model.InvoiceLines;
@@ -29,7 +32,7 @@ namespace FluentSQL.Tests.Api
              *  WHERE dbo.customers.id > 0
              */
             Query<int> parameterless =
-                model
+                database
                     .Query<int>()
                     .From(() => model.Customers)
                     .Where(() => model.Customers.Id > 0)
@@ -44,7 +47,8 @@ namespace FluentSQL.Tests.Api
              *  WHERE i2.invoice_number = i.invoice_number
              */
             Query<ExampleParameters, SubqueryResult> subquery =
-                model.Query<SubqueryResult>().WithParameters<ExampleParameters>()
+                database
+                    .Query<SubqueryResult>().WithParameters<ExampleParameters>()
                     .From(() => i2)
                     .Where(p => i2.InvoiceNumber == i.InvoiceNumber)
                     .Select(() => i2.InvoiceNumber).As(r => r.InvoiceIdFromSubquery)
@@ -73,7 +77,8 @@ namespace FluentSQL.Tests.Api
              *    ORDER BY c.name DESC
              */
             Query<ExampleParameters, int> parameterized =
-                model.Query<int>().WithParameters<ExampleParameters>()
+                database
+                    .Query<int>().WithParameters<ExampleParameters>()
                     .From(() => c)
                     .InnerJoin(() => i).On(() => i.CustomerId == c.Id)
                     .LeftJoin(() => subquery).On(x => x.InvoiceIdFromSubquery == i.Id)
@@ -122,25 +127,26 @@ namespace FluentSQL.Tests.Api
              *        FROM dbo.customers
              */
             Query<ExampleParameters, UnionResult> unionQuery =
-                model.Query<UnionResult>().WithParameters<ExampleParameters>()
+                database
+                    .Query<UnionResult>().WithParameters<ExampleParameters>()
                     .From(() => c)
                     .InnerJoin(() => i).On(() => i.CustomerId == c.Id)
                     .InnerJoin(() => l).On(() => l.InvoiceId == i.Id)
                     .Select(() => c.Name).As(result => result.CustomerName)
                     .Select(() => l.Price.Sum()).As(result => result.TotalAmount)
                     .Where(p => c.Id > p.Limit)
-                    .UnionAll(model.Query<UnionResult>()
+                    .UnionAll(database.Query<UnionResult>()
                         .From(() => c)
                         .Select(() => c.Name).As(result => result.CustomerName)
                         .Select(() => 1).As(result => result.TotalAmount)
                     )
-                    .Union(model.Query<UnionResult>()
+                    .Union(database.Query<UnionResult>()
                         .WithParameters<ExampleParameters>()
                         .From(() => model.Customers)
                         .Select(() => "dummy")
                         .Select(() => 1)
                     )
-                    .Union(model.Query<UnionResult>()
+                    .Union(database.Query<UnionResult>()
                         .From(() => model.Customers)
                         .Select(() => "other_dummy").As(result => result.CustomerName)
                         .Select(() => model.Customers.Id)

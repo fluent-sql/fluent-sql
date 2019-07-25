@@ -18,7 +18,7 @@ namespace FluentSQL.Querying.Statements
         public UnionAll(
             QueryComponent<TFirstParameters, TQueryResult> first,
             QueryComponent<TSecondParameters, TQueryResult> second)
-            : base(new QueryContext<TFirstParameters, TQueryResult>(first.QueryContext.Database, first.QueryContext.Model))
+            : base(new QueryContext<TFirstParameters, TQueryResult>(first.QueryContext.Database))
         {
             First = first;
             Second = second;

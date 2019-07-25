@@ -5,8 +5,6 @@ using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements;
 
-#pragma warning disable 1591
-
 namespace FluentSQL.Compilation.Parser
 {
     public sealed class QueryParser
