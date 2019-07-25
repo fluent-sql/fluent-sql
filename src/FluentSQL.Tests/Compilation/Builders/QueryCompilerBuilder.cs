@@ -1,7 +1,7 @@
 ﻿using System;
 
 using FluentSQL.Compilation;
-using FluentSQL.Compilation.Parser;
+using FluentSQL.Compilation.Parser.Nodes;
 
 namespace FluentSQL.Tests.Compilation.Builders
 {

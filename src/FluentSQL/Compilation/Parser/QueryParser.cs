@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
+using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements;
 
@@ -112,7 +113,8 @@ namespace FluentSQL.Compilation.Parser
         }
 
         private (AstNode firstResult, AstNode secondResult) ParseMultiple<TFirstParameters, TSecondParameters, TQueryResult>(
-            QueryComponent<TFirstParameters, TQueryResult> first, QueryComponent<TSecondParameters, TQueryResult> second)
+            QueryComponent<TFirstParameters, TQueryResult> first,
+            QueryComponent<TSecondParameters, TQueryResult> second)
         {
             var firstParser = new QueryParser();
             AstNode firstResult = firstParser.Parse(first.QueryContext);

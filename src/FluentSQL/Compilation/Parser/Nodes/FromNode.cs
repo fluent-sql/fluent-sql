@@ -1,4 +1,4 @@
-﻿namespace FluentSQL.Compilation.Parser
+﻿namespace FluentSQL.Compilation.Parser.Nodes
 {
     public sealed class FromNode : AstNode
     {

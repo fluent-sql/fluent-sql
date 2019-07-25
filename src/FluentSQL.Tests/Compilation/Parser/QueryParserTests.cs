@@ -1,4 +1,5 @@
 ﻿using FluentSQL.Compilation.Parser;
+using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Querying;
 using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;

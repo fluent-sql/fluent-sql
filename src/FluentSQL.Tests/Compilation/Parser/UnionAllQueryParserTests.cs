@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 
 using FluentSQL.Compilation.Parser;
+using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Builders;

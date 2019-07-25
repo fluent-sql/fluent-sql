@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FluentSQL.Compilation.Parser
+namespace FluentSQL.Compilation.Parser.Nodes
 {
     public class AstNode
     {

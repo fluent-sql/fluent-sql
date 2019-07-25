@@ -1,5 +1,5 @@
 ﻿using FluentSQL.Compilation;
-using FluentSQL.Compilation.Parser;
+using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Querying;
 
 namespace FluentSQL.Databases.SqlServer

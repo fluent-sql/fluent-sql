@@ -4,7 +4,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
-using FluentSQL.Compilation.Parser;
+using FluentSQL.Compilation.Parser.Nodes;
 
 namespace FluentSQL.Tests.Compilation.Parser.Assertions
 {

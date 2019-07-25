@@ -3,10 +3,12 @@
 using FluentAssertions;
 
 using FluentSQL.Compilation.Parser;
+using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Builders;
 using FluentSQL.Tests.Compilation.Parser.Builders;
+using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Examples;
 using FluentSQL.Tests.Examples.Builders;
 
@@ -47,7 +49,7 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_have_no_alias()
             {
-                RootNode.ChildNodes.OfType<FromNode>().Single().Alias.Should().BeNull();
+                RootNode.ChildNodes.OfType<FromNode>().Single().Should().NotHaveAnAlias();
             }
         }
 
@@ -85,7 +87,7 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_have_the_alias()
             {
-                RootNode.ChildNodes.OfType<FromNode>().Single().Alias.Should().Be(Alias);
+                RootNode.ChildNodes.OfType<FromNode>().Single().Should().HaveAlias(Alias);
             }
         }
     }
