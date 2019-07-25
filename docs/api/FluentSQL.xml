@@ -103,6 +103,16 @@
             <param name="transaction">The optional transaction.</param>
             <returns>The result of the query.</returns>
         </member>
+        <member name="M:FluentSQL.Extensions.QueryExtensions.ExecuteAsync``2(System.Data.IDbConnection,FluentSQL.Query{``0,``1},``0,System.Data.IDbTransaction)">
+            <summary>
+                Execute this query and return the result.
+            </summary>
+            <param name="connection">The <see cref="T:System.Data.IDbConnection" />.</param>
+            <param name="query">The query to execute.</param>
+            <param name="parameters">The query parameters.</param>
+            <param name="transaction">The optional transaction.</param>
+            <returns>The result of the query.</returns>
+        </member>
         <member name="M:FluentSQL.Extensions.QueryExtensions.ExecuteAsync``1(System.Data.IDbConnection,FluentSQL.Query{``0},System.Data.IDbTransaction)">
             <summary>
                 Execute this query and return the result.
@@ -116,7 +126,7 @@
             <summary>
                 Represents a column.
             </summary>
-            <typeparam name="TType">The column type.</typeparam>
+            <typeparam name="TExpressionType">The column type.</typeparam>
         </member>
         <member name="M:FluentSQL.Modelling.Column`1.#ctor(System.String)">
             <summary>
@@ -148,7 +158,7 @@
             <summary>
                 Any expression of type <typeparamref name="TExpressionType" /> that can be used in SQL.
             </summary>
-            <typeparam name="TExpressionType">The result type of evaluating this <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.</typeparam>
+            <typeparam name="TExpressionType">The result type of evaluating this SQL expression.</typeparam>
         </member>
         <member name="M:FluentSQL.Modelling.SqlExpression`1.Equals(System.Object)">
             <inheritdoc />
@@ -843,7 +853,7 @@
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="query">The <see cref="T:FluentSQL.Query`2" /> that tests for the existence of a record.</param>
-            <returns>The <see cref="T:FluentSQL.Querying.Statements.Exists`1"/>.</returns>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Exists`1" />.</returns>
         </member>
         <member name="M:FluentSQL.Querying.Statements.Extensions.ExistsExtensions.Exists``1(FluentSQL.Query{``0})">
             <summary>
@@ -851,7 +861,7 @@
             </summary>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="query">The <see cref="T:FluentSQL.Query`2" /> that tests for the existence of a record.</param>
-            <returns>The <see cref="T:FluentSQL.Querying.Statements.Exists`1"/>.</returns>
+            <returns>The <see cref="T:FluentSQL.Querying.Statements.Exists`1" />.</returns>
         </member>
         <member name="T:FluentSQL.Querying.Statements.Extensions.FromExtensions">
             <summary>
@@ -913,7 +923,8 @@
             <typeparam name="TTable">The child table.</typeparam>
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
             <returns>The <see cref="T:FluentSQL.Querying.Statements.LeftJoin`3" />.</returns>
         </member>
@@ -960,7 +971,8 @@
             <typeparam name="TTable">The child table.</typeparam>
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
             <returns>The <see cref="T:FluentSQL.Querying.Statements.RightJoin`3" />.</returns>
         </member>
@@ -1007,7 +1019,8 @@
             <typeparam name="TTable">The child table.</typeparam>
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
             <returns>The <see cref="T:FluentSQL.Querying.Statements.InnerJoin`3" />.</returns>
         </member>
@@ -1054,7 +1067,8 @@
             <typeparam name="TTable">The child table.</typeparam>
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
             <returns>The <see cref="T:FluentSQL.Querying.Statements.OuterJoin`3" />.</returns>
         </member>
@@ -1274,7 +1288,8 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
         </member>
         <member name="M:FluentSQL.Querying.Statements.InnerJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
@@ -1299,7 +1314,8 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
         </member>
         <member name="M:FluentSQL.Querying.Statements.Join`3.On(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
@@ -1354,7 +1370,8 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
         </member>
         <member name="M:FluentSQL.Querying.Statements.LeftJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
@@ -1424,7 +1441,8 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
         </member>
         <member name="M:FluentSQL.Querying.Statements.OuterJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
@@ -1449,7 +1467,8 @@
             </summary>
             <param name="queryContext">The <see cref="T:FluentSQL.Querying.QueryContext`2" />.</param>
             <param name="child">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join with.
+                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable&gt;&gt;</see> that selects the child to join
+                with.
             </param>
         </member>
         <member name="M:FluentSQL.Querying.Statements.RightJoin`3.Parse(FluentSQL.Compilation.Parser.QueryParser,System.Linq.Expressions.Expression{System.Func{`2}},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
@@ -1487,25 +1506,10 @@
         <member name="M:FluentSQL.Querying.Statements.Select`3.As(System.Linq.Expressions.Expression{System.Func{`1,System.Object}})">
             <summary>
                 Sets the alias under which this expression will be known
-                where the name is derived from a property in the class <typeparamref name="TQueryResult"/>.
+                where the name is derived from a property in the class <typeparamref name="TQueryResult" />.
             </summary>
             <param name="alias">The alias.</param>
             <returns><c>this</c> for method chaining.</returns>
-        </member>
-        <member name="T:FluentSQL.Querying.Statements.SortDirection">
-            <summary>
-                The direction to sort the results.
-            </summary>
-        </member>
-        <member name="F:FluentSQL.Querying.Statements.SortDirection.Ascending">
-            <summary>
-                Sort the results in ascending order.
-            </summary>
-        </member>
-        <member name="F:FluentSQL.Querying.Statements.SortDirection.Descending">
-            <summary>
-                Sort the results in descending order.
-            </summary>
         </member>
         <member name="T:FluentSQL.Querying.Statements.Subquery`1">
             <summary>

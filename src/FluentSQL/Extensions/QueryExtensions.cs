@@ -26,6 +26,23 @@ namespace FluentSQL.Extensions
             var parameters = new TParameters();
             parameterConfig(parameters);
 
+            return ExecuteAsync(connection, query, parameters, transaction);
+        }
+
+        /// <summary>
+        ///     Execute this query and return the result.
+        /// </summary>
+        /// <param name="connection">The <see cref="IDbConnection" />.</param>
+        /// <param name="query">The query to execute.</param>
+        /// <param name="parameters">The query parameters.</param>
+        /// <param name="transaction">The optional transaction.</param>
+        /// <returns>The result of the query.</returns>
+        public static Task<TQueryResult> ExecuteAsync<TParameters, TQueryResult>(
+            this IDbConnection connection,
+            Query<TParameters, TQueryResult> query,
+            TParameters parameters,
+            IDbTransaction transaction = null) where TParameters : new()
+        {
             return Task.FromResult(default(TQueryResult));
         }
 

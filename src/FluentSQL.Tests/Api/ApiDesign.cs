@@ -93,10 +93,10 @@ namespace FluentSQL.Tests.Api
                     .Limit(100)
                     .Compile();
 
-            int parameterizedResult = await SomeConnection.ExecuteAsync(parameterized, p =>
+            int parameterizedResult = await SomeConnection.ExecuteAsync(parameterized, new ExampleParameters
             {
-                p.Limit = 100;
-                p.InvoiceNumber = "2019";
+                Limit = 100,
+                InvoiceNumber = "2019"
             });
 
             /**
