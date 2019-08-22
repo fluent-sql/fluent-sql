@@ -18,10 +18,7 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// </typeparam>
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
-        /// <param name="expression">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
-        ///     which columns to join.
-        /// </param>
+        /// <param name="expression">The predicate.</param>
         /// <returns>The <see cref="Statements.Where{TParameters,TQueryResult}" />.</returns>
         public static Where<TParameters, TQueryResult> Where<TParameters, TQueryResult>(
             this QueryComponent<TParameters, TQueryResult> queryComponent,
@@ -35,10 +32,7 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// </summary>
         /// <typeparam name="TQueryResult">The result type of the query.</typeparam>
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
-        /// <param name="expression">
-        ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on
-        ///     which columns to join.
-        /// </param>
+        /// <param name="expression">The predicate.</param>
         /// <returns>The <see cref="Statements.Where{TParameters,TQueryResult}" />.</returns>
         public static Where<NoParameters, TQueryResult> Where<TQueryResult>(
             this QueryComponent<NoParameters, TQueryResult> queryComponent,

@@ -5,7 +5,7 @@ using FluentSQL.Modelling;
 namespace FluentSQL.Querying.Functions
 {
     /// <summary>
-    ///     Represents all columns in a @object.
+    ///     Represents all properties in a @object.
     /// </summary>
     public sealed class All : SqlExpression<IEnumerable<object>>
     {

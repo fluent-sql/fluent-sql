@@ -14,7 +14,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int32}" /> representing the summed total.</returns>
         public static SqlExpression<int> Sum(this int subject)
         {
-            return new Sum<int>(subject);
+            return new Sum<int>();
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int32}" /> representing the summed total.</returns>
         public static SqlExpression<int?> Sum(this int? subject)
         {
-            return new Sum<int?>(subject);
+            return new Sum<int?>();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int64}" /> representing the summed total.</returns>
         public static SqlExpression<long> Sum(this long subject)
         {
-            return new Sum<long>(subject);
+            return new Sum<long>();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int64}" /> representing the summed total.</returns>
         public static SqlExpression<long?> Sum(this long? subject)
         {
-            return new Sum<long?>(subject);
+            return new Sum<long?>();
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int64}" /> representing the summed total.</returns>
         public static SqlExpression<decimal> Sum(this decimal subject)
         {
-            return new Sum<decimal>(subject);
+            return new Sum<decimal>();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int64}" /> representing the summed total.</returns>
         public static SqlExpression<decimal?> Sum(this decimal? subject)
         {
-            return new Sum<decimal?>(subject);
+            return new Sum<decimal?>();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int64}" /> representing the summed total.</returns>
         public static SqlExpression<float> Sum(this float subject)
         {
-            return new Sum<float>(subject);
+            return new Sum<float>();
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace FluentSQL.Querying.Functions.Extensions
         /// <returns>A <see cref="SqlExpression{Int64}" /> representing the summed total.</returns>
         public static SqlExpression<float?> Sum(this float? subject)
         {
-            return new Sum<float?>(subject);
+            return new Sum<float?>();
         }
     }
 }

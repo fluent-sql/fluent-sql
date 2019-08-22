@@ -6,7 +6,6 @@ using FluentSQL.Databases;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Builders;
-using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
@@ -40,7 +39,7 @@ namespace FluentSQL.Tests.Compilation.Parser
 
                 QueryContext = first.Union(second).QueryContext;
 
-                return new QueryParserBuilder().Build();
+                return new QueryParser();
             }
 
             protected override void Because(QueryParser sut)
@@ -56,8 +55,8 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_contain_both_queries()
             {
-                RootNode.As<UnionNode>().First.Should().Contain<FromNode>().Which.Should().HaveAlias(FirstAlias);
-                RootNode.As<UnionNode>().Second.Should().Contain<FromNode>().Which.Should().HaveAlias(SecondAlias);
+                RootNode.Should().Contain<FromNode>().Which.Should().ContainSingle(x => x.Alias == FirstAlias);
+                RootNode.Should().Contain<FromNode>().Which.Should().ContainSingle(x => x.Alias == SecondAlias);
             }
 
             [Fact]

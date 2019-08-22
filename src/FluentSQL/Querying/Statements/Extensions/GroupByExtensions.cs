@@ -19,7 +19,7 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="expression">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> that indicates on
-        ///     which columns to group.
+        ///     which properties to group.
         /// </param>
         /// <returns>
         ///     The <see cref="Statements.GroupBy{TParameters,TQueryResult,TSqlExpression}" />.

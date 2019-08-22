@@ -2,7 +2,6 @@
 using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Databases;
 using FluentSQL.Querying;
-using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Databases.Builders;
 
@@ -19,7 +18,7 @@ namespace FluentSQL.Tests.Compilation.Parser
                 Database database = new DatabaseBuilder().Build();
                 QueryContext = database.Query<string>();
 
-                return new QueryParserBuilder().Build();
+                return new QueryParser();
             }
 
             protected override void Because(QueryParser sut)

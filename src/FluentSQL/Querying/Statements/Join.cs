@@ -36,11 +36,11 @@ namespace FluentSQL.Querying.Statements
         private Expression<Func<TTable, bool>> ExplicitTableExpression { get; set; }
 
         /// <summary>
-        ///     Adds the <c>ON</c> to indicate on which columns to join.
+        ///     Adds the <c>ON</c> to indicate on which properties to join.
         /// </summary>
         /// <param name="expression">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on
-        ///     which columns to join.
+        ///     which properties to join.
         /// </param>
         /// <returns><c>this</c> for method chaining.</returns>
         public Join<TParameters, TQueryResult, TTable> On(Expression<Func<bool>> expression)
@@ -50,11 +50,11 @@ namespace FluentSQL.Querying.Statements
         }
 
         /// <summary>
-        ///     Adds the <c>ON</c> to indicate on which columns to join.
+        ///     Adds the <c>ON</c> to indicate on which properties to join.
         /// </summary>
         /// <param name="expression">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
-        ///     which columns to join.
+        ///     which properties to join.
         /// </param>
         /// <returns><c>this</c> for method chaining.</returns>
         public Join<TParameters, TQueryResult, TTable> On(Expression<Func<TTable, bool>> expression)

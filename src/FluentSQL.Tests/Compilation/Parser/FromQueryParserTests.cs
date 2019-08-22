@@ -1,14 +1,9 @@
-﻿using System.Linq;
-
-using FluentAssertions;
-
-using FluentSQL.Compilation.Parser;
+﻿using FluentSQL.Compilation.Parser;
 using FluentSQL.Compilation.Parser.Nodes;
 using FluentSQL.Databases;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements.Extensions;
 using FluentSQL.Tests.Builders;
-using FluentSQL.Tests.Compilation.Parser.Builders;
 using FluentSQL.Tests.Compilation.Parser.Extensions;
 using FluentSQL.Tests.Databases.Builders;
 using FluentSQL.Tests.Examples;
@@ -24,14 +19,15 @@ namespace FluentSQL.Tests.Compilation.Parser
             protected override QueryParser EstablishContext()
             {
                 Database database = new DatabaseBuilder().Build();
-                var customer = new Customer();
+                Customer customer = null;
 
                 QueryContext =
-                    database.Query<string>()
+                    database
+                        .Query<string>()
                         .From(() => customer)
                         .QueryContext;
 
-                return new QueryParserBuilder().Build();
+                return new QueryParser();
             }
 
             protected override void Because(QueryParser sut)
@@ -45,13 +41,7 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_add_the_from_clause()
             {
-                RootNode.ChildNodes.OfType<FromNode>().Should().ContainSingle();
-            }
-
-            [Fact]
-            public void It_should_have_no_alias()
-            {
-                RootNode.ChildNodes.OfType<FromNode>().Single().Should().NotHaveAnAlias();
+                RootNode.Should().ContainSingle<FromNode>().Which.Should().NotHaveAnAlias();
             }
         }
 
@@ -60,16 +50,17 @@ namespace FluentSQL.Tests.Compilation.Parser
             protected override QueryParser EstablishContext()
             {
                 Database database = new DatabaseBuilder().Build();
-                var customer = new Customer();
+                Customer customer = null;
                 
                 Alias = new RandomStringBuilder().ThatStartsWithLetter.Build();
 
                 QueryContext =
-                    database.Query<string>()
+                    database
+                        .Query<string>()
                         .From(() => customer).As(Alias)
                         .QueryContext;
 
-                return new QueryParserBuilder().Build();
+                return new QueryParser();
             }
 
             protected override void Because(QueryParser sut)
@@ -85,13 +76,7 @@ namespace FluentSQL.Tests.Compilation.Parser
             [Fact]
             public void It_should_add_the_from_clause()
             {
-                RootNode.ChildNodes.OfType<FromNode>().Should().ContainSingle();
-            }
-
-            [Fact]
-            public void It_should_have_the_alias()
-            {
-                RootNode.ChildNodes.OfType<FromNode>().Single().Should().HaveAlias(Alias);
+                RootNode.Should().ContainSingle<FromNode>().Which.Should().HaveAlias(Alias);
             }
         }
     }

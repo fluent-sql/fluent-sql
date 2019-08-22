@@ -310,7 +310,7 @@
         </member>
         <member name="T:FluentSQL.Querying.Functions.All">
             <summary>
-                Represents all columns in a @object.
+                Represents all properties in a @object.
             </summary>
         </member>
         <member name="M:FluentSQL.Querying.Functions.All.#ctor(System.Object)">
@@ -625,12 +625,6 @@
                 Sums a <see cref="T:FluentSQL.Modelling.SqlExpression`1" />.
             </summary>
         </member>
-        <member name="M:FluentSQL.Querying.Functions.Sum`1.#ctor(`0)">
-            <summary>
-                Create a new SUM-expression.
-            </summary>
-            <param name="expression">The actual <see cref="T:FluentSQL.Modelling.SqlExpression`1" /> that should be summed.</param>
-        </member>
         <member name="T:FluentSQL.Querying.Functions.Trim">
             <summary>
                 Trims a string.
@@ -863,7 +857,7 @@
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
             <param name="expression">
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> that indicates on
-                which columns to group.
+                which properties to group.
             </param>
             <returns>
                 The <see cref="T:FluentSQL.Querying.Statements.GroupBy`3" />.
@@ -1098,7 +1092,7 @@
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
             <param name="expression">
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> that indicates on
-                which columns to order.
+                which properties to order.
             </param>
             <returns>
                 The <see cref="T:FluentSQL.Querying.Statements.OrderBy`3" />.
@@ -1173,10 +1167,7 @@
             </typeparam>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
-            <param name="expression">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
-                which columns to join.
-            </param>
+            <param name="expression">The predicate.</param>
             <returns>The <see cref="T:FluentSQL.Querying.Statements.Where`2" />.</returns>
         </member>
         <member name="M:FluentSQL.Querying.Statements.Extensions.WhereExtensions.Where``1(FluentSQL.Querying.QueryComponent{FluentSQL.Querying.NoParameters,``0},System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
@@ -1185,10 +1176,7 @@
             </summary>
             <typeparam name="TQueryResult">The result type of the query.</typeparam>
             <param name="queryComponent">The <see cref="T:FluentSQL.Querying.QueryComponent`2" />.</param>
-            <param name="expression">
-                The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on
-                which columns to join.
-            </param>
+            <param name="expression">The predicate.</param>
             <returns>The <see cref="T:FluentSQL.Querying.Statements.Where`2" />.</returns>
         </member>
         <member name="T:FluentSQL.Querying.Statements.From`3">
@@ -1282,21 +1270,21 @@
         </member>
         <member name="M:FluentSQL.Querying.Statements.Join`3.On(System.Linq.Expressions.Expression{System.Func{System.Boolean}})">
             <summary>
-                Adds the <c>ON</c> to indicate on which columns to join.
+                Adds the <c>ON</c> to indicate on which properties to join.
             </summary>
             <param name="expression">
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;bool&gt;&gt;</see> that indicates on
-                which columns to join.
+                which properties to join.
             </param>
             <returns><c>this</c> for method chaining.</returns>
         </member>
         <member name="M:FluentSQL.Querying.Statements.Join`3.On(System.Linq.Expressions.Expression{System.Func{`2,System.Boolean}})">
             <summary>
-                Adds the <c>ON</c> to indicate on which columns to join.
+                Adds the <c>ON</c> to indicate on which properties to join.
             </summary>
             <param name="expression">
                 The <see cref="T:System.Linq.Expressions.Expression`1">Expression&lt;Func&lt;TTable, bool&gt;&gt;</see> that indicates on
-                which columns to join.
+                which properties to join.
             </param>
             <returns><c>this</c> for method chaining.</returns>
         </member>

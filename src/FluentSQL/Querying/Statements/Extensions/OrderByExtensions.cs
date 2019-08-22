@@ -19,7 +19,7 @@ namespace FluentSQL.Querying.Statements.Extensions
         /// <param name="queryComponent">The <see cref="QueryComponent{TParameters, TQueryResult}" />.</param>
         /// <param name="expression">
         ///     The <see cref="Expression{TDelegate}">Expression&lt;Func&lt;TSqlExpression&gt;&gt;</see> that indicates on
-        ///     which columns to order.
+        ///     which properties to order.
         /// </param>
         /// <returns>
         ///     The <see cref="Statements.OrderBy{TParameters,TQueryResult,TSqlExpression}" />.

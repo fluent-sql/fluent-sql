@@ -2,6 +2,8 @@
 using System.Linq.Expressions;
 
 using FluentSQL.Compilation.Parser.Nodes;
+using FluentSQL.Extensions;
+using FluentSQL.Modelling;
 using FluentSQL.Querying;
 using FluentSQL.Querying.Statements;
 
@@ -11,7 +13,7 @@ namespace FluentSQL.Compilation.Parser
     {
         public QueryParser()
         {
-            ResultNode = new AstNode();
+            ResultNode = new RootNode();
         }
 
         private AstNode ResultNode { get; set; }
@@ -28,12 +30,12 @@ namespace FluentSQL.Compilation.Parser
 
         internal void From<TTable>(Expression<Func<TTable>> expression)
         {
-            ResultNode.ChildNodes.Add(new FromNode());
+            ResultNode.ChildNodes.Add(new FromNode(ResultNode));
         }
 
         internal void From<TTable>(Expression<Func<TTable>> expression, Alias alias)
         {
-            ResultNode.ChildNodes.Add(new FromNode(alias.Name));
+            ResultNode.ChildNodes.Add(new FromNode(ResultNode, alias.Name));
         }
 
         internal void GroupBy<TSqlExpression>(Expression<Func<TSqlExpression>> expression)
@@ -86,10 +88,49 @@ namespace FluentSQL.Compilation.Parser
 
         internal void Select<TSqlExpression>(Expression<Func<TSqlExpression>> expression, Alias alias)
         {
+            Parse(new SelectComponentParser(), expression);
+       
+            var x = expression.Body.NodeType;
+        }
+
+        internal class SelectComponentParser : QueryComponentParser
+        {
+            public void ParseComponent<TSqlExpression>(Expression<Func<TSqlExpression>> expression)
+            {
+            }
+
+            public void ParseComponent<TExpressionType>(SqlExpression<TExpressionType> expression)
+            {
+            }
+        }
+
+        internal interface QueryComponentParser
+        {
+            void ParseComponent<TSqlExpression>(Expression<Func<TSqlExpression>> expression);
+            void ParseComponent<TExpressionType>(SqlExpression<TExpressionType> expression);
+        }
+
+        private void Parse<TSqlExpression>(QueryComponentParser parser, Expression<Func<TSqlExpression>> expression)
+        {
+            dynamic dynamicParser = parser;
+
+            if (expression.IsSqlExpression())
+            {
+                Func<TSqlExpression> compiled = expression.Compile();
+                TSqlExpression result = compiled();
+                dynamicParser.ParseComponent(result);
+            }
+            else
+            {
+                dynamicParser.ParseComponent(expression);
+            }
         }
 
         internal void Select<TSqlExpression>(Expression<Func<TSqlExpression>> expression)
         {
+            Parse(new SelectComponentParser(), expression);
+       
+            var x = expression.Body.NodeType;
         }
 
         internal void Union<TFirstParameters, TSecondParameters, TQueryResult>(

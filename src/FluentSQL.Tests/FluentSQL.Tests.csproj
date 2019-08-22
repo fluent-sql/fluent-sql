@@ -22,4 +22,8 @@
     <ProjectReference Include="..\FluentSQL\FluentSQL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Compilation\Parser\Nodes\" />
+  </ItemGroup>
+
 </Project>
